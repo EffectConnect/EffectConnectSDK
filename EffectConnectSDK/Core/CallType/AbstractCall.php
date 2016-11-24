@@ -103,7 +103,7 @@
             $this->validator->setup($this->action);
             $this->validator->validateCall($this->payload);
 
-            return $this->doCall();
+            return $this->prepareCall();
         }
 
         /**
@@ -159,5 +159,5 @@
             return $this;
         }
 
-        public abstract function doCall();
+        public abstract function prepareCall();
     }

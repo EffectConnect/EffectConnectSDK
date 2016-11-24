@@ -26,7 +26,7 @@
         /**
          * @return ApiCall
          */
-        public function doCall()
+        public function prepareCall()
         {
             $apiCall = new ApiCall();
             $method  = false;
@@ -43,6 +43,10 @@
             {
                 case CallTypeInterface::ACTION_CREATE:
                     $method = 'PUT';
+                    $apiCall->setPayload($this->payload);
+                    break;
+                case CallTypeInterface::ACTION_UPDATE:
+                    $method = 'POST';
                     $apiCall->setPayload($this->payload);
                     break;
             }

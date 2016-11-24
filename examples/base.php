@@ -8,6 +8,7 @@
      */
     $publicKey = 'PutYourSuppliedPublicKey';
     $secretKey = 'FillInYourOwnSecretKeyAsSupplied';
+
     /**
      * Create the keychain
      */
