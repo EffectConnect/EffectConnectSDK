@@ -23,7 +23,7 @@
         ->setResponseType(CallTypeInterface::RESPONSE_TYPE_XML)
         ->setResponseLanguage('en')
     ;
-    
+
     $orderNumber  = '1323';
     $orderStatus  = Order::STATUS_NEW;
     $currency     = 'EUR';

@@ -87,6 +87,14 @@
         protected $_handlingCost;
 
         /**
+         * REQUIRED for Updates
+         * @var string $_trackingCode
+         *
+         * Tracking code
+         */
+        protected $_trackingCode;
+
+        /**
          * REQUIRED
          * @var OrderAddress $_billingAddress
          *
@@ -180,7 +188,12 @@
          */
         public function getDate()
         {
-            return $this->_date->format('Y-m-d\TH:i:sP');
+            if ($this->_date)
+            {
+                return $this->_date->format('Y-m-d\TH:i:sP');
+            }
+
+            return null;
         }
 
         /**
@@ -311,6 +324,26 @@
         public function setCurrency($currency)
         {
             $this->_currency = $currency;
+
+            return $this;
+        }
+
+        /**
+         * @return string
+         */
+        public function getTrackingCode()
+        {
+            return $this->_trackingCode;
+        }
+
+        /**
+         * @param string $trackingCode
+         *
+         * @return Order
+         */
+        public function setTrackingCode($trackingCode)
+        {
+            $this->_trackingCode = $trackingCode;
 
             return $this;
         }

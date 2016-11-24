@@ -18,7 +18,8 @@
     final class OrderValidator extends AbstractValidator implements CallValidatorInterface
     {
         protected $validActions = [
-            CallTypeInterface::ACTION_CREATE
+            CallTypeInterface::ACTION_CREATE,
+            CallTypeInterface::ACTION_UPDATE
         ];
         /**
          * @param $argument
@@ -31,7 +32,7 @@
             $valid = false;
             if ($this->payloadRequired && $this->identifierRequired)
             {
-                if ($argument instanceof Order && $argument->id !== null)
+                if ($argument instanceof Order && $argument->getNumber() !== null)
                 {
                     $valid = true;
                 }
@@ -43,7 +44,7 @@
                 }
             } elseif ($this->identifierRequired)
             {
-                if (is_int($argument) || ($argument instanceof Order && $argument->id !== null))
+                if (is_int($argument) || ($argument instanceof Order && $argument->getNumber() !== null))
                 {
                     $valid = true;
                 }
