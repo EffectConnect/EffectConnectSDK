@@ -1,17 +1,29 @@
 <?php
+    use EffectConnectSDK\Core;
     use EffectConnectSDK\Core\Model\Order;
     use EffectConnectSDK\Core\Model\OrderLine;
     use EffectConnectSDK\Core\Model\OrderAddress;
     use EffectConnectSDK\Core\CallType\OrderCall;
     use EffectConnectSDK\Core\Interfaces\CallTypeInterface;
+
+    /**
+     * Include the base
+     */
     require_once(realpath(__DIR__.'/..').'/base.php');
 
+    /**
+     * @var Core $effectConnectSDK
+     * @var OrderCall $orderCallType
+     *
+     * The core as instantiated in base.php
+     * Creates the appropriate calltype, in this case, the Order call
+     */
     $orderCallType = $effectConnectSDK->OrderCall();
-    /** @var OrderCall $orderCallType */
     $orderCallType
         ->setResponseType(CallTypeInterface::RESPONSE_TYPE_XML)
         ->setResponseLanguage('en')
     ;
+    
     $orderNumber  = '1323';
     $orderStatus  = Order::STATUS_NEW;
     $currency     = 'EUR';
