@@ -35,7 +35,7 @@
         /**
          * @return ApiCall
          */
-        public function doCall();
+        public function prepareCall();
 
         /**
          * @param string $callType
