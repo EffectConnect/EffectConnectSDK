@@ -1,7 +1,6 @@
 <?php
     namespace EffectConnectSDK;
 
-    use EffectConnectSDK\Core\CallType\KeyCall;
     use EffectConnectSDK\Core\CallType\OrderCall;
     use EffectConnectSDK\Core\Exception\InvalidApiCallException;
     use EffectConnectSDK\Core\Helper\Keychain;
@@ -15,7 +14,6 @@
      * @package EffectConnectSDK
      *
      * @method OrderCall OrderCall()
-     * @method KeyCall KeyCall()
      */
     final class Core
     {
