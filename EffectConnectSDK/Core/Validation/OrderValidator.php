@@ -19,6 +19,7 @@
     {
         protected $validActions = [
             CallTypeInterface::ACTION_CREATE,
+            CallTypeInterface::ACTION_READ,
             CallTypeInterface::ACTION_UPDATE
         ];
         /**
