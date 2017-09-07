@@ -17,7 +17,6 @@
      * @method ApiCall create(Order $order)
      * @method ApiCall read($id)
      * @method ApiCall update(Order $order)
-     * @method ApiCall delete($id)
      */
     final class OrderCall extends AbstractCall implements CallTypeInterface
     {
