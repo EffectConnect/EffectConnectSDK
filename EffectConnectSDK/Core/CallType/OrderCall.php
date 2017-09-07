@@ -17,7 +17,6 @@
      * @method ApiCall create(Order $order)
      * @method ApiCall read($id)
      * @method ApiCall update(Order $order)
-     * @method ApiCall delete($id)
      */
     final class OrderCall extends AbstractCall implements CallTypeInterface
     {
@@ -38,16 +37,18 @@
                 ->setCallDate($this->callDate)
                 ->setPublicKey($this->keychain->getPublicKey())
                 ->setSecretKey($this->keychain->getSecretKey())
+                ->setPayload($this->payload)
             ;
             switch ($this->action)
             {
+                case CallTypeInterface::ACTION_READ:
+                    $method = 'GET';
+                    break;
                 case CallTypeInterface::ACTION_CREATE:
-                    $method = 'PUT';
-                    $apiCall->setPayload($this->payload);
+                    $method = 'POST';
                     break;
                 case CallTypeInterface::ACTION_UPDATE:
-                    $method = 'POST';
-                    $apiCall->setPayload($this->payload);
+                    $method = 'PUT';
                     break;
             }
             $apiCall
