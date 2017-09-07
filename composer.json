@@ -1,0 +1,12 @@
+{
+        "name": "effectconnect-sdk/effectconnect-sdk",
+        "description": "An SDK to work with the EffectConnect API, a marketplace integration service.",
+        "keywords": ["effectconnect"],
+        "homepage": "https://www.effectconnect.com",
+        "require": {
+                "php": ">=5.5"
+        },
+        "autoload": {
+            "psr-4": {"EffectConnectSDK\\": "EffectConnectSDK/"}
+        }
+}
