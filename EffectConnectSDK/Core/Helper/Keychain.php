@@ -24,12 +24,9 @@
          */
         private $_secretKey;
 
-        /**
-         * @return string
-         */
-        public function getPublicKey()
+        final public function _isValid()
         {
-            return $this->_publicKey;
+            return ($this->_publicKey && $this->_secretKey);
         }
 
         /**
@@ -38,7 +35,7 @@
          * @return Keychain
          * @throws InvalidKeyException
          */
-        public function setPublicKey($publicKey)
+        final public function setPublicKey($publicKey)
         {
             if (strlen($publicKey) !== 24)
             {
@@ -50,20 +47,12 @@
         }
 
         /**
-         * @return string
-         */
-        public function getSecretKey()
-        {
-            return $this->_secretKey;
-        }
-
-        /**
          * @param string $secretKey
          *
          * @return Keychain
          * @throws InvalidKeyException
          */
-        public function setSecretKey($secretKey)
+        final public function setSecretKey($secretKey)
         {
             if (strlen($secretKey) !== 32)
             {
@@ -72,5 +61,21 @@
             $this->_secretKey = $secretKey;
 
             return $this;
+        }
+
+        /**
+         * @return string
+         */
+        final public function getPublicKey()
+        {
+            return $this->_publicKey;
+        }
+
+        /**
+         * @return string
+         */
+        final public function getSecretKey()
+        {
+            return $this->_secretKey;
         }
     }

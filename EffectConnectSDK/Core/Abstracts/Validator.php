@@ -1,5 +1,5 @@
 <?php
-    namespace EffectConnectSDK\Core\Validation;
+    namespace EffectConnectSDK\Abstracts;
 
     use EffectConnectSDK\Core\Exception\InvalidActionForCallTypeException;
     use EffectConnectSDK\Core\Exception\InvalidCallActionException;
@@ -14,7 +14,7 @@
      * @package EffectConnectSDK
      *
      */
-    abstract class AbstractValidator
+    abstract class Validator
     {
         /**
          * @var string $action
@@ -44,7 +44,7 @@
          * @throws InvalidCallActionException
          * @throws InvalidActionForCallTypeException
          */
-        public function setup($callAction)
+        final public function setup($callAction)
         {
             $this->action = $callAction;
             if (!in_array($callAction, $this->validActions))
@@ -54,21 +54,44 @@
             switch ($callAction)
             {
                 case CallTypeInterface::ACTION_CREATE:
-                    $this->identifierRequired  = false;
-                    $this->payloadRequired     = true;
+                    $this->_setupCreate();
+                    break;
+                case CallTypeInterface::ACTION_READ:
+                    $this->_setupRead();
                     break;
                 case CallTypeInterface::ACTION_UPDATE:
-                    $this->identifierRequired  = true;
-                    $this->payloadRequired     = true;
+                    $this->_setupUpdate();
                     break;
                 case CallTypeInterface::ACTION_DELETE:
-                case CallTypeInterface::ACTION_READ:
-                    $this->identifierRequired  = true;
-                    $this->payloadRequired     = false;
+                    $this->_setupDelete();
                     break;
                 default:
                     throw new InvalidCallActionException();
                     break;
             }
+        }
+
+        protected function _setupCreate()
+        {
+            $this->identifierRequired  = false;
+            $this->payloadRequired     = true;
+        }
+
+        protected function _setupRead()
+        {
+            $this->identifierRequired  = true;
+            $this->payloadRequired     = false;
+        }
+
+        protected function _setupUpdate()
+        {
+            $this->identifierRequired  = true;
+            $this->payloadRequired     = true;
+        }
+
+        protected function _setupDelete()
+        {
+            $this->identifierRequired  = true;
+            $this->payloadRequired     = false;
         }
     }

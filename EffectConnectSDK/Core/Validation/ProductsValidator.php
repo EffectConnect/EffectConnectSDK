@@ -5,10 +5,9 @@
     use EffectConnectSDK\Core\Exception\InvalidPayloadException;
     use EffectConnectSDK\Core\Interfaces\CallTypeInterface;
     use EffectConnectSDK\Core\Interfaces\CallValidatorInterface;
-    use EffectConnectSDK\Core\Model\Order;
 
     /**
-     * Class OrderValidator
+     * Class ProductValidator
      *
      * @author  Stefan Van den Heuvel
      * @company Koek & Peer
@@ -16,7 +15,7 @@
      * @package EffectConnectSDK
      *
      */
-    final class OrderValidator extends Validator implements CallValidatorInterface
+    final class ProductsValidator extends Validator implements CallValidatorInterface
     {
         protected $validActions = [
             CallTypeInterface::ACTION_CREATE,
@@ -32,21 +31,15 @@
         public function validateCall($argument)
         {
             $valid = false;
-            if ($this->payloadRequired && $this->identifierRequired)
+            if ($this->payloadRequired)
             {
-                if ($argument instanceof Order && $argument->getNumber() !== null)
-                {
-                    $valid = true;
-                }
-            } elseif ($this->payloadRequired)
-            {
-                if ($argument instanceof Order)
+                if ($argument instanceof \CURLFile)
                 {
                     $valid = true;
                 }
             } elseif ($this->identifierRequired)
             {
-                if (is_int($argument) || ($argument instanceof Order && $argument->getNumber() !== null))
+                if (is_int($argument))
                 {
                     $valid = true;
                 }
@@ -57,5 +50,17 @@
             }
 
             return true;
+        }
+
+        protected function _setupUpdate()
+        {
+            $this->identifierRequired  = false;
+            $this->payloadRequired     = true;
+        }
+
+        protected function _setupDelete()
+        {
+            $this->identifierRequired  = false;
+            $this->payloadRequired     = true;
         }
     }

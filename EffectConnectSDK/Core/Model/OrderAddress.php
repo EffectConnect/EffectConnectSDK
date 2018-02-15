@@ -1,6 +1,7 @@
 <?php
     namespace EffectConnectSDK\Core\Model;
 
+    use EffectConnectSDK\Abstracts\ApiModel;
     use EffectConnectSDK\Core\Exception\InvalidAddressTypeException;
     use EffectConnectSDK\Core\Exception\InvalidSalutationException;
     use EffectConnectSDK\Core\Helper\Reflector;

@@ -24,26 +24,10 @@
         const RESPONSE_TYPE_XML     = 'xml';
         const RESPONSE_TYPE_JSON    = 'json';
 
-        const CALLTYPE_XML          = 'XML';
-        const CALLTYPE_JSON         = 'JSON';
-
         /**
          * @param Keychain $keychain
          */
         public function __construct(Keychain $keychain);
-
-        /**
-         * @return ApiCall
-         */
-        public function prepareCall();
-
-        /**
-         * @param string $callType
-         *
-         * @return CallTypeInterface
-         * @throws InvalidCallTypeException
-         */
-        public function setCallType($callType);
 
         /**
          * @param string $responseType

@@ -1,8 +1,12 @@
 <?php
-    namespace EffectConnectSDK\Core\CallType;
+    namespace EffectConnectSDK\Abstracts;
 
+    use EffectConnectSDK\ApiCall;
     use EffectConnectSDK\Core\Exception\IncorrectArgumentException;
-    use EffectConnectSDK\Core\Exception\InvalidCallTypeException;
+    use EffectConnectSDK\Core\Exception\InvalidCallActionException;
+    use EffectConnectSDK\Core\Exception\InvalidPayloadException;
+    use EffectConnectSDK\Core\Exception\InvalidPropertyException;
+    use EffectConnectSDK\Core\Exception\InvalidReflectionException;
     use EffectConnectSDK\Core\Exception\InvalidResponseTypeException;
     use EffectConnectSDK\Core\Exception\InvalidValidatorClassException;
     use EffectConnectSDK\Core\Exception\MissingValidatorClassException;
@@ -20,7 +24,7 @@
      * @package EffectConnectSDK
      *
      */
-    abstract class AbstractCall
+    abstract class CallType
     {
         /**
          * @var string $_action
@@ -35,11 +39,9 @@
         protected $callDate;
 
         /**
-         * @var string $callType
-         *
-         * Defines the payload format
+         * @var string $callVersion
          */
-        protected $callType = CallTypeInterface::CALLTYPE_XML;
+        protected $callVersion = '1.0';
 
         /**
          * @var Keychain $keychain
@@ -77,6 +79,14 @@
          */
         protected $validatorClass;
 
+        /**
+         * AbstractCall constructor.
+         *
+         * @param Keychain $keychain
+         *
+         * @throws InvalidValidatorClassException
+         * @throws MissingValidatorClassException
+         */
         public function __construct(Keychain $keychain)
         {
             $this->keychain = $keychain;
@@ -92,6 +102,13 @@
             $this->validator = new $this->validatorClass();
         }
 
+        /**
+         * @param $name
+         * @param $arguments
+         *
+         * @return ApiCall
+         * @throws \Exception
+         */
         public function __call($name, $arguments)
         {
             if (count($arguments) !== 1)
@@ -107,45 +124,25 @@
         }
 
         /**
-         * @param string $callType
-         *
-         * @return CallTypeInterface
-         * @throws InvalidCallTypeException
-         */
-        public function setCallType($callType)
-        {
-            if (Reflector::isValid(CallTypeInterface::class, $callType, 'CALLTYPE_%') === true)
-            {
-                $this->callType = $callType;
-            } else
-            {
-                throw new InvalidCallTypeException();
-            }
-
-            /** @var CallTypeInterface $this */
-            return $this;
-        }
-
-        /**
          * @param $responseLanguage
          *
-         * @return CallTypeInterface
+         * @return $this
          */
-        public function setResponseLanguage($responseLanguage)
+        final public function setResponseLanguage($responseLanguage = 'en')
         {
             $this->responseLanguage = $responseLanguage;
 
-            /** @var CallTypeInterface $this */
             return $this;
         }
 
         /**
-         * @param string $responseType
-         **
-         * @return CallTypeInterface
+         * @param $responseType
+         *
+         * @return $this
          * @throws InvalidResponseTypeException
+         * @throws InvalidReflectionException
          */
-        public function setResponseType($responseType)
+        final public function setResponseType($responseType = CallTypeInterface::RESPONSE_TYPE_XML)
         {
             if (Reflector::isValid(CallTypeInterface::class, $responseType, 'RESPONSE_TYPE_%') === true)
             {
@@ -155,9 +152,33 @@
                 throw new InvalidResponseTypeException();
             }
 
-            /** @var CallTypeInterface $this */
             return $this;
         }
 
-        public abstract function prepareCall();
+        /**
+         * @return ApiCall
+         * @throws InvalidPropertyException
+         */
+        final public function prepareCall()
+        {
+            $apiCall = new ApiCall();
+            $apiCall
+                ->setResponseType($this->responseType)
+                ->setResponseLanguage($this->responseLanguage)
+                ->setCallDate($this->callDate)
+                ->setCallVersion($this->callVersion)
+                ->setPublicKey($this->keychain->getPublicKey())
+                ->setSecretKey($this->keychain->getSecretKey())
+                ->setPayload($this->payload)
+            ;
+
+            return $this->_prepareCall($apiCall);
+        }
+
+        /**
+         * @param ApiCall $apiCall
+         *
+         * @return ApiCall
+         */
+        protected abstract function _prepareCall(ApiCall $apiCall);
     }
