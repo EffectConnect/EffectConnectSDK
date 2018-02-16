@@ -1,6 +1,8 @@
 <?php
     namespace EffectConnectSDK\Core\Model;
 
+    use EffectConnectSDK\Abstracts\ApiModel;
+    use EffectConnectSDK\Core\Exception\InvalidReflectionException;
     use EffectConnectSDK\Core\Exception\InvalidStatusException;
     use EffectConnectSDK\Core\Helper\Reflector;
     use EffectConnectSDK\Core\Interfaces\ApiModelInterface;
@@ -50,15 +52,14 @@
          * REQUIRED
          * @var string(3) $_currency
          *
+         * Currency string in ISO 4217 format
+         * http://www.currency-iso.org/dam/downloads/lists/list_one.xml
          */
 
         protected $_currency;
         /**
          * REQUIRED
          * @var string $_status
-         *
-         * Currency string in ISO 4217 format
-         * http://www.currency-iso.org/dam/downloads/lists/list_one.xml
          */
         protected $_status;
 
@@ -167,10 +168,11 @@
         }
 
         /**
-         * @param mixed $status
+         * @param $status
          *
-         * @return Order
+         * @return $this
          * @throws InvalidStatusException
+         * @throws InvalidReflectionException
          */
         public function setStatus($status)
         {

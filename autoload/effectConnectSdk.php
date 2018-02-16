@@ -1,13 +1,12 @@
 <?php
     spl_autoload_register(function ($class) {
-        $sdkRoot       = realpath(__DIR__.DIRECTORY_SEPARATOR.'..').DIRECTORY_SEPARATOR;
-        $namespaceFile = str_replace('\\', DIRECTORY_SEPARATOR, $class).'.php';
+        $sdkRoot       = realpath(__DIR__.'/..').'/';
+        $namespaceFile = str_replace('\\', '/', $class).'.php';
         $fileLocation  = $sdkRoot.$namespaceFile;
         if (file_exists($fileLocation))
         {
             require_once($fileLocation);
             return true;
         }
-
-        throw new Exception('File `'.$fileLocation.'` for class `'.$class.'` not found');
+        throw new Exception(vsprintf('File `%s` for class `%s` not found', [$fileLocation, $class]));
     }, true);

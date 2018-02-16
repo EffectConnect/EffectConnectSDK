@@ -1,8 +1,7 @@
 <?php
-    namespace EffectConnectSDK\Core\Model;
+    namespace EffectConnectSDK\Abstracts;
 
     use EffectConnectSDK\Core\Exception\InvalidPropertyException;
-    use EffectConnectSDK\Core\Exception\InvalidReflectionException;
     use EffectConnectSDK\Core\Helper\EffectConnectXMLElement;
 
     /**
@@ -39,57 +38,6 @@
                     call_user_func([$this, 'set'.ucfirst($property)], $value);
                 }
             }
-        }
-
-        /**
-         * @return string
-         *
-         * @throws InvalidPropertyException
-         */
-        public function getJson()
-        {
-            $jsonPayload = [];
-            $properties  = get_object_vars($this);
-            foreach (array_keys($properties) as $property)
-            {
-                $cleanProperty = ltrim($property, '_');
-                $action = 'get'.ucfirst($cleanProperty);
-                if (!method_exists($this, $action))
-                {
-                    throw new InvalidPropertyException();
-                }
-                $value = $this->{$action}();
-                if ($value !== null)
-                {
-                    if ($value instanceof ApiModel)
-                    {
-                        $jsonPayload[$cleanProperty] = $value->toArray();
-                    } elseif (is_array($value))
-                    {
-                        foreach ($value as $parent => $list)
-                        {
-                            if ($list instanceof ApiModel)
-                            {
-                                if (is_numeric($parent))
-                                {
-                                    $jsonPayload[$cleanProperty][] = $list->toArray();
-                                } else
-                                {
-                                    $jsonPayload[$parent] = $list->toArray();
-                                }
-                            } else
-                            {
-                                $jsonPayload[$parent] = $list;
-                            }
-                        }
-                    } else
-                    {
-                        $jsonPayload[$cleanProperty] = $value;
-                    }
-                }
-            }
-
-            return json_encode($jsonPayload, JSON_UNESCAPED_SLASHES);
         }
 
         /**
@@ -150,20 +98,6 @@
             }
 
             return $xmlPayload->asXML();
-        }
-
-        /**
-         * @return array
-         */
-        public function toArray()
-        {
-            $data = [];
-            foreach (get_object_vars($this) as $property => $value)
-            {
-                $data[ltrim($property, '_')] = $value;
-            }
-
-            return $data;
         }
 
         public function __get($name)

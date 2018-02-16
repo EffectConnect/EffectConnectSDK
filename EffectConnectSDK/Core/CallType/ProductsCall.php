@@ -5,26 +5,25 @@
     use EffectConnectSDK\ApiCall;
     use EffectConnectSDK\Core\Exception\InvalidActionForCallTypeException;
     use EffectConnectSDK\Core\Interfaces\CallTypeInterface;
-    use EffectConnectSDK\Core\Model\Order;
-    use EffectConnectSDK\Core\Validation\OrderValidator;
+    use EffectConnectSDK\Core\Validation\ProductsValidator;
 
     /**
-     * Class OrderCall
+     * Class ProductsCall
      *
-     * CallType class for creating single order calls to the EffectConnect API
+     * CallType class for creating batch product calls to the EffectConnect API
      *
      * @author  Stefan Van den Heuvel
      * @company Koek & Peer
      * @product EffectConnect
      * @package EffectConnectSDK
      *
-     * @method ApiCall create(Order $order)
+     * @method ApiCall create(\CURLFile $productFile)
      * @method ApiCall read($id)
-     * @method ApiCall update(Order $order)
+     * @method ApiCall update(\CURLFile $productFile)
      */
-    final class OrderCall extends CallType implements CallTypeInterface
+    final class ProductsCall extends CallType implements CallTypeInterface
     {
-        protected $validatorClass = OrderValidator::class;
+        protected $validatorClass = ProductsValidator::class;
 
         /**
          * @param ApiCall $apiCall
@@ -49,7 +48,7 @@
                     throw new InvalidActionForCallTypeException();
             }
             $apiCall
-                ->setUri('/orders')
+                ->setUri('/products')
                 ->setMethod($method)
             ;
 

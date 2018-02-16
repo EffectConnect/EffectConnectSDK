@@ -1,29 +1,30 @@
 <?php
-    use EffectConnectSDK\Core;
-    use EffectConnectSDK\Core\Model\Order;
-    use EffectConnectSDK\Core\CallType\OrderCall;
-    use EffectConnectSDK\Core\Interfaces\CallTypeInterface;
-
-    /**
-     * Include the base
-     */
+    // 1. Require the SDK base file.
     require_once(realpath(__DIR__.'/..').'/base.php');
 
     /**
-     * @var Core $effectConnectSDK
-     * @var OrderCall $orderCallType
+     * @var \EffectConnectSDK\Core $effectConnectSDK
+     * @var \EffectConnectSDK\Core\CallType\OrderCall $orderCallType
      *
-     * The core as instantiated in base.php
-     * Creates the appropriate calltype, in this case, the Order call
+     * 2. Get the Order call type.
      */
-    $orderCallType = $effectConnectSDK->OrderCall();
-    $orderCallType
-        ->setResponseType(CallTypeInterface::RESPONSE_TYPE_XML)
-        ->setResponseLanguage('en')
-    ;
-
-    $orderNumber  = '1234';
-    $order = (new Order())->setNumber($orderNumber);
-    $apiCall = $orderCallType->read($order);
+    try
+    {
+        $orderCallType = $effectConnectSDK->OrderCall();
+    } catch (Exception $exception)
+    {
+        echo sprintf('Could not create call type. `%s`', $exception->getMessage());
+        die();
+    }
+    /**
+     * 3. Create an EffectConnectSDK\Core\Model\Order object and populate it with the order number
+     */
+    $orderNumber = '1323';
+    $order       = (new \EffectConnectSDK\Core\Model\Order())->setNumber($orderNumber);
+    /**
+     * 4. Make the call
+     */
+    $apiCall     = $orderCallType->read($order);
     $apiCall->call();
-    echo $apiCall->getResponse();
+
+    echo $apiCall->getCurlResponse();

@@ -23,10 +23,5 @@
         /**
          * @return string
          */
-        public function getJson();
-
-        /**
-         * @return string
-         */
         public function getXml();
     }

@@ -18,20 +18,18 @@
         const TYPE_SUFFIXED_ADDITION = 2;
         const TYPE_FULL_ADDITION     = 3;
 
+        private static $_prefix;
+        private static $_suffix;
+        private static $_additionType;
+
         /**
-         * @param string $class
-         * @param mixed $variable
-         * @param string|null $predefined
-         *
-         * @return bool
+         * @param $predefined
          *
          * @throws InvalidReflectionException
          */
-        public static function isValid($class, $variable, $predefined=null)
+        private static function _setup($predefined)
         {
-            $additionType    = self::TYPE_NO_ADDITIONS;
-            $reflection      = new \ReflectionClass($class);
-            $prefix          = $suffix = '';
+            self::$_additionType = self::TYPE_NO_ADDITIONS;
             if ($predefined !== null)
             {
                 $exploded = array_filter(explode('%', $predefined));
@@ -39,12 +37,12 @@
                 {
                     if (strpos($predefined, '%') === 0)
                     {
-                        $additionType = self::TYPE_SUFFIXED_ADDITION;
-                        $suffix = strrev(array_shift($exploded));
+                        self::$_additionType = self::TYPE_SUFFIXED_ADDITION;
+                        self::$_suffix       = strrev(array_shift($exploded));
                     } else
                     {
-                        $additionType = self::TYPE_PREFIXED_ADDITION;
-                        $prefix = array_shift($exploded);
+                        self::$_additionType = self::TYPE_PREFIXED_ADDITION;
+                        self::$_prefix       = array_shift($exploded);
                     }
                 } else
                 {
@@ -52,38 +50,43 @@
                     {
                         throw new InvalidReflectionException();
                     }
-                    $additionType = self::TYPE_FULL_ADDITION;
-                    $prefix       = array_shift($exploded);
-                    $suffix       = array_shift($exploded);
+                    self::$_additionType = self::TYPE_FULL_ADDITION;
+                    self::$_prefix       = array_shift($exploded);
+                    self::$_suffix       = array_shift($exploded);
                 }
             }
+        }
+
+        /**
+         * @param string $class
+         * @param mixed $variable
+         * @param string|null $predefined
+         *
+         * @return bool
+         *
+         * @throws \Exception
+         */
+        final public static function isValid($class, $variable, $predefined=null)
+        {
+            self::_setup($predefined);
+            $reflection      = new \ReflectionClass($class);
+            $prefix          = $suffix = '';
             foreach ($reflection->getConstants() as $constant => $validConstant)
             {
                 if ($validConstant !== $variable)
                 {
                     continue;
                 }
-                switch ($additionType)
+                switch (self::$_additionType)
                 {
                     case self::TYPE_PREFIXED_ADDITION:
-                        if (strpos($constant, $prefix) === 0)
-                        {
-                            return true;
-                        }
+                        return (strpos($constant, $prefix) === 0);
                         break;
                     case self::TYPE_SUFFIXED_ADDITION:
-                        $flippedConstant = strrev($constant);
-                        if (strpos($flippedConstant, $suffix) === 0)
-                        {
-                            return true;
-                        }
+                        return (strpos(strrev($constant), $suffix) === 0);
                         break;
                     case self::TYPE_FULL_ADDITION:
-                        $flippedConstant = strrev($constant);
-                        if ((strpos($constant, $prefix) === 0 && strpos($flippedConstant, $suffix) === 0))
-                        {
-                            return true;
-                        }
+                        return ((strpos($constant, $prefix) === 0 && strpos(strrev($constant), $suffix) === 0));
                         break;
                     case self::TYPE_NO_ADDITIONS:
                     default:

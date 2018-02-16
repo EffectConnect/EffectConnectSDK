@@ -2,8 +2,10 @@
     namespace EffectConnectSDK;
 
     use EffectConnectSDK\Core\CallType\OrderCall;
+    use EffectConnectSDK\Core\CallType\ProductsCall;
     use EffectConnectSDK\Core\Exception\InvalidApiCallException;
     use EffectConnectSDK\Core\Helper\Keychain;
+    use EffectConnectSDK\Core\Interfaces\CallTypeInterface;
 
     /**
      * Class Core
@@ -13,29 +15,49 @@
      * @product EffectConnect
      * @package EffectConnectSDK
      *
-     * @method OrderCall OrderCall()
+     * @method OrderCall    OrderCall()
+     * @method ProductsCall  ProductCall()
      */
     final class Core
     {
-        const SDK_VERSION   = '1.0';
         /**
          * @var Keychain
          */
         private $_keychain;
 
+        /**
+         * Core constructor.
+         *
+         * @param Keychain $keychain
+         *
+         * @throws \Exception
+         */
         public function __construct(Keychain $keychain)
         {
+            if (!$keychain->_isValid())
+            {
+                throw new \Exception('Invalid keychain.');
+            }
             $this->_keychain = $keychain;
         }
 
-        public function __call($name, $arguments)
+        /**
+         * @param $name
+         * @param $arguments
+         *
+         * @return CallTypeInterface
+         * @throws \Exception
+         */
+        final public function __call($name, $arguments)
         {
-            $class = 'EffectConnectSDK\Core\CallType\\'.$name;
-            if (class_exists($class))
+            try
             {
-                return new $class($this->_keychain);
-            }
+                $reflection = new \ReflectionClass('EffectConnectSDK\Core\CallType\\'.$name);
 
-            throw new InvalidApiCallException($name);
+                return $reflection->newInstanceArgs([$this->_keychain]);
+            } catch (\Exception $exception)
+            {
+                throw new InvalidApiCallException($name);
+            }
         }
     }
