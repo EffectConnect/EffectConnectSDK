@@ -1,60 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0"?>
 <products>
     <product>
-        <id>1234</id>
-        <sku>TEST-12</sku>
-        <brand>Testmerk</brand>
-        <visible>1</visible>
+        <id>1</id>
+        <brand>Brand-1</brand>
         <categories>
             <category>
                 <id>1</id>
                 <titles>
-                    <title language="nl">Test categorie 1</title>
-                    <title language="en">Test category 1</title>
+                    <title language="nl">Categorie 1</title>
+                    <title language="en">Category 1</title>
                 </titles>
                 <children>
                     <category>
-                        <id>11</id>
+                        <id>10</id>
                         <titles>
-                            <title language="nl">Test categorie 1.1</title>
-                            <title language="en">Test category 1.1</title>
-                        </titles>
-                    </category>
-                    <category>
-                        <id>12</id>
-                        <titles>
-                            <title language="nl">Test categorie 1.2</title>
-                            <title language="en">Test category 1.2</title>
-                        </titles>
-                        <children>
-                            <category>
-                                <id>121</id>
-                                <titles>
-                                    <title language="nl">Test categorie 1.2.1</title>
-                                    <title language="en">Test category 1.2.1</title>
-                                </titles>
-                            </category>
-                            <category>
-                                <id>122</id>
-                                <titles>
-                                    <title language="nl">Test categorie 1.2.2</title>
-                                    <title language="en">Test category 1.2.2</title>
-                                </titles>
-                            </category>
-                            <category>
-                                <id>123</id>
-                                <titles>
-                                    <title language="nl">Test categorie 1.2.3</title>
-                                    <title language="en">Test category 1.2.3</title>
-                                </titles>
-                            </category>
-                        </children>
-                    </category>
-                    <category>
-                        <id>13</id>
-                        <titles>
-                            <title language="nl">Test categorie 1.3</title>
-                            <title language="en">Test category 1.3</title>
+                            <title language="nl">Categorie 1.1</title>
+                            <title language="en">Category 1.1</title>
                         </titles>
                     </category>
                 </children>
@@ -62,53 +23,77 @@
             <category>
                 <id>2</id>
                 <titles>
-                    <title language="nl">Test categorie 2</title>
-                    <title language="en">Test category 2</title>
+                    <title language="nl">Categorie 2</title>
+                    <title language="en">Category 2</title>
                 </titles>
                 <children>
                     <category>
                         <id>21</id>
                         <titles>
-                            <title language="nl">Test categorie 1.3</title>
-                            <title language="en">Test category 1.3</title>
+                            <title language="nl">Categorie 2.2</title>
+                            <title language="en">Category 2.2</title>
                         </titles>
+                        <children>
+                            <category>
+                                <id>210</id>
+                                <titles>
+                                    <title language="nl">Categorie 2.2.1</title>
+                                    <title language="en">Category 2.2.1</title>
+                                </titles>
+                            </category>
+                        </children>
                     </category>
                 </children>
-            </category>
-            <category>
-                <id>3</id>
-                <titles>
-                    <title language="nl">Test categorie 3</title>
-                    <title language="en">Test category 3</title>
-                </titles>
             </category>
         </categories>
         <options>
             <option>
                 <id>1</id>
-                <price>1234</price>
-                <stock>123</stock>
+                <visible>true</visible>
+                <cost>650</cost>
+                <price>1250</price>
+                <priceOriginal>1500</priceOriginal>
+                <stock>7</stock>
                 <titles>
-                    <title language="nl">Optie titel</title>
-                    <title language="en">option title</title>
+                    <title language="nl">Optie 1</title>
+                    <title language="en">Option 1</title>
                 </titles>
                 <urls>
                     <url language="nl">https://go.effectconnect.com/nl/test-1</url>
                     <url language="en">https://go.effectconnect.com/en/test-1</url>
                 </urls>
                 <descriptions>
-                    <description language="nl">Testbeschrijving</description>
-                    <description language="en">Testdescription</description>
+                    <description language="nl"><![CDATA[Product beschrijving.]]></description>
+                    <description language="en"><![CDATA[Product description.]]></description>
                 </descriptions>
                 <ean>1234567890123</ean>
-                <sku>sku-1</sku>
-                <priceOriginal>3185</priceOriginal>
-                <cost>562</cost>
-                <deliveryTime>string</deliveryTime>
+                <sku>OPTION-1</sku>
+                <deliveryTime>Voor 16:00 besteld, morgen in huis</deliveryTime>
                 <images>
-                    <image>https://go.effectconnect.com/image-1</image>
-                    <image>https://go.effectconnect.com/image-2</image>
-                    <image>https://go.effectconnect.com/image-3</image>
+                    <image>
+                        <url>https://go.effectconnect.com/image-1</url>
+                        <size>1234</size>
+                        <md5checksum>1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a</md5checksum>
+                        <order>1</order>
+                    </image>
+                    <image>
+                        <url>https://go.effectconnect.com/image-2</url>
+                        <size>1234</size>
+                        <md5checksum>1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1b</md5checksum>
+                        <order>2</order>
+                    </image>
+                    <image>
+                        <url>https://go.effectconnect.com/image-3</url>
+                        <size>1234</size>
+                        <md5checksum>1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1c</md5checksum>
+                        <order>3</order>
+                    </image>
+                    <image>
+                        <url>https://go.effectconnect.com/image-4</url>
+                        <size>1234</size>
+                        <md5checksum>1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1d</md5checksum>
+                        <order>4</order>
+                    </image>
                 </images>
                 <attributes>
                     <attribute>
@@ -119,12 +104,7 @@
                         </names>
                         <values>
                             <value>
-                                <names>
-                                    <name language="nl">Blauw</name>
-                                    <name language="en">Blue</name>
-                                </names>
-                            </value>
-                            <value>
+                                <id>1</id>
                                 <names>
                                     <name language="nl">Rood</name>
                                     <name language="en">Red</name>
@@ -140,126 +120,80 @@
                         </names>
                         <values>
                             <value>
+                                <id>12</id>
                                 <names>
                                     <name language="nl">L</name>
                                     <name language="en">L</name>
+                                </names>
+                            </value>
+                        </values>
+                    </attribute>
+                    <attribute>
+                        <id>3</id>
+                        <names>
+                            <name language="nl">Lengte</name>
+                            <name language="en">Length</name>
+                        </names>
+                        <unit>cm</unit>
+                        <values>
+                            <value>
+                                <id>44</id>
+                                <names>
+                                    <name language="nl">120</name>
+                                    <name language="en">120</name>
                                 </names>
                             </value>
                         </values>
                     </attribute>
                 </attributes>
             </option>
-        </options>
-    </product>
-    <product>
-        <id>1235</id>
-        <sku>TEST-12</sku>
-        <brand>Testmerk</brand>
-        <visible>1</visible>
-        <categories>
-            <category>
-                <id>1</id>
-                <titles>
-                    <title language="nl">Test categorie 1</title>
-                    <title language="en">Test category 1</title>
-                </titles>
-                <children>
-                    <category>
-                        <id>11</id>
-                        <titles>
-                            <title language="nl">Test categorie 1.1</title>
-                            <title language="en">Test category 1.1</title>
-                        </titles>
-                    </category>
-                    <category>
-                        <id>12</id>
-                        <titles>
-                            <title language="nl">Test categorie 1.2</title>
-                            <title language="en">Test category 1.2</title>
-                        </titles>
-                        <children>
-                            <category>
-                                <id>121</id>
-                                <titles>
-                                    <title language="nl">Test categorie 1.2.1</title>
-                                    <title language="en">Test category 1.2.1</title>
-                                </titles>
-                            </category>
-                            <category>
-                                <id>122</id>
-                                <titles>
-                                    <title language="nl">Test categorie 1.2.2</title>
-                                    <title language="en">Test category 1.2.2</title>
-                                </titles>
-                            </category>
-                            <category>
-                                <id>123</id>
-                                <titles>
-                                    <title language="nl">Test categorie 1.2.3</title>
-                                    <title language="en">Test category 1.2.3</title>
-                                </titles>
-                            </category>
-                        </children>
-                    </category>
-                    <category>
-                        <id>13</id>
-                        <titles>
-                            <title language="nl">Test categorie 1.3</title>
-                            <title language="en">Test category 1.3</title>
-                        </titles>
-                    </category>
-                </children>
-            </category>
-            <category>
-                <id>2</id>
-                <titles>
-                    <title language="nl">Test categorie 2</title>
-                    <title language="en">Test category 2</title>
-                </titles>
-                <children>
-                    <category>
-                        <id>21</id>
-                        <titles>
-                            <title language="nl">Test categorie 1.3</title>
-                            <title language="en">Test category 1.3</title>
-                        </titles>
-                    </category>
-                </children>
-            </category>
-            <category>
-                <id>3</id>
-                <titles>
-                    <title language="nl">Test categorie 3</title>
-                    <title language="en">Test category 3</title>
-                </titles>
-            </category>
-        </categories>
-        <options>
             <option>
                 <id>2</id>
-                <price>1234</price>
-                <stock>123</stock>
+                <visible>true</visible>
+                <cost>650</cost>
+                <price>1250</price>
+                <priceOriginal>1500</priceOriginal>
+                <stock>7</stock>
                 <titles>
-                    <title language="nl">Optie titel</title>
-                    <title language="en">option title</title>
+                    <title language="nl">Optie 2</title>
+                    <title language="en">Option 2</title>
                 </titles>
                 <urls>
-                    <url language="nl">https://go.effectconnect.com/nl/test-1</url>
-                    <url language="en">https://go.effectconnect.com/en/test-1</url>
+                    <url language="nl">https://go.effectconnect.com/nl/test-2</url>
+                    <url language="en">https://go.effectconnect.com/en/test-2</url>
                 </urls>
                 <descriptions>
-                    <description language="nl">Testbeschrijving</description>
-                    <description language="en">Testdescription</description>
+                    <description language="nl"><![CDATA[Product 2 beschrijving.]]></description>
+                    <description language="en"><![CDATA[Product 2 description.]]></description>
                 </descriptions>
-                <ean>1234567890123</ean>
-                <sku>sku-1</sku>
-                <priceOriginal>3185</priceOriginal>
-                <cost>562</cost>
-                <deliveryTime>string</deliveryTime>
+                <ean>1234567890124</ean>
+                <sku>OPTION-2</sku>
+                <deliveryTime>Voor 16:00 besteld, morgen in huis</deliveryTime>
                 <images>
-                    <image>https://go.effectconnect.com/image-1</image>
-                    <image>https://go.effectconnect.com/image-2</image>
-                    <image>https://go.effectconnect.com/image-3</image>
+                    <image>
+                        <url>https://go.effectconnect.com/image-1</url>
+                        <size>1234</size>
+                        <md5checksum>1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a</md5checksum>
+                        <order>1</order>
+                    </image>
+                    <image>
+                        <url>https://go.effectconnect.com/image-2</url>
+                        <size>1234</size>
+                        <md5checksum>1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1b</md5checksum>
+                        <order>2</order>
+                    </image>
+                    <image>
+                        <url>https://go.effectconnect.com/image-3</url>
+                        <size>1234</size>
+                        <md5checksum>1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1c</md5checksum>
+                        <order>3</order>
+                    </image>
+                    <image>
+                        <url>https://go.effectconnect.com/image-4</url>
+                        <size>1234</size>
+                        <md5checksum>1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1d</md5checksum>
+                        <order>4</order>
+                    </image>
                 </images>
                 <attributes>
                     <attribute>
@@ -270,15 +204,10 @@
                         </names>
                         <values>
                             <value>
+                                <id>1</id>
                                 <names>
                                     <name language="nl">Blauw</name>
                                     <name language="en">Blue</name>
-                                </names>
-                            </value>
-                            <value>
-                                <names>
-                                    <name language="nl">Rood</name>
-                                    <name language="en">Red</name>
                                 </names>
                             </value>
                         </values>
@@ -291,6 +220,7 @@
                         </names>
                         <values>
                             <value>
+                                <id>12</id>
                                 <names>
                                     <name language="nl">L</name>
                                     <name language="en">L</name>
@@ -298,153 +228,19 @@
                             </value>
                         </values>
                     </attribute>
-                </attributes>
-            </option>
-        </options>
-    </product>
-    <product>
-        <id>1236</id>
-        <sku>TEST-12</sku>
-        <brand>Testmerk</brand>
-        <visible>1</visible>
-        <categories>
-            <category>
-                <id>1</id>
-                <titles>
-                    <title language="nl">Test categorie 1</title>
-                    <title language="en">Test category 1</title>
-                </titles>
-                <children>
-                    <category>
-                        <id>11</id>
-                        <titles>
-                            <title language="nl">Test categorie 1.1</title>
-                            <title language="en">Test category 1.1</title>
-                        </titles>
-                    </category>
-                    <category>
-                        <id>12</id>
-                        <titles>
-                            <title language="nl">Test categorie 1.2</title>
-                            <title language="en">Test category 1.2</title>
-                        </titles>
-                        <children>
-                            <category>
-                                <id>121</id>
-                                <titles>
-                                    <title language="nl">Test categorie 1.2.1</title>
-                                    <title language="en">Test category 1.2.1</title>
-                                </titles>
-                            </category>
-                            <category>
-                                <id>122</id>
-                                <titles>
-                                    <title language="nl">Test categorie 1.2.2</title>
-                                    <title language="en">Test category 1.2.2</title>
-                                </titles>
-                            </category>
-                            <category>
-                                <id>123</id>
-                                <titles>
-                                    <title language="nl">Test categorie 1.2.3</title>
-                                    <title language="en">Test category 1.2.3</title>
-                                </titles>
-                            </category>
-                        </children>
-                    </category>
-                    <category>
-                        <id>13</id>
-                        <titles>
-                            <title language="nl">Test categorie 1.3</title>
-                            <title language="en">Test category 1.3</title>
-                        </titles>
-                    </category>
-                </children>
-            </category>
-            <category>
-                <id>2</id>
-                <titles>
-                    <title language="nl">Test categorie 2</title>
-                    <title language="en">Test category 2</title>
-                </titles>
-                <children>
-                    <category>
-                        <id>21</id>
-                        <titles>
-                            <title language="nl">Test categorie 1.3</title>
-                            <title language="en">Test category 1.3</title>
-                        </titles>
-                    </category>
-                </children>
-            </category>
-            <category>
-                <id>3</id>
-                <titles>
-                    <title language="nl">Test categorie 3</title>
-                    <title language="en">Test category 3</title>
-                </titles>
-            </category>
-        </categories>
-        <options>
-            <option>
-                <id>3</id>
-                <price>1234</price>
-                <stock>123</stock>
-                <titles>
-                    <title language="nl">Optie titel</title>
-                    <title language="en">option title</title>
-                </titles>
-                <urls>
-                    <url language="nl">https://go.effectconnect.com/nl/test-1</url>
-                    <url language="en">https://go.effectconnect.com/en/test-1</url>
-                </urls>
-                <descriptions>
-                    <description language="nl">Testbeschrijving</description>
-                    <description language="en">Testdescription</description>
-                </descriptions>
-                <ean>1234567890123</ean>
-                <sku>sku-1</sku>
-                <priceOriginal>3185</priceOriginal>
-                <cost>562</cost>
-                <deliveryTime>string</deliveryTime>
-                <images>
-                    <image>https://go.effectconnect.com/image-1</image>
-                    <image>https://go.effectconnect.com/image-2</image>
-                    <image>https://go.effectconnect.com/image-3</image>
-                </images>
-                <attributes>
                     <attribute>
-                        <id>1</id>
+                        <id>3</id>
                         <names>
-                            <name language="nl">Kleur</name>
-                            <name language="en">Color</name>
+                            <name language="nl">Lengte</name>
+                            <name language="en">Length</name>
                         </names>
+                        <unit>cm</unit>
                         <values>
                             <value>
+                                <id>44</id>
                                 <names>
-                                    <name language="nl">Blauw</name>
-                                    <name language="en">Blue</name>
-                                </names>
-                            </value>
-                            <value>
-                                <names>
-                                    <name language="nl">Rood</name>
-                                    <name language="en">Red</name>
-                                </names>
-                            </value>
-                        </values>
-                    </attribute>
-                    <attribute>
-                        <id>2</id>
-                        <names>
-                            <name language="nl">Maat</name>
-                            <name language="en">Size</name>
-                        </names>
-                        <values>
-                            <value>
-                                <names>
-                                    <name language="nl">L</name>
-                                    <name language="en">L</name>
+                                    <name language="nl">120</name>
+                                    <name language="en">120</name>
                                 </names>
                             </value>
                         </values>
