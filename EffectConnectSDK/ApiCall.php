@@ -16,7 +16,7 @@
      */
     final class ApiCall
     {
-        const API_ENDPOINT  = 'https://submitdev.effectconnect.com/v1';
+        const API_ENDPOINT  = 'https://submit.effectconnect.com/v1';
 
         /**
          * @var \DateTime $_callDate
@@ -118,7 +118,7 @@
                 CURLOPT_POSTFIELDS      => $postFields,
                 CURLOPT_RETURNTRANSFER  => true,
                 CURLOPT_SSL_VERIFYPEER  => true,
-                CURLOPT_CAINFO          => '/var/www/star_effectconnect_com.pem'
+                CURLOPT_CAINFO          => 'your_certificate'
             ]);
             $this->_curlResponse = curl_exec($ch);
             $this->_curlErrors   = curl_error($ch);
