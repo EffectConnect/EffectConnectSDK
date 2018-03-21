@@ -3,7 +3,7 @@
 
     use EffectConnectSDK\Core\Exception\InvalidPropertyException;
     use EffectConnectSDK\Core\Interfaces\CallTypeInterface;
-    use EffectConnectSDK\Abstracts\ApiModel;
+    use EffectConnectSDK\Core\Abstracts\ApiModel;
 
     /**
      * Class ApiCall
@@ -221,7 +221,7 @@
         }
 
         /**
-         * @param \EffectConnectSDK\Abstracts\ApiModel $payload
+         * @param \EffectConnectSDK\Core\Abstracts\ApiModel $payload
          *
          * @return $this
          * @throws InvalidPropertyException

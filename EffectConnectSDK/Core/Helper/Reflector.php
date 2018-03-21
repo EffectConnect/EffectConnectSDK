@@ -70,7 +70,6 @@
         {
             self::_setup($predefined);
             $reflection      = new \ReflectionClass($class);
-            $prefix          = $suffix = '';
             foreach ($reflection->getConstants() as $constant => $validConstant)
             {
                 if ($validConstant !== $variable)
@@ -80,13 +79,13 @@
                 switch (self::$_additionType)
                 {
                     case self::TYPE_PREFIXED_ADDITION:
-                        return (strpos($constant, $prefix) === 0);
+                        return (strpos($constant, self::$_prefix) === 0);
                         break;
                     case self::TYPE_SUFFIXED_ADDITION:
-                        return (strpos(strrev($constant), $suffix) === 0);
+                        return (strpos(strrev($constant), self::$_suffix) === 0);
                         break;
                     case self::TYPE_FULL_ADDITION:
-                        return ((strpos($constant, $prefix) === 0 && strpos(strrev($constant), $suffix) === 0));
+                        return ((strpos($constant, self::$_prefix) === 0 && strpos(strrev($constant), self::$_suffix) === 0));
                         break;
                     case self::TYPE_NO_ADDITIONS:
                     default:

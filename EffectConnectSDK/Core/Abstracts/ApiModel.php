@@ -1,5 +1,5 @@
 <?php
-    namespace EffectConnectSDK\Abstracts;
+    namespace EffectConnectSDK\Core\Abstracts;
 
     use EffectConnectSDK\Core\Exception\InvalidPropertyException;
     use EffectConnectSDK\Core\Helper\EffectConnectXMLElement;
@@ -73,7 +73,11 @@
                             {
                                 $childNode = simplexml_load_string($list->getXml());
                                 EffectConnectXMLElement::insert($iterableElement, $childNode);
-                            } else
+                            } elseif(is_array($list))
+                            {
+                                EffectConnectXMLElement::addCDataChild($iterableElement, key($list), current($list));
+                            }
+                            else
                             {
                                 if (is_string($list))
                                 {

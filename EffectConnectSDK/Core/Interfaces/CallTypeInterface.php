@@ -27,7 +27,7 @@
         /**
          * @param Keychain $keychain
          */
-        public function __construct(Keychain $keychain);
+        public function __construct($keychain);
 
         /**
          * @param string $responseType

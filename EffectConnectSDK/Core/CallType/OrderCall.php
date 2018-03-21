@@ -1,7 +1,7 @@
 <?php
     namespace EffectConnectSDK\Core\CallType;
 
-    use EffectConnectSDK\Abstracts\CallType;
+    use EffectConnectSDK\Core\Abstracts\CallType;
     use EffectConnectSDK\ApiCall;
     use EffectConnectSDK\Core\Exception\InvalidActionForCallTypeException;
     use EffectConnectSDK\Core\Interfaces\CallTypeInterface;
@@ -32,7 +32,7 @@
          * @return ApiCall
          * @throws InvalidActionForCallTypeException
          */
-        public function _prepareCall(ApiCall $apiCall): ApiCall
+        public function _prepareCall($apiCall)
         {
             switch ($this->action)
             {

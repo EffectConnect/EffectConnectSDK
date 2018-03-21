@@ -2,6 +2,7 @@
     namespace EffectConnectSDK;
 
     use EffectConnectSDK\Core\CallType\OrderCall;
+    use EffectConnectSDK\Core\CallType\OrderListCall;
     use EffectConnectSDK\Core\CallType\ProductsCall;
     use EffectConnectSDK\Core\Exception\InvalidApiCallException;
     use EffectConnectSDK\Core\Helper\Keychain;
@@ -15,8 +16,9 @@
      * @product EffectConnect
      * @package EffectConnectSDK
      *
-     * @method OrderCall    OrderCall()
-     * @method ProductsCall  ProductCall()
+     * @method OrderCall     OrderCall()
+     * @method OrderListCall OrderListCall()
+     * @method ProductsCall  ProductsCall()
      */
     final class Core
     {
@@ -32,7 +34,7 @@
          *
          * @throws \Exception
          */
-        public function __construct(Keychain $keychain)
+        public function __construct($keychain)
         {
             if (!$keychain->_isValid())
             {
