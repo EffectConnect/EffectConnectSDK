@@ -1,7 +1,7 @@
 <?php
     namespace EffectConnectSDK\Core\Validation;
 
-    use EffectConnectSDK\Abstracts\Validator;
+    use EffectConnectSDK\Core\Abstracts\Validator;
     use EffectConnectSDK\Core\Exception\InvalidPayloadException;
     use EffectConnectSDK\Core\Interfaces\CallTypeInterface;
     use EffectConnectSDK\Core\Interfaces\CallValidatorInterface;

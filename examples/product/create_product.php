@@ -4,11 +4,11 @@
 
     /**
      * @var \EffectConnectSDK\Core $effectConnectSDK
-     * @var \EffectConnectSDK\Core\CallType\OrderCall $orderCallType
+     * @var \EffectConnectSDK\Core\CallType\ProductsCall $productCallType
      *
      * 2. Get the Product call type.
      */
-    $productCallType = $effectConnectSDK->ProductCall();
+    $productsCallType = $effectConnectSDK->ProductsCall();
     /**
      * 3. Create a CURLFile containing the product feed
      */
@@ -24,7 +24,7 @@
     /**
      * 4. Make the call
      */
-    $apiCall = $productCallType->create($curlFile);
+    $apiCall = $productsCallType->create($curlFile);
     $apiCall->call();
 
     echo $apiCall->getCurlResponse();

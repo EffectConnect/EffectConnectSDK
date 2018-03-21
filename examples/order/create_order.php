@@ -66,7 +66,7 @@
             ->setState('Ergens')
             ->setCountry('NL')
             ->setPhone('9876543210')
-            ->setEmail('stefan+1@koekenpeer.n')
+            ->setEmail('stefan+1@koekenpeer.nl')
         ;
 
         $firstOrderLine = (new \EffectConnectSDK\Core\Model\OrderLine())

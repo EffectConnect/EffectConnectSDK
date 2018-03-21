@@ -1,5 +1,5 @@
 <?php
-    namespace EffectConnectSDK\Abstracts;
+    namespace EffectConnectSDK\Core\Abstracts;
 
     use EffectConnectSDK\ApiCall;
     use EffectConnectSDK\Core\Exception\IncorrectArgumentException;
@@ -87,7 +87,7 @@
          * @throws InvalidValidatorClassException
          * @throws MissingValidatorClassException
          */
-        public function __construct(Keychain $keychain)
+        public function __construct($keychain)
         {
             $this->keychain = $keychain;
             $this->callDate = new \DateTime('now', new \DateTimeZone('Europe/Amsterdam'));
@@ -180,5 +180,5 @@
          *
          * @return ApiCall
          */
-        protected abstract function _prepareCall(ApiCall $apiCall);
+        protected abstract function _prepareCall($apiCall);
     }

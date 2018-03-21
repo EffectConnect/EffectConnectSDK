@@ -2,7 +2,7 @@
 
     namespace EffectConnectSDK\Core\Model;
 
-    use EffectConnectSDK\Abstracts\ApiModel;
+    use EffectConnectSDK\Core\Abstracts\ApiModel;
 
     /**
      * Class OrderLine

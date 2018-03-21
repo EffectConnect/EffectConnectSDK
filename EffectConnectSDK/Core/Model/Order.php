@@ -1,7 +1,7 @@
 <?php
     namespace EffectConnectSDK\Core\Model;
 
-    use EffectConnectSDK\Abstracts\ApiModel;
+    use EffectConnectSDK\Core\Abstracts\ApiModel;
     use EffectConnectSDK\Core\Exception\InvalidReflectionException;
     use EffectConnectSDK\Core\Exception\InvalidStatusException;
     use EffectConnectSDK\Core\Helper\Reflector;
@@ -23,14 +23,6 @@
         const STATUS_COMPLETED  = 'completed';
         const STATUS_CANCELED   = 'canceled';
         const STATUS_RETURN     = 'return';
-
-        /**
-         * @return string
-         */
-        public function getName()
-        {
-            return 'order';
-        }
 
         /**
          * REQUIRED
@@ -118,6 +110,14 @@
          * Order lines
          */
         protected $_orderLines;
+
+        /**
+         * @return string
+         */
+        public function getName()
+        {
+            return 'order';
+        }
 
         /**
          * @return mixed
@@ -271,7 +271,7 @@
          *
          * @return Order
          */
-        public function setShippingAddress(OrderAddress $address)
+        public function setShippingAddress($address)
         {
             $this->_shippingAddress = $address;
 
@@ -283,7 +283,7 @@
          *
          * @return Order
          */
-        public function setBillingAddress(OrderAddress $address)
+        public function setBillingAddress($address)
         {
             $this->_billingAddress = $address;
 
@@ -295,7 +295,7 @@
          *
          * @return Order
          */
-        public function addOrderLine(OrderLine $orderLine)
+        public function addOrderLine($orderLine)
         {
             $this->_orderLines[] = $orderLine;
 

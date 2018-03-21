@@ -1,5 +1,5 @@
 <?php
-    namespace EffectConnectSDK\Abstracts;
+    namespace EffectConnectSDK\Core\Abstracts;
 
     use EffectConnectSDK\Core\Exception\InvalidActionForCallTypeException;
     use EffectConnectSDK\Core\Exception\InvalidCallActionException;
