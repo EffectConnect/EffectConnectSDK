@@ -66,25 +66,42 @@
                         EffectConnectXMLElement::insert($xmlPayload, $modelValue);
                     } elseif (is_array($value))
                     {
-                        $iterableElement = $xmlPayload->addChild($cleanProperty);
-                        foreach ($value as $parent => $list)
+                        if ($this->isIterator())
                         {
-                            if ($list instanceof ApiModel)
+                            foreach ($value as $parent => $list)
                             {
-                                $childNode = simplexml_load_string($list->getXml());
-                                EffectConnectXMLElement::insert($iterableElement, $childNode);
-                            } elseif(is_array($list))
-                            {
-                                EffectConnectXMLElement::addCDataChild($iterableElement, key($list), current($list));
-                            }
-                            else
-                            {
-                                if (is_string($list))
+                                if ($list instanceof ApiModel)
                                 {
-                                    EffectConnectXMLElement::addCDataChild($iterableElement, $parent, $list);
+                                    EffectConnectXMLElement::insert($xmlPayload, simplexml_load_string($list->getXml()));
+                                } elseif (is_string($list))
+                                {
+                                    EffectConnectXMLElement::addCDataChild($xmlPayload, $cleanProperty, $list);
                                 } else
                                 {
-                                    $iterableElement->addChild($parent, $list);
+                                    $xmlPayload->addChild($parent, $list);
+                                }
+                            }
+                        } else
+                        {
+                            $iterableElement = $xmlPayload->addChild($cleanProperty);
+                            foreach ($value as $parent => $list)
+                            {
+                                if ($list instanceof ApiModel)
+                                {
+                                    EffectConnectXMLElement::insert($iterableElement, simplexml_load_string($list->getXml()));
+                                } elseif(is_array($list))
+                                {
+                                    EffectConnectXMLElement::addCDataChild($iterableElement, key($list), current($list));
+                                }
+                                else
+                                {
+                                    if (is_string($list))
+                                    {
+                                        EffectConnectXMLElement::addCDataChild($iterableElement, $parent, $list);
+                                    } else
+                                    {
+                                        $iterableElement->addChild($parent, $list);
+                                    }
                                 }
                             }
                         }
@@ -111,6 +128,10 @@
                 return $this->{'_'.$name};
             }
             return null;
+        }
+        protected function isIterator()
+        {
+            return false;
         }
 
         public abstract function getName();

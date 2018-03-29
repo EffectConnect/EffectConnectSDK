@@ -2,6 +2,8 @@
     namespace EffectConnectSDK;
 
     use EffectConnectSDK\Core\Exception\InvalidPropertyException;
+    use EffectConnectSDK\Core\Exception\MissingCertificateFileException;
+    use EffectConnectSDK\Core\Exception\MissingCertificateLocationException;
     use EffectConnectSDK\Core\Interfaces\CallTypeInterface;
     use EffectConnectSDK\Core\Abstracts\ApiModel;
 
@@ -16,7 +18,8 @@
      */
     final class ApiCall
     {
-        const API_ENDPOINT  = 'https://submit.effectconnect.com/v1';
+        const API_ENDPOINT          = 'https://submit.effectconnect.com/v1';
+        const CERTIFICATE_LOCATION  = '';
 
         /**
          * @var \DateTime $_callDate
@@ -93,6 +96,9 @@
 
         /**
          * @return ApiCall
+         *
+         * @throws MissingCertificateFileException
+         * @throws MissingCertificateLocationException
          */
         final public function call()
         {
@@ -109,6 +115,14 @@
                  */
                 $postFields = [$this->_payload];
             }
+            if (!self::CERTIFICATE_LOCATION)
+            {
+                throw new MissingCertificateLocationException();
+            }
+            if (!file_exists(self::CERTIFICATE_LOCATION))
+            {
+                throw new MissingCertificateFileException(self::CERTIFICATE_LOCATION);
+            }
             $ch = curl_init();
             curl_setopt_array($ch, [
                 CURLOPT_HTTPHEADER      => $this->_getHeaders(),
@@ -117,8 +131,8 @@
                 CURLOPT_TIMEOUT         => $timeout,
                 CURLOPT_POSTFIELDS      => $postFields,
                 CURLOPT_RETURNTRANSFER  => true,
-                CURLOPT_SSL_VERIFYPEER  => true,
-                CURLOPT_CAINFO          => 'your_certificate'
+                CURLOPT_SSL_VERIFYHOST  => 2,
+                CURLOPT_CAINFO          => self::CERTIFICATE_LOCATION
             ]);
             $this->_curlResponse = curl_exec($ch);
             $this->_curlErrors   = curl_error($ch);
@@ -167,7 +181,7 @@
         /**
          * @return bool
          */
-        final public function isSuccess(): bool
+        final public function isSuccess()
         {
             return (count($this->_curlErrors) === 0 && $this->_curlErrNo === 0 && $this->_curlResponse !== '');
         }
@@ -189,7 +203,7 @@
          *
          * @return ApiCall
          */
-        final public function setCallVersion(string $callVersion)
+        final public function setCallVersion($callVersion)
         {
             $this->_callVersion = $callVersion;
 

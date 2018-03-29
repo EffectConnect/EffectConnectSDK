@@ -1,53 +1,48 @@
 <?php
-namespace EffectConnectSDK\Core\Validation;
 
-use EffectConnectSDK\Core\Abstracts\Validator;
-use EffectConnectSDK\Core\Exception\InvalidPayloadException;
-use EffectConnectSDK\Core\Interfaces\CallTypeInterface;
-use EffectConnectSDK\Core\Interfaces\CallValidatorInterface;
-use EffectConnectSDK\Core\Model\OrderList;
+    namespace EffectConnectSDK\Core\Validation;
 
-/**
- * Class OrderListValidator
- *
- * @author  Mark Thiesen
- * @company Koek & Peer
- * @product EffectConnect
- * @package EffectConnectSDK
- *
- */
-final class OrderListValidator extends Validator implements CallValidatorInterface
-{
-    protected $validActions = [
-        CallTypeInterface::ACTION_READ,
-    ];
+    use EffectConnectSDK\Core\Abstracts\Validator;
+    use EffectConnectSDK\Core\Exception\InvalidPayloadException;
+    use EffectConnectSDK\Core\Interfaces\CallTypeInterface;
+    use EffectConnectSDK\Core\Interfaces\CallValidatorInterface;
+    use EffectConnectSDK\Core\Model\OrderList;
+
     /**
-     * @param $argument
+     * Class OrderListValidator
      *
-     * @return bool
-     * @throws InvalidPayloadException
+     * @author  Mark Thiesen
+     * @company Koek & Peer
+     * @product EffectConnect
+     * @package EffectConnectSDK
+     *
      */
-    public function validateCall($argument)
+    final class OrderListValidator extends Validator implements CallValidatorInterface
     {
-        $valid = false;
-        if ($this->payloadRequired)
+        protected $validActions = [
+            CallTypeInterface::ACTION_READ,
+        ];
+
+        /**
+         * @param $argument
+         *
+         * @return bool
+         * @throws InvalidPayloadException
+         */
+        public function validateCall($argument)
         {
-            if ($argument instanceof OrderList)
-            {
-                $valid = true;
+            $valid = false;
+            switch ($this->action) {
+                case CallTypeInterface::ACTION_READ:
+                    if ($argument instanceof OrderList) {
+                        $valid = true;
+                    }
+                    break;
             }
-        }
-        if (!$valid)
-        {
-            throw new InvalidPayloadException($this->action);
-        }
+            if (!$valid) {
+                throw new InvalidPayloadException($this->action);
+            }
 
-        return true;
+            return true;
+        }
     }
-
-    protected function _setupRead()
-    {
-        $this->identifierRequired  = false;
-        $this->payloadRequired     = true;
-    }
-}

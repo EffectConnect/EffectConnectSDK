@@ -8,8 +8,12 @@
      * @author  Stefan Van den Heuvel
      * @company Koek & Peer
      * @product EffectConnect
-     * @package BlackBox
+     * @package EffectConnectSDK
      */
-    class InvalidSignatureException
+    final class InvalidSignatureException extends \Exception
     {
+        public function __construct()
+        {
+            parent::__construct('Invalid signature');
+        }
     }

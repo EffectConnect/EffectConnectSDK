@@ -7,6 +7,7 @@
     use EffectConnectSDK\Core\Exception\InvalidStatusException;
     use EffectConnectSDK\Core\Helper\Reflector;
     use EffectConnectSDK\Core\Interfaces\ApiModelInterface;
+    use EffectConnectSDK\Core\Interfaces\OrderListFilterInterface;
 
     /**
      * Class OrderList
@@ -19,19 +20,13 @@
      */
     final class OrderList extends ApiModel implements ApiModelInterface
     {
-        const TYPE_STATUS = 'status';
         /**
          * OPTIONAL
+         * @var OrderListFilterInterface[] $_filters
          *
-         * @var string $_type
-         *
-         * Type of list
+         * List of filters
          */
-        protected $_type;
-        /**
-         * @var array $_values
-         */
-        protected $_values;
+        protected $_filters = [];
 
         /**
          * @return string
@@ -42,63 +37,21 @@
         }
 
         /**
-         * @return string
+         * @return OrderListFilterInterface[]
          */
-        public function getType()
+        public function getFilters()
         {
-            return $this->_type;
+            return $this->_filters;
         }
 
         /**
-         * @param $type
+         * @param OrderListFilterInterface $filter
          *
-         * @return $this
-         * @throws InvalidListTypeException
-         * @throws \Exception
+         * @return OrderList
          */
-        public function setType($type)
+        public function addFilter(OrderListFilterInterface $filter)
         {
-            if (!Reflector::isValid(OrderList::class, $type, 'TYPE_%'))
-            {
-                throw new InvalidListTypeException();
-            }
-            $this->_type = $type;
-
-            return $this;
-        }
-
-        public function getValues()
-        {
-            return $this->_values;
-        }
-
-        /**
-         * @param string $value
-         *
-         * @return $this
-         * @throws InvalidListValuesException
-         * @throws \Exception
-         */
-        public function addValue($value)
-        {
-            $valid = true;
-            switch ($this->getType())
-            {
-                case self::TYPE_STATUS:
-                    if (!Reflector::isValid(Order::class, $value, 'STATUS_%'))
-                    {
-                        $valid = false;
-                    }
-                    break;
-                default:
-                    $valid = false;
-                    break;
-            }
-            if (!$valid)
-            {
-                throw new InvalidListValuesException();
-            }
-            $this->_values[] = ['value' => $value];
+            $this->_filters[] = $filter;
 
             return $this;
         }

@@ -22,7 +22,7 @@
          *
          * @return SimpleXMLElement
          */
-        public static function addCDataChild($parent, $name, $value)
+        public static function addCDataChild(SimpleXMLElement $parent, $name, $value)
         {
             $child = $parent->addChild($name);
             if ($value)
@@ -40,7 +40,7 @@
          * @param SimpleXMLElement $to
          * @param SimpleXMLElement $from
          */
-        public static function insert($to, $from)
+        public static function insert(SimpleXMLElement $to, SimpleXMLElement $from)
         {
             $toDom   = dom_import_simplexml($to);
             $fromDom = dom_import_simplexml($from);

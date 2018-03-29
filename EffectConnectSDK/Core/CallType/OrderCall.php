@@ -6,6 +6,8 @@
     use EffectConnectSDK\Core\Exception\InvalidActionForCallTypeException;
     use EffectConnectSDK\Core\Interfaces\CallTypeInterface;
     use EffectConnectSDK\Core\Model\Order;
+    use EffectConnectSDK\Core\Model\OrderReadRequest;
+    use EffectConnectSDK\Core\Model\OrderUpdateRequest;
     use EffectConnectSDK\Core\Validation\OrderValidator;
 
     /**
@@ -19,11 +21,12 @@
      * @package EffectConnectSDK
      *
      * @method ApiCall create(Order $order)
-     * @method ApiCall read($id)
-     * @method ApiCall update(Order $order)
+     * @method ApiCall read(OrderReadRequest $readRequest)
+     * @method ApiCall update(OrderUpdateRequest $updateRequest)
      */
     final class OrderCall extends CallType implements CallTypeInterface
     {
+        protected $callVersion    = '2.0';
         protected $validatorClass = OrderValidator::class;
 
         /**
@@ -55,4 +58,6 @@
 
             return $apiCall;
         }
+
+
     }
