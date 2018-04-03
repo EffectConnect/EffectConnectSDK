@@ -8,6 +8,8 @@
      *
      * 2. Get the Order call type.
      */
+    error_reporting(E_ALL);
+    ini_set("display_errors", 1);
     try
     {
         $orderCallType = $effectConnectSDK->OrderCall();
@@ -20,23 +22,11 @@
      * 3. Create an EffectConnectSDK\Core\Model\Order object and populate it with all required information
      */
     $orderNumber  = '1323';
-    $orderStatus  = \EffectConnectSDK\Core\Model\Order::STATUS_NEW;
     $currency     = 'EUR';
     $date         = new \DateTime('now', new \DateTimeZone('Europe/Amsterdam'));
-    $shippingCost = 0;
-    $handlingCost = 0;
     try
     {
-        $order = (new \EffectConnectSDK\Core\Model\Order())
-            ->setNumber($orderNumber)
-            ->setStatus($orderStatus)
-            ->setCurrency($currency)
-            ->setDate($date)
-            ->setShippingCost($shippingCost)
-            ->setHandlingCost($handlingCost)
-        ;
         $shippingAddress = (new \EffectConnectSDK\Core\Model\OrderAddress())
-            ->setType(\EffectConnectSDK\Core\Model\OrderAddress::TYPE_SHIPPING)
             ->setSalutation(\EffectConnectSDK\Core\Model\OrderAddress::SALUTATION_MALE)
             ->setFirstName('Stefan')
             ->setLastName('Van den Heuvel')
@@ -53,7 +43,6 @@
             ->setEmail('stefan@koekenpeer.nl')
         ;
         $billingAddress = (new \EffectConnectSDK\Core\Model\OrderAddress())
-            ->setType(\EffectConnectSDK\Core\Model\OrderAddress::TYPE_BILLING)
             ->setSalutation(\EffectConnectSDK\Core\Model\OrderAddress::SALUTATION_MALE)
             ->setFirstName('Stefan')
             ->setLastName('Van den Heuvel')
@@ -71,23 +60,43 @@
 
         $firstOrderLine = (new \EffectConnectSDK\Core\Model\OrderLine())
             ->setId('1232456-1')
-            ->setOptionId(902)
-            ->setAmount(1)
-            ->setPrice(16000)
-            ->setTransactionFee(230)
+            ->addProductIdentifier((new \EffectConnectSDK\Core\Model\OrderLineProductIdentifier())
+                ->setType(\EffectConnectSDK\Core\Model\OrderLineProductIdentifier::TYPE_ID)
+                ->setValue(1)
+            )
+            ->setProductTitle('Optie 1')
+            ->setIndividualProductPrice(12.50)
+            ->addFee((new \EffectConnectSDK\Core\Model\OrderFee())
+                ->setType(\EffectConnectSDK\Core\Model\OrderFee::FEE_TYPE_COMMISSION)
+                ->setAmount(1.25)
+            )
         ;
         $secondOrderLine = (new \EffectConnectSDK\Core\Model\OrderLine())
             ->setId('1232456-2')
-            ->setOptionId(357)
-            ->setAmount(3)
-            ->setPrice(41000)
-            ->setTransactionFee(230)
+            ->addProductIdentifier((new \EffectConnectSDK\Core\Model\OrderLineProductIdentifier())
+                ->setType(\EffectConnectSDK\Core\Model\OrderLineProductIdentifier::TYPE_ID)
+                ->setValue(6)
+            )
+            ->setQuantity(3)
+            ->setProductTitle('Optie 1')
+            ->setIndividualProductPrice(12.50)
+            ->addFee((new \EffectConnectSDK\Core\Model\OrderFee())
+                ->setType(\EffectConnectSDK\Core\Model\OrderFee::FEE_TYPE_COMMISSION)
+                ->setAmount(3.75)
+            )
         ;
-        $order
+        $order = (new \EffectConnectSDK\Core\Model\Order())
+            ->setNumber($orderNumber)
+            ->setCurrency($currency)
+            ->setDate($date)
             ->setBillingAddress($billingAddress)
             ->setShippingAddress($shippingAddress)
-            ->addOrderLine($firstOrderLine)
-            ->addOrderLine($secondOrderLine)
+            ->addLine($firstOrderLine)
+            ->addLine($secondOrderLine)
+            ->addFee((new \EffectConnectSDK\Core\Model\OrderFee())
+                ->setType(\EffectConnectSDK\Core\Model\OrderFee::FEE_TYPE_SHIPPING)
+                ->setAmount(6.50)
+            )
         ;
     } catch (Exception $exception)
     {

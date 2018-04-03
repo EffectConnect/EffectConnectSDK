@@ -18,7 +18,6 @@
      * @package EffectConnectSDK
      *
      * @method ApiCall create(\CURLFile $productFile)
-     * @method ApiCall read($id)
      * @method ApiCall update(\CURLFile $productFile)
      */
     final class ProductsCall extends CallType implements CallTypeInterface
@@ -35,9 +34,6 @@
         {
             switch ($this->action)
             {
-                case CallTypeInterface::ACTION_READ:
-                    $method = 'GET';
-                    break;
                 case CallTypeInterface::ACTION_CREATE:
                     $method = 'POST';
                     break;

@@ -7,17 +7,18 @@
     use EffectConnectSDK\Core\Interfaces\CallTypeInterface;
     use EffectConnectSDK\Core\Interfaces\CallValidatorInterface;
     use EffectConnectSDK\Core\Model\OrderList;
+    use EffectConnectSDK\Core\Model\ProcessReadRequest;
 
     /**
-     * Class OrderListValidator
+     * Class ProcessValidator
      *
-     * @author  Mark Thiesen
+     * @author  Stefan Van den Heuvel
      * @company Koek & Peer
      * @product EffectConnect
      * @package EffectConnectSDK
      *
      */
-    final class OrderListValidator extends Validator implements CallValidatorInterface
+    final class ProcessValidator extends Validator implements CallValidatorInterface
     {
         protected $validActions = [
             CallTypeInterface::ACTION_READ,
@@ -34,12 +35,13 @@
             $valid = false;
             switch ($this->action) {
                 case CallTypeInterface::ACTION_READ:
-                    if ($argument instanceof OrderList) {
+                    if ($argument instanceof ProcessReadRequest) {
                         $valid = true;
                     }
                     break;
             }
-            if (!$valid) {
+            if (!$valid)
+            {
                 throw new InvalidPayloadException($this->action);
             }
 

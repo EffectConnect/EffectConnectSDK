@@ -5,29 +5,25 @@
     use EffectConnectSDK\ApiCall;
     use EffectConnectSDK\Core\Exception\InvalidActionForCallTypeException;
     use EffectConnectSDK\Core\Interfaces\CallTypeInterface;
-    use EffectConnectSDK\Core\Model\Order;
-    use EffectConnectSDK\Core\Model\OrderReadRequest;
-    use EffectConnectSDK\Core\Model\OrderUpdateRequest;
-    use EffectConnectSDK\Core\Validation\OrderValidator;
+    use EffectConnectSDK\Core\Model\ProcessReadRequest;
+    use EffectConnectSDK\Core\Validation\ProcessValidator;
+    use EffectConnectSDK\Core\Validation\ProductsValidator;
 
     /**
-     * Class OrderCall
+     * Class ProcessCall
      *
-     * CallType class for creating single order calls to the EffectConnect API
+     * CallType class for creating batch product calls to the EffectConnect API
      *
      * @author  Stefan Van den Heuvel
      * @company Koek & Peer
      * @product EffectConnect
      * @package EffectConnectSDK
      *
-     * @method ApiCall create(Order $order)
-     * @method ApiCall read(OrderReadRequest $readRequest)
-     * @method ApiCall update(OrderUpdateRequest $updateRequest)
+     * @method ApiCall read(ProcessReadRequest $processReadRequest)
      */
-    final class OrderCall extends CallType implements CallTypeInterface
+    final class ProcessCall extends CallType implements CallTypeInterface
     {
-        protected $callVersion    = '2.0';
-        protected $validatorClass = OrderValidator::class;
+        protected $validatorClass = ProcessValidator::class;
 
         /**
          * @param ApiCall $apiCall
@@ -42,22 +38,14 @@
                 case CallTypeInterface::ACTION_READ:
                     $method = 'GET';
                     break;
-                case CallTypeInterface::ACTION_CREATE:
-                    $method = 'POST';
-                    break;
-                case CallTypeInterface::ACTION_UPDATE:
-                    $method = 'PUT';
-                    break;
                 default:
                     throw new InvalidActionForCallTypeException();
             }
             $apiCall
-                ->setUri('/orders')
+                ->setUri('/process')
                 ->setMethod($method)
             ;
 
             return $apiCall;
         }
-
-
     }
