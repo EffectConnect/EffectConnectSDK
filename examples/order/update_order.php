@@ -20,38 +20,17 @@
         die();
     }
     /**
-     * 3. Create an EffectConnectSDK\Core\Model\Order object containing all orderlines you're trying to update.
+     * 3. Create an EffectConnectSDK\Core\Model\Order object containing the order number and tracking code.
      */
-
-    try
-    {
-        $firstUpdatableOrderline = (new \EffectConnectSDK\Core\Model\OrderLineUpdate())
-            ->setIdentifierType(\EffectConnectSDK\Core\Model\OrderLineUpdate::TYPE_CHANNEL_LINE_ID)
-            ->setIdentifier('test_order_1.2')
-            ->setTrackingNumber('TEST-TRACK-1234')
-            ->setTrackingUrl('https://test-update.test')
-            ->setCarrier('NOT A CARRIER')
-        ;
-        $secondUpdatableOrderline = (new \EffectConnectSDK\Core\Model\OrderLineUpdate())
-            ->setIdentifierType(\EffectConnectSDK\Core\Model\OrderLineUpdate::TYPE_CHANNEL_LINE_ID)
-            ->setIdentifier('test_order_1.1')
-            ->setTrackingNumber('TEST-TRACK-1234')
-            ->setTrackingUrl('https://test-update.test')
-            ->setCarrier('NOT A CARRIER')
-        ;
-        $orderUpdate             = (new EffectConnectSDK\Core\Model\OrderUpdateRequest())
-            ->addLineUpdate($firstUpdatableOrderline)
-            ->addLineUpdate($secondUpdatableOrderline)
-        ;
-    } catch (Exception $exception)
-    {
-        echo sprintf('Could not create object. `%s`', $exception->getMessage());
-        die();
-    }
+    $orderNumber  = '1323';
+    $order        = (new EffectConnectSDK\Core\Model\Order())
+        ->setNumber($orderNumber)
+        ->setTrackingCode('TEST123456')
+    ;
     /**
      * 4. Make the call
      */
-    $apiCall = $orderCallType->update($orderUpdate);
+    $apiCall = $orderCallType->update($order);
     $apiCall->call();
 
     echo $apiCall->getCurlResponse();

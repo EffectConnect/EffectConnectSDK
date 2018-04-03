@@ -3,7 +3,10 @@
 
     use EffectConnectSDK\ApiCall;
     use EffectConnectSDK\Core\Exception\IncorrectArgumentException;
+    use EffectConnectSDK\Core\Exception\InvalidCallActionException;
+    use EffectConnectSDK\Core\Exception\InvalidPayloadException;
     use EffectConnectSDK\Core\Exception\InvalidPropertyException;
+    use EffectConnectSDK\Core\Exception\InvalidReflectionException;
     use EffectConnectSDK\Core\Exception\InvalidResponseTypeException;
     use EffectConnectSDK\Core\Exception\InvalidValidatorClassException;
     use EffectConnectSDK\Core\Exception\MissingValidatorClassException;
@@ -84,7 +87,7 @@
          * @throws InvalidValidatorClassException
          * @throws MissingValidatorClassException
          */
-        public function __construct(Keychain $keychain)
+        public function __construct($keychain)
         {
             $this->keychain = $keychain;
             $this->callDate = new \DateTime('now', new \DateTimeZone('Europe/Amsterdam'));
@@ -133,11 +136,11 @@
         }
 
         /**
-         * @param string $responseType
+         * @param $responseType
          *
          * @return $this
          * @throws InvalidResponseTypeException
-         * @throws \Exception
+         * @throws InvalidReflectionException
          */
         final public function setResponseType($responseType = CallTypeInterface::RESPONSE_TYPE_XML)
         {
