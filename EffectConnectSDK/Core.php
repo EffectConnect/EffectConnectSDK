@@ -3,6 +3,7 @@
 
     use EffectConnectSDK\Core\CallType\OrderCall;
     use EffectConnectSDK\Core\CallType\OrderListCall;
+    use EffectConnectSDK\Core\CallType\ProcessCall;
     use EffectConnectSDK\Core\CallType\ProductsCall;
     use EffectConnectSDK\Core\Exception\InvalidApiCallException;
     use EffectConnectSDK\Core\Exception\InvalidKeyException;
@@ -23,6 +24,7 @@
      * @method OrderCall     OrderCall()
      * @method OrderListCall OrderListCall()
      * @method ProductsCall  ProductsCall()
+     * @method ProcessCall   ProcessCall()
      */
     final class Core
     {
