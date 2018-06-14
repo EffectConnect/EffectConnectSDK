@@ -27,14 +27,14 @@
     {
         $firstUpdatableOrderline = (new \EffectConnectSDK\Core\Model\OrderLineUpdate())
             ->setIdentifierType(\EffectConnectSDK\Core\Model\OrderLineUpdate::TYPE_CHANNEL_LINE_ID)
-            ->setIdentifier('test_order_1.2')
+            ->setIdentifier('test_order3_1.2')
             ->setTrackingNumber('TEST-TRACK-1234')
             ->setTrackingUrl('https://test-update.test')
             ->setCarrier('NOT A CARRIER')
         ;
         $secondUpdatableOrderline = (new \EffectConnectSDK\Core\Model\OrderLineUpdate())
             ->setIdentifierType(\EffectConnectSDK\Core\Model\OrderLineUpdate::TYPE_CHANNEL_LINE_ID)
-            ->setIdentifier('test_order_1.1')
+            ->setIdentifier('test_order3_1.1')
             ->setTrackingNumber('TEST-TRACK-1234')
             ->setTrackingUrl('https://test-update.test')
             ->setCarrier('NOT A CARRIER')

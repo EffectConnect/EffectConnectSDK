@@ -2,26 +2,26 @@
     // 1. Require the SDK base file.
     require_once(realpath(__DIR__.'/..').'/base.php');
     /**
-     * @var \EffectConnectSDK\Core                        $effectConnectSDK
-     * @var \EffectConnectSDK\Core\CallType\ProcessCall   $processCallType
+     * @var \EffectConnectSDK\Core                       $effectConnectSDK
+     * @var \EffectConnectSDK\Core\CallType\ReportCall   $reportCallType
      *
      * 2. Get the Process call type.
      */
     try
     {
-        $processCallType = $effectConnectSDK->ProcessCall();
+        $reportCallType = $effectConnectSDK->ReportCall();
     } catch (Exception $exception)
     {
         echo sprintf('Could not create call type. `%s`', $exception->getMessage());
         die();
     }
     /**
-     * 3. Create an EffectConnectSDK\Core\Model\ProcessReadRequest object and populate it with the process ID you want to retrieve
+     * 3. Create an EffectConnectSDK\Core\Model\ReportReadRequest object and populate it with the process ID you want to retrieve
      */
 
     try
     {
-        $processReadRequest = (new \EffectConnectSDK\Core\Model\ProcessReadRequest())
+        $reportReadRequest = (new \EffectConnectSDK\Core\Model\ReportReadRequest())
             ->setID('Vqs2PqP985p4r1rG')
         ;
     } catch (Exception $exception)
@@ -32,6 +32,6 @@
     /**
      * 4. Make the call
      */
-    $apiCall = $processCallType->read($processReadRequest);
+    $apiCall = $reportCallType->read($reportReadRequest);
     $apiCall->call();
     echo $apiCall->getCurlResponse();

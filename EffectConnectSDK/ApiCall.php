@@ -88,6 +88,10 @@
          */
         private $_secretKey;
         /**
+         * @var int $_timeout
+         */
+        private $_timeout = 3;
+        /**
          * @var string $_uri
          *
          * The endpoint we're attempting to reach
@@ -102,18 +106,17 @@
          */
         final public function call()
         {
-            $timeout    = 3;
             $postFields = $this->_payload;
             if ($this->_payload instanceof \CURLFile)
             {
                 /**
                  * Allowing a longer timeout to upload the file to EffectConnect.
                  */
-                $timeout    = 30;
+                $this->_timeout = 30;
                 /**
                  * Sending the CURLFile as an array.
                  */
-                $postFields = [$this->_payload];
+                $postFields     = [$this->_payload];
             }
             if (!self::CERTIFICATE_LOCATION)
             {
@@ -128,7 +131,7 @@
                 CURLOPT_HTTPHEADER      => $this->_getHeaders(),
                 CURLOPT_URL             => self::API_ENDPOINT.$this->_uri,
                 CURLOPT_CUSTOMREQUEST   => $this->_method,
-                CURLOPT_TIMEOUT         => $timeout,
+                CURLOPT_TIMEOUT         => $this->_timeout,
                 CURLOPT_POSTFIELDS      => $postFields,
                 CURLOPT_RETURNTRANSFER  => true,
                 CURLOPT_SSL_VERIFYHOST  => 2,
@@ -309,6 +312,18 @@
         final public function setUri($uri)
         {
             $this->_uri = $uri;
+
+            return $this;
+        }
+
+        /**
+         * @param $timeout
+         *
+         * @return ApiCall
+         */
+        final public function setTimeout($timeout)
+        {
+            $this->_timeout = $timeout;
 
             return $this;
         }

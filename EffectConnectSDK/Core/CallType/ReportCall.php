@@ -5,25 +5,24 @@
     use EffectConnectSDK\ApiCall;
     use EffectConnectSDK\Core\Exception\InvalidActionForCallTypeException;
     use EffectConnectSDK\Core\Interfaces\CallTypeInterface;
-    use EffectConnectSDK\Core\Model\ProcessReadRequest;
-    use EffectConnectSDK\Core\Validation\ProcessValidator;
-    use EffectConnectSDK\Core\Validation\ProductsValidator;
+    use EffectConnectSDK\Core\Model\ReportReadRequest;
+    use EffectConnectSDK\Core\Validation\ReportValidator;
 
     /**
-     * Class ProcessCall
+     * Class ReportCall
      *
-     * CallType class for retrieving the process status report
+     * CallType class for retrieving the process report.
      *
      * @author  Stefan Van den Heuvel
      * @company Koek & Peer
      * @product EffectConnect
      * @package EffectConnectSDK
      *
-     * @method ApiCall read(ProcessReadRequest $processReadRequest)
+     * @method ApiCall read(ReportReadRequest $reportReadRequest)
      */
-    final class ProcessCall extends CallType implements CallTypeInterface
+    final class ReportCall extends CallType implements CallTypeInterface
     {
-        protected $validatorClass = ProcessValidator::class;
+        protected $validatorClass = ReportValidator::class;
 
         /**
          * @param ApiCall $apiCall
@@ -42,7 +41,7 @@
                     throw new InvalidActionForCallTypeException();
             }
             $apiCall
-                ->setUri('/process')
+                ->setUri('/report')
                 ->setMethod($method)
             ;
 

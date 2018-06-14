@@ -5,6 +5,7 @@
     use EffectConnectSDK\Core\CallType\OrderListCall;
     use EffectConnectSDK\Core\CallType\ProcessCall;
     use EffectConnectSDK\Core\CallType\ProductsCall;
+    use EffectConnectSDK\Core\CallType\ReportCall;
     use EffectConnectSDK\Core\Exception\InvalidApiCallException;
     use EffectConnectSDK\Core\Exception\InvalidKeyException;
     use EffectConnectSDK\Core\Exception\InvalidSignatureException;
@@ -25,6 +26,7 @@
      * @method OrderListCall OrderListCall()
      * @method ProductsCall  ProductsCall()
      * @method ProcessCall   ProcessCall()
+     * @method ReportCall    ReportCall()
      */
     final class Core
     {
@@ -72,11 +74,11 @@
             {
                 throw new InvalidSignatureException();
             }
-            if (!array_key_exists('eventDetails', $_POST) || $_POST['eventDetails'] === '')
+            if (!array_key_exists('eventPayload', $_POST) || $_POST['eventPayload'] === '')
             {
-                throw new MissingArgumentException('$_POST["eventDetails"]');
+                throw new MissingArgumentException('$_POST["eventPayload"]');
             }
-            $message    = base64_decode($_POST['eventDetails'], true);
+            $message    = base64_decode($_POST['eventPayload'], true);
             $size       = openssl_cipher_iv_length('aes-256-ctr');
             $nonce      = mb_substr($message, 0, $size, '8bit');
             $encrypted  = mb_substr($message, $size, null, '8bit');

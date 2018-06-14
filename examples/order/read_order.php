@@ -21,7 +21,7 @@
      */
     $order       = (new \EffectConnectSDK\Core\Model\OrderReadRequest())
         ->setIdentifierType(\EffectConnectSDK\Core\Model\OrderReadRequest::TYPE_EFFECTCONNECT_NUMBER)
-        ->setIdentifier('1189-2018-2')
+        ->setIdentifier('TEST_ORDER_1')
     ;
     /**
      * 4. Make the call
