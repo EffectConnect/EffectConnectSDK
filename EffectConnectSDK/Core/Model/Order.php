@@ -18,6 +18,12 @@
      */
     final class Order extends ApiModel implements ApiModelInterface
     {
+        const STATUS_NEW        = 'new';
+        const STATUS_PAID       = 'paid';
+        const STATUS_COMPLETED  = 'completed';
+        const STATUS_CANCELED   = 'canceled';
+        const STATUS_RETURN     = 'return';
+
         /**
          * REQUIRED
          * @var string $_number
@@ -27,13 +33,27 @@
         protected $_number;
 
         /**
+         * OPTIONAL
+         * @var int $_fulfilmentNumber
+         *
+         * Fulfilment number
+         */
+
+        protected $_fulfilmentNumber;
+        /**
          * REQUIRED
          * @var string(3) $_currency
          *
          * Currency string in ISO 4217 format
          * http://www.currency-iso.org/dam/downloads/lists/list_one.xml
          */
+
         protected $_currency;
+        /**
+         * REQUIRED
+         * @var string $_status
+         */
+        protected $_status;
 
         /**
          * REQUIRED
@@ -42,13 +62,30 @@
          * The order date
          */
         protected $_date;
+
         /**
          * OPTIONAL
-         * @var OrderFee[] $_fees
+         * @var int $_shippingCost
          *
-         * A list of order fees.
+         * Shipping cost in cents
          */
-        protected $_fees = [];
+        protected $_shippingCost;
+
+        /**
+         * OPTIONAL
+         * @var int $_handlingCost
+         *
+         * Handling cost in cents
+         */
+        protected $_handlingCost;
+
+        /**
+         * REQUIRED for Updates
+         * @var string $_trackingCode
+         *
+         * Tracking code
+         */
+        protected $_trackingCode;
 
         /**
          * REQUIRED
@@ -68,11 +105,11 @@
 
         /**
          * REQUIRED
-         * @var OrderLine[] $_lines
+         * @var OrderLine[] $_orderLines
          *
          * Order lines
          */
-        protected $_lines = [];
+        protected $_orderLines;
 
         /**
          * @return string
@@ -83,7 +120,7 @@
         }
 
         /**
-         * @return string
+         * @return mixed
          */
         public function getNumber()
         {
@@ -91,13 +128,59 @@
         }
 
         /**
-         * @param string $number
+         * @param mixed $number
          *
          * @return Order
          */
         public function setNumber($number)
         {
             $this->_number = $number;
+
+            return $this;
+        }
+
+        /**
+         * @return string
+         */
+        public function getFulfilmentNumber()
+        {
+            return $this->_fulfilmentNumber;
+        }
+
+        /**
+         * @param string $fulfilmentNumber
+         *
+         * @return Order
+         */
+        public function setFulfilmentNumber($fulfilmentNumber)
+        {
+            $this->_fulfilmentNumber = $fulfilmentNumber;
+
+            return $this;
+        }
+
+        /**
+         * @return string
+         */
+        public function getStatus()
+        {
+            return $this->_status;
+        }
+
+        /**
+         * @param $status
+         *
+         * @return $this
+         * @throws InvalidStatusException
+         * @throws InvalidReflectionException
+         */
+        public function setStatus($status)
+        {
+            if (!Reflector::isValid(Order::class, $status, 'STATUS_%'))
+            {
+                throw new InvalidStatusException();
+            }
+            $this->_status = $status;
 
             return $this;
         }
@@ -128,6 +211,46 @@
         }
 
         /**
+         * @return int
+         */
+        public function getShippingCost()
+        {
+            return $this->_shippingCost;
+        }
+
+        /**
+         * @param int $shippingCost
+         *
+         * @return Order
+         */
+        public function setShippingCost($shippingCost)
+        {
+            $this->_shippingCost = $shippingCost;
+
+            return $this;
+        }
+
+        /**
+         * @return int
+         */
+        public function getHandlingCost()
+        {
+            return $this->_handlingCost;
+        }
+
+        /**
+         * @param int $handlingCost
+         *
+         * @return Order
+         */
+        public function setHandlingCost($handlingCost)
+        {
+            $this->_handlingCost = $handlingCost;
+
+            return $this;
+        }
+
+        /**
          * @return OrderAddress
          */
         public function getShippingAddress()
@@ -148,9 +271,9 @@
          *
          * @return Order
          */
-        public function setShippingAddress(OrderAddress $address)
+        public function setShippingAddress($address)
         {
-            $this->_shippingAddress = $address->setType('shipping');
+            $this->_shippingAddress = $address;
 
             return $this;
         }
@@ -160,9 +283,9 @@
          *
          * @return Order
          */
-        public function setBillingAddress(OrderAddress $address)
+        public function setBillingAddress($address)
         {
-            $this->_billingAddress = $address->setType('billing');
+            $this->_billingAddress = $address;
 
             return $this;
         }
@@ -172,9 +295,9 @@
          *
          * @return Order
          */
-        public function addLine($orderLine)
+        public function addOrderLine($orderLine)
         {
-            $this->_lines[] = $orderLine;
+            $this->_orderLines[] = $orderLine;
 
             return $this;
         }
@@ -182,9 +305,9 @@
         /**
          * @return OrderLine[]
          */
-        public function getLines()
+        public function getOrderLines()
         {
-            return $this->_lines;
+            return $this->_orderLines;
         }
 
         /**
@@ -208,21 +331,21 @@
         }
 
         /**
-         * @return OrderFee[]
+         * @return string
          */
-        public function getFees()
+        public function getTrackingCode()
         {
-            return $this->_fees;
+            return $this->_trackingCode;
         }
 
         /**
-         * @param OrderFee $fee
+         * @param string $trackingCode
          *
          * @return Order
          */
-        public function addFee(OrderFee $fee)
+        public function setTrackingCode($trackingCode)
         {
-            $this->_fees[] = $fee;
+            $this->_trackingCode = $trackingCode;
 
             return $this;
         }

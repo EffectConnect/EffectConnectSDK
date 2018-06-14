@@ -7,7 +7,6 @@
     use EffectConnectSDK\Core\Exception\InvalidStatusException;
     use EffectConnectSDK\Core\Helper\Reflector;
     use EffectConnectSDK\Core\Interfaces\ApiModelInterface;
-    use EffectConnectSDK\Core\Interfaces\OrderListFilterInterface;
 
     /**
      * Class OrderList
@@ -20,13 +19,19 @@
      */
     final class OrderList extends ApiModel implements ApiModelInterface
     {
+        const TYPE_STATUS = 'status';
         /**
          * OPTIONAL
-         * @var OrderListFilterInterface[] $_filters
          *
-         * List of filters
+         * @var string $_type
+         *
+         * Type of list
          */
-        protected $_filters = [];
+        protected $_type;
+        /**
+         * @var array $_values
+         */
+        protected $_values;
 
         /**
          * @return string
@@ -37,21 +42,63 @@
         }
 
         /**
-         * @return OrderListFilterInterface[]
+         * @return string
          */
-        public function getFilters()
+        public function getType()
         {
-            return $this->_filters;
+            return $this->_type;
         }
 
         /**
-         * @param OrderListFilterInterface $filter
+         * @param $type
          *
-         * @return OrderList
+         * @return $this
+         * @throws InvalidListTypeException
+         * @throws \Exception
          */
-        public function addFilter(OrderListFilterInterface $filter)
+        public function setType($type)
         {
-            $this->_filters[] = $filter;
+            if (!Reflector::isValid(OrderList::class, $type, 'TYPE_%'))
+            {
+                throw new InvalidListTypeException();
+            }
+            $this->_type = $type;
+
+            return $this;
+        }
+
+        public function getValues()
+        {
+            return $this->_values;
+        }
+
+        /**
+         * @param string $value
+         *
+         * @return $this
+         * @throws InvalidListValuesException
+         * @throws \Exception
+         */
+        public function addValue($value)
+        {
+            $valid = true;
+            switch ($this->getType())
+            {
+                case self::TYPE_STATUS:
+                    if (!Reflector::isValid(Order::class, $value, 'STATUS_%'))
+                    {
+                        $valid = false;
+                    }
+                    break;
+                default:
+                    $valid = false;
+                    break;
+            }
+            if (!$valid)
+            {
+                throw new InvalidListValuesException();
+            }
+            $this->_values[] = ['value' => $value];
 
             return $this;
         }

@@ -42,7 +42,7 @@
          *
          * @throws \Exception
          */
-        public function __construct(Keychain $keychain)
+        public function __construct($keychain)
         {
             if (!$keychain->_isValid())
             {

@@ -19,6 +19,7 @@
     {
         protected $validActions = [
             CallTypeInterface::ACTION_CREATE,
+            CallTypeInterface::ACTION_READ,
             CallTypeInterface::ACTION_UPDATE
         ];
         /**
@@ -30,15 +31,18 @@
         public function validateCall($argument)
         {
             $valid = false;
-            switch ($this->action)
+            if ($this->payloadRequired)
             {
-                case CallTypeInterface::ACTION_CREATE:
-                case CallTypeInterface::ACTION_UPDATE:
-                    if ($argument instanceof \CURLFile)
-                    {
-                        $valid = true;
-                    }
-                    break;
+                if ($argument instanceof \CURLFile)
+                {
+                    $valid = true;
+                }
+            } elseif ($this->identifierRequired)
+            {
+                if (is_int($argument))
+                {
+                    $valid = true;
+                }
             }
             if (!$valid)
             {
@@ -46,5 +50,17 @@
             }
 
             return true;
+        }
+
+        protected function _setupUpdate()
+        {
+            $this->identifierRequired  = false;
+            $this->payloadRequired     = true;
+        }
+
+        protected function _setupDelete()
+        {
+            $this->identifierRequired  = false;
+            $this->payloadRequired     = true;
         }
     }

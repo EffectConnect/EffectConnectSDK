@@ -3,7 +3,6 @@
     namespace EffectConnectSDK\Core\Model;
 
     use EffectConnectSDK\Core\Abstracts\ApiModel;
-    use EffectConnectSDK\Core\Interfaces\ApiModelInterface;
 
     /**
      * Class OrderLine
@@ -14,62 +13,95 @@
      * @package EffectConnectSDK
      *
      */
-    final class OrderLine extends ApiModel implements ApiModelInterface
+    final class OrderLine extends ApiModel
     {
+
         /**
          * REQUIRED
-         * @var string $_id
-         * 
-         * The order line identifier
+         * @var int $_amount
+         *
+         * The amount of products
+         */
+        protected $_amount;
+
+        /**
+         * OPTIONAL
+         * @var string $_ean
+         *
+         * Product European Article Number
+         */
+        protected $_ean;
+
+        /**
+         * REQUIRED
+         * @var int $_id
+         *
+         * Line Identifier
          */
         protected $_id;
 
         /**
          * REQUIRED
-         * @var OrderLineProductIdentifier[] $_productIdentifiers
-         * 
-         * At least one identifier is required to match the product.
+         * @var int $_optionId
+         *
+         * Product option ID
          */
-        protected $_productIdentifiers = [];
+        protected $_optionId;
 
         /**
          * REQUIRED
-         * @var string $_productTitle
+         * @var int $_price
+         *
+         * Product unit price
          */
-        protected $_productTitle;
-
-        /**
-         * REQUIRED
-         * @var int $_quantity
-         * 
-         * Defaults to 1
-         */
-        protected $_quantity = 1;
-
-        /**
-         * REQUIRED
-         * @var float $_individualProductPrice
-         * 
-         * The price of a single product in this line
-         */
-        protected $_individualProductPrice;
+        protected $_price;
 
         /**
          * OPTIONAL
-         * @var OrderFee[] $_fees
+         * @var string $_sku
+         *
+         * Product Stock Keeping Unit
          */
-        protected $_fees = [];
+        protected $_sku;
+
+        /**
+         * OPTIONAL
+         * @var int $_transactionFee
+         *
+         * Transaction fee in cents
+         */
+        protected $_transactionFee;
 
         /**
          * @return string
          */
         public function getName()
         {
-            return 'line';
+            return 'orderLine';
         }
 
         /**
-         * @return string
+         * @return int
+         */
+        public function getAmount()
+        {
+            return $this->_amount;
+        }
+
+        /**
+         * @param int $amount
+         *
+         * @return OrderLine
+         */
+        public function setAmount($amount)
+        {
+            $this->_amount = $amount;
+
+            return $this;
+        }
+
+        /**
+         * @return int
          */
         public function getId()
         {
@@ -77,7 +109,7 @@
         }
 
         /**
-         * @param string $id
+         * @param int $id
          *
          * @return OrderLine
          */
@@ -89,41 +121,21 @@
         }
 
         /**
-         * @return OrderLineProductIdentifier[]
+         * @return int
          */
-        public function getProductIdentifiers()
+        public function getOptionId()
         {
-            return $this->_productIdentifiers;
+            return $this->_optionId;
         }
 
         /**
-         * @param OrderLineProductIdentifier $identifier
+         * @param int $optionId
          *
          * @return OrderLine
          */
-        public function addProductIdentifier(OrderLineProductIdentifier $identifier)
+        public function setOptionId($optionId)
         {
-            $this->_productIdentifiers[] = $identifier;
-
-            return $this;
-        }
-
-        /**
-         * @return string
-         */
-        public function getProductTitle()
-        {
-            return $this->_productTitle;
-        }
-
-        /**
-         * @param string $productTitle
-         *
-         * @return OrderLine
-         */
-        public function setProductTitle($productTitle)
-        {
-            $this->_productTitle = $productTitle;
+            $this->_optionId = $optionId;
 
             return $this;
         }
@@ -131,59 +143,79 @@
         /**
          * @return int
          */
-        public function getQuantity()
+        public function getPrice()
         {
-            return $this->_quantity;
+            return $this->_price;
         }
 
         /**
-         * @param int $quantity
+         * @param int $price
          *
          * @return OrderLine
          */
-        public function setQuantity($quantity)
+        public function setPrice($price)
         {
-            $this->_quantity = $quantity;
+            $this->_price = $price;
 
             return $this;
         }
 
         /**
-         * @return float
+         * @return int
          */
-        public function getIndividualProductPrice()
+        public function getTransactionFee()
         {
-            return $this->_individualProductPrice;
+            return $this->_transactionFee;
         }
 
         /**
-         * @param float $individualProductPrice
+         * @param int $transactionFee
          *
          * @return OrderLine
          */
-        public function setIndividualProductPrice($individualProductPrice)
+        public function setTransactionFee($transactionFee)
         {
-            $this->_individualProductPrice = $individualProductPrice;
+            $this->_transactionFee = $transactionFee;
 
             return $this;
         }
 
         /**
-         * @return OrderFee[]
+         * @return string
          */
-        public function getFees()
+        public function getEan()
         {
-            return $this->_fees;
+            return $this->_ean;
         }
 
         /**
-         * @param OrderFee $fee
+         * @param string $ean
          *
          * @return OrderLine
          */
-        public function addFee(OrderFee $fee)
+        public function setEan($ean)
         {
-            $this->_fees[] = $fee;
+            $this->_ean = $ean;
+
+            return $this;
+        }
+
+        /**
+         * @return string
+         */
+        public function getSku()
+        {
+            return $this->_sku;
+        }
+
+        /**
+         * @param string $sku
+         *
+         * @return OrderLine
+         */
+        public function setSku($sku)
+        {
+            $this->_sku = $sku;
 
             return $this;
         }

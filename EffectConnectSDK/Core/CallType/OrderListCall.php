@@ -22,7 +22,6 @@
      */
     final class OrderListCall extends CallType implements CallTypeInterface
     {
-        protected $callVersion    = '2.0';
         protected $validatorClass = OrderListValidator::class;
 
         /**
