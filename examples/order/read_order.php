@@ -19,8 +19,10 @@
     /**
      * 3. Create an EffectConnectSDK\Core\Model\Order object and populate it with the order number
      */
-    $orderNumber = '1323';
-    $order       = (new \EffectConnectSDK\Core\Model\Order())->setNumber($orderNumber);
+    $order       = (new \EffectConnectSDK\Core\Model\OrderReadRequest())
+        ->setIdentifierType(\EffectConnectSDK\Core\Model\OrderReadRequest::TYPE_EFFECTCONNECT_NUMBER)
+        ->setIdentifier('TEST_ORDER_1')
+    ;
     /**
      * 4. Make the call
      */
