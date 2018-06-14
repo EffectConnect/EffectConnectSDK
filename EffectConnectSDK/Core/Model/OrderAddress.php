@@ -5,6 +5,7 @@
     use EffectConnectSDK\Core\Exception\InvalidAddressTypeException;
     use EffectConnectSDK\Core\Exception\InvalidSalutationException;
     use EffectConnectSDK\Core\Helper\Reflector;
+    use EffectConnectSDK\Core\Interfaces\ApiModelInterface;
 
     /**
      * Class OrderAddress
@@ -15,18 +16,15 @@
      * @package EffectConnectSDK
      *
      */
-    final class OrderAddress extends ApiModel
+    final class OrderAddress extends ApiModel implements ApiModelInterface
     {
         const SALUTATION_MALE   = 'm';
         const SALUTATION_FEMALE = 'f';
 
-        const TYPE_BILLING      = 'billing';
-        const TYPE_SHIPPING     = 'shipping';
         /**
-         * REQUIRED
-         * @var string $_type
+         * Used to map the correct XML Node.
          *
-         * The internal address type, according to the OrderAddress class constants.
+         * @var string $_type
          */
         private $_type;
 
@@ -143,34 +141,21 @@
          */
         protected $_email;
 
-        public function getName()
-        {
-            return $this->_type.'Address';
-        }
-
-        /**
-         * @return string
-         */
-        public function getType()
-        {
-            return $this->_type;
-        }
-
         /**
          * @param string $type
          *
          * @return OrderAddress
-         * @throws InvalidAddressTypeException
          */
         public function setType($type)
         {
-            if (!Reflector::isValid(OrderAddress::class, $type, 'TYPE_%'))
-            {
-                throw new InvalidAddressTypeException();
-            }
             $this->_type = $type;
 
             return $this;
+        }
+
+        public function getName()
+        {
+            return $this->_type.'Address';
         }
 
         /**
@@ -182,10 +167,11 @@
         }
 
         /**
-         * @param string $salutation
+         * @param $salutation
          *
-         * @return OrderAddress
+         * @return $this
          * @throws InvalidSalutationException
+         * @throws \Exception
          */
         public function setSalutation($salutation)
         {

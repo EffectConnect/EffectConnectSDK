@@ -6,6 +6,8 @@
     use EffectConnectSDK\Core\Interfaces\CallTypeInterface;
     use EffectConnectSDK\Core\Interfaces\CallValidatorInterface;
     use EffectConnectSDK\Core\Model\Order;
+    use EffectConnectSDK\Core\Model\OrderReadRequest;
+    use EffectConnectSDK\Core\Model\OrderUpdateRequest;
 
     /**
      * Class OrderValidator
@@ -32,24 +34,33 @@
         public function validateCall($argument)
         {
             $valid = false;
-            if ($this->payloadRequired && $this->identifierRequired)
+            switch ($this->action)
             {
-                if ($argument instanceof Order && $argument->getNumber() !== null)
-                {
-                    $valid = true;
-                }
-            } elseif ($this->payloadRequired)
-            {
-                if ($argument instanceof Order)
-                {
-                    $valid = true;
-                }
-            } elseif ($this->identifierRequired)
-            {
-                if (is_int($argument) || ($argument instanceof Order && $argument->getNumber() !== null))
-                {
-                    $valid = true;
-                }
+                case CallTypeInterface::ACTION_CREATE:
+                    if ($argument instanceof Order)
+                    {
+                        $valid = true;
+                    }
+                    break;
+                case CallTypeInterface::ACTION_READ:
+                    if (
+                        $argument instanceof OrderReadRequest &&
+                        $argument->getIdentifierType() !== null &&
+                        $argument->getIdentifier() !== null
+                    )
+                    {
+                        $valid = true;
+                    }
+                    break;
+                case CallTypeInterface::ACTION_UPDATE:
+                    if (
+                        $argument instanceof OrderUpdateRequest &&
+                        count($argument->getLineUpdate()) > 0
+                    )
+                    {
+                        $valid = true;
+                    }
+                    break;
             }
             if (!$valid)
             {
