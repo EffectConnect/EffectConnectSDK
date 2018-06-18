@@ -25,18 +25,18 @@
         /**
          * REQUIRED
          *
-         * @var string $_identifierType
+         * @var string $_orderlineIdentifierType
          *
          * This type is used to identify the orderline you're trying to update.
          */
-        protected $_identifierType;
+        protected $_orderlineIdentifierType;
 
         /**
          * REQUIRED
          *
-         * @var string $_identifier
+         * @var string $_orderlineIdentifier
          */
-        protected $_identifier;
+        protected $_orderlineIdentifier;
 
         /**
          * OPTIONAL
@@ -70,9 +70,9 @@
         /**
          * @return string
          */
-        public function getIdentifierType()
+        public function getOrderlineIdentifierType()
         {
-            return $this->_identifierType;
+            return $this->_orderlineIdentifierType;
         }
 
         /**
@@ -83,13 +83,13 @@
          * @throws InvalidPropertyValueException
          * @throws \Exception
          */
-        public function setIdentifierType($identifierType)
+        public function setOrderlineIdentifierType($identifierType)
         {
             if (!Reflector::isValid(OrderLineUpdate::class, $identifierType))
             {
                 throw new InvalidPropertyValueException('identifierType');
             }
-            $this->_identifierType = $identifierType;
+            $this->_orderlineIdentifierType = $identifierType;
 
             return $this;
         }
@@ -97,9 +97,9 @@
         /**
          * @return string
          */
-        public function getIdentifier()
+        public function getOrderlineIdentifier()
         {
-            return $this->_identifier;
+            return $this->_orderlineIdentifier;
         }
 
         /**
@@ -107,9 +107,9 @@
          *
          * @return OrderLineUpdate
          */
-        public function setIdentifier($identifier)
+        public function setOrderlineIdentifier($identifier)
         {
-            $this->_identifier = $identifier;
+            $this->_orderlineIdentifier = $identifier;
 
             return $this;
         }

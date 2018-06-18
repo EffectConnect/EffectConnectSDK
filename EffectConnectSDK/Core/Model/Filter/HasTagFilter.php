@@ -4,7 +4,6 @@
 
     use EffectConnectSDK\Core\Abstracts\ApiModel;
     use EffectConnectSDK\Core\Exception\InvalidPropertyValueException;
-    use EffectConnectSDK\Core\Helper\Reflector;
     use EffectConnectSDK\Core\Interfaces\OrderListFilterInterface;
 
     /**
@@ -32,13 +31,6 @@
             return $this->_filterValue;
         }
 
-        /**
-         * @param $filterValue
-         *
-         * @return $this
-         * @throws InvalidPropertyValueException
-         * @throws \Exception
-         */
         public function setFilterValue($filterValue)
         {
             if (!is_array($filterValue))
@@ -47,14 +39,16 @@
             }
             foreach ($filterValue as $value)
             {
-                if (!Reflector::isValid(HasStatusFilter::class, $value))
+                if (!$value instanceof TagFilterValue)
                 {
                     throw new InvalidPropertyValueException('filterValue');
                 }
+                $this->_filterValue[] = $value;
             }
+        }
 
-            $this->_filterValue = $filterValue;
-
-            return $this;
+        protected function isIterator()
+        {
+            return true;
         }
     }

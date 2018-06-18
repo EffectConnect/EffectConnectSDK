@@ -16,26 +16,39 @@
     final class OrderUpdateRequest extends ApiModel implements ApiModelInterface
     {
         /**
-         * @var OrderLineUpdate[] $_lines
+         * @var OrderLineUpdate[] $_orderlines
          */
-        protected $_lineUpdate = [];
+        protected $_orderlines  = [];
+        /**
+         * @var OrderUpdate[] $_orders
+         */
+        protected $_orders      = [];
 
         public function getName()
         {
-            return 'lines';
+            return 'update';
         }
 
-        public function isIterator()
+        public function getOrders()
         {
-            return true;
+            return $this->_orders;
+        }
+
+        public function getOrderlines()
+        {
+            return $this->_orderlines;
         }
 
         /**
-         * @return OrderLineUpdate[]
+         * @param OrderUpdate $orderUpdate
+         *
+         * @return OrderUpdateRequest
          */
-        public function getLineUpdate()
+        public function addOrderUpdate(OrderUpdate $orderUpdate)
         {
-            return $this->_lineUpdate;
+            $this->_orders[] = $orderUpdate;
+
+            return $this;
         }
 
         /**
@@ -43,9 +56,9 @@
          *
          * @return OrderUpdateRequest
          */
-        public function addLineUpdate(OrderLineUpdate $line)
+        public function addLineUpdate(OrderLineUpdate $lineUpdate)
         {
-            $this->_lineUpdate[] = $line;
+            $this->_orderlines[] = $lineUpdate;
 
             return $this;
         }
