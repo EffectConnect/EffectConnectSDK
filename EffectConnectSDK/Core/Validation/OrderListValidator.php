@@ -31,13 +31,8 @@
          */
         public function validateCall($argument)
         {
-            $valid = false;
-            if ($this->payloadRequired) {
-                if ($argument instanceof OrderList) {
-                    $valid = true;
-                }
-            }
-            if (!$valid) {
+            if (!$argument instanceof OrderList)
+            {
                 throw new InvalidPayloadException($this->action);
             }
 

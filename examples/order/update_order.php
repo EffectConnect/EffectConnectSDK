@@ -25,16 +25,23 @@
 
     try
     {
+        $orderAddTag             = (new \EffectConnectSDK\Core\Model\OrderUpdate())
+            ->setOrderIdentifierType(\EffectConnectSDK\Core\Model\OrderUpdate::TYPE_CHANNEL_NUMBER)
+            ->setOrderIdentifier('TEST-ORDER-1')
+            ->addTag('CustomTag')
+            ->addTag('Test')
+            ->removeTag('RemovableTag')
+        ;
         $firstUpdatableOrderline = (new \EffectConnectSDK\Core\Model\OrderLineUpdate())
-            ->setIdentifierType(\EffectConnectSDK\Core\Model\OrderLineUpdate::TYPE_CHANNEL_LINE_ID)
-            ->setIdentifier('test_order3_1.2')
+            ->setOrderlineIdentifierType(\EffectConnectSDK\Core\Model\OrderLineUpdate::TYPE_CHANNEL_LINE_ID)
+            ->setOrderlineIdentifier('test_order3_1.2')
             ->setTrackingNumber('TEST-TRACK-1234')
             ->setTrackingUrl('https://test-update.test')
             ->setCarrier('NOT A CARRIER')
         ;
         $secondUpdatableOrderline = (new \EffectConnectSDK\Core\Model\OrderLineUpdate())
-            ->setIdentifierType(\EffectConnectSDK\Core\Model\OrderLineUpdate::TYPE_CHANNEL_LINE_ID)
-            ->setIdentifier('test_order3_1.1')
+            ->setOrderlineIdentifierType(\EffectConnectSDK\Core\Model\OrderLineUpdate::TYPE_CHANNEL_LINE_ID)
+            ->setOrderlineIdentifier('test_order3_1.1')
             ->setTrackingNumber('TEST-TRACK-1234')
             ->setTrackingUrl('https://test-update.test')
             ->setCarrier('NOT A CARRIER')
@@ -42,6 +49,7 @@
         $orderUpdate             = (new EffectConnectSDK\Core\Model\OrderUpdateRequest())
             ->addLineUpdate($firstUpdatableOrderline)
             ->addLineUpdate($secondUpdatableOrderline)
+            ->addOrderUpdate($orderAddTag)
         ;
     } catch (Exception $exception)
     {

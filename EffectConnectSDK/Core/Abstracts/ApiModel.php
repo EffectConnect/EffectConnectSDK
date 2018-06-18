@@ -68,16 +68,27 @@
                     {
                         if ($this->isIterator())
                         {
-                            foreach ($value as $parent => $list)
-                            {
+                            foreach ($value as $parent => $list) {
                                 if ($list instanceof ApiModel)
                                 {
-                                    EffectConnectXMLElement::insert($xmlPayload, simplexml_load_string($list->getXml()));
+                                    $xml = simplexml_load_string($list->getXml());
+                                    EffectConnectXMLElement::insert($xmlPayload, $xml);
                                 } elseif (is_string($list))
                                 {
                                     EffectConnectXMLElement::addCDataChild($xmlPayload, $cleanProperty, $list);
+                                } elseif (is_array($list))
+                                {
+                                    $container = $xmlPayload->addChild($cleanProperty);
+                                    foreach ($list as $item)
+                                    {
+                                        EffectConnectXMLElement::addCDataChild($container, $parent, $item);
+                                    }
                                 } else
                                 {
+                                    if (is_bool($list))
+                                    {
+                                        $list = $list?'true':'false';
+                                    }
                                     $xmlPayload->addChild($parent, $list);
                                 }
                             }
@@ -100,6 +111,10 @@
                                         EffectConnectXMLElement::addCDataChild($iterableElement, $parent, $list);
                                     } else
                                     {
+                                        if (is_bool($list))
+                                        {
+                                            $list = $list?'true':'false';
+                                        }
                                         $iterableElement->addChild($parent, $list);
                                     }
                                 }
@@ -112,6 +127,10 @@
                             EffectConnectXMLElement::addCDataChild($xmlPayload, $cleanProperty, $value);
                         } else
                         {
+                            if (is_bool($value))
+                            {
+                                $value = $value?'true':'false';
+                            }
                             $xmlPayload->addChild($cleanProperty, $value);
                         }
                     }
@@ -129,6 +148,7 @@
             }
             return null;
         }
+
         protected function isIterator()
         {
             return false;
