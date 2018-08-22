@@ -21,6 +21,6 @@
     "php": ">=5.5"
   },
   "autoload": {
-    "psr-4": {"EffectConnectSDK\\": "EffectConnectSDK/"}
+    "psr-4": {"EffectConnect\\PHPSdk": "EffectConnectSDK/"}
   }
 }
