@@ -16,7 +16,7 @@
      * @package EffectConnectSDK
      *
      */
-    final class ApiCall
+    class ApiCall
     {
         const API_ENDPOINT          = 'https://submit.effectconnect.com/v1';
         const CERTIFICATE_LOCATION  = '';
@@ -24,79 +24,79 @@
         /**
          * @var \DateTime $_callDate
          */
-        private $_callDate;
+        protected $_callDate;
 
         /**
          * @var string $_callVersion
          */
-        private $_callVersion = '1.0';
+        protected $_callVersion = '1.0';
 
         /**
          * @var int $_curlErrNo
          */
-        private $_curlErrNo;
+        protected $_curlErrNo;
 
         /**
          * @var array $_curlErrors
          */
-        private $_curlErrors = [];
+        protected $_curlErrors = [];
 
         /**
          * @var array $_curlInfo
          */
-        private $_curlInfo = [];
+        protected $_curlInfo = [];
 
         /**
          * @var string $_curlResponse
          */
-        private $_curlResponse;
+        protected $_curlResponse;
 
         /**
          * @var array $_headers
          */
-        private $_headers;
+        protected $_headers;
 
         /**
          * @var string $_method
          *
          */
-        private $_method;
+        protected $_method;
 
         /**
          * @var mixed $_payload
          */
-        private $_payload;
+        protected $_payload;
 
         /**
          * @var string $_publicKey
          */
-        private $_publicKey;
+        protected $_publicKey;
 
         /**
          * @var string $_responseLanguage
          */
-        private $_responseLanguage = 'en';
+        protected $_responseLanguage = 'en';
 
         /**
          * @var string $_responseType
          *
          */
-        private $_responseType = CallTypeInterface::RESPONSE_TYPE_XML;
+        protected $_responseType = CallTypeInterface::RESPONSE_TYPE_XML;
 
         /**
          * @var string $_secretKey
          */
-        private $_secretKey;
+        protected $_secretKey;
         /**
          * @var int $_timeout
          */
-        private $_timeout = 3;
+        protected $_timeout = 3;
         /**
          * @var string $_uri
          *
          * The endpoint we're attempting to reach
          */
-        private $_uri;
+        protected $_uri;
 
         /**
          * @return ApiCall
@@ -104,7 +104,7 @@
          * @throws MissingCertificateFileException
          * @throws MissingCertificateLocationException
          */
-        final public function call()
+        public function call()
         {
             $postFields = $this->_payload;
             if ($this->_payload instanceof \CURLFile)
@@ -161,7 +161,7 @@
         /**
          * @return string
          */
-        final public function getCurlResponse()
+        public function getCurlResponse()
         {
             switch ($this->_responseType)
             {
