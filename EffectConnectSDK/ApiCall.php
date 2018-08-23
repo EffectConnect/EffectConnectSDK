@@ -238,7 +238,7 @@
         }
 
         /**
-         * @param \EffectConnectSDK\Core\Abstracts\ApiModel $payload
+         * @param \EffectConnect\PHPSdk\Core\Abstracts\ApiModel $payload
          *
          * @return $this
          * @throws InvalidPropertyException

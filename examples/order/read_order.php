@@ -3,8 +3,8 @@
     require_once(realpath(__DIR__.'/..').'/base.php');
 
     /**
-     * @var \EffectConnectSDK\Core $effectConnectSDK
-     * @var \EffectConnectSDK\Core\CallType\OrderCall $orderCallType
+     * @var \EffectConnect\PHPSdk\Core $effectConnectSDK
+     * @var \EffectConnect\PHPSdk\Core\CallType\OrderCall $orderCallType
      *
      * 2. Get the Order call type.
      */
@@ -17,10 +17,10 @@
         die();
     }
     /**
-     * 3. Create an EffectConnectSDK\Core\Model\Order object and populate it with the order number
+     * 3. Create an EffectConnect\PHPSdk\Core\Model\Order object and populate it with the order number
      */
-    $order       = (new \EffectConnectSDK\Core\Model\OrderReadRequest())
-        ->setIdentifierType(\EffectConnectSDK\Core\Model\OrderReadRequest::TYPE_EFFECTCONNECT_NUMBER)
+    $order       = (new \EffectConnect\PHPSdk\Core\Model\OrderReadRequest())
+        ->setIdentifierType(\EffectConnect\PHPSdk\Core\Model\OrderReadRequest::TYPE_EFFECTCONNECT_NUMBER)
         ->setIdentifier('TEST_ORDER_1')
     ;
     /**
