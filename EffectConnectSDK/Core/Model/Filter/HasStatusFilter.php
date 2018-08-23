@@ -1,12 +1,12 @@
 <?php
 
-    namespace EffectConnectSDK\Core\Model\Filter;
+    namespace EffectConnect\PHPSdk\Core\Model\Filter;
 
-    use EffectConnectSDK\Core\Abstracts\ApiModel;
-    use EffectConnectSDK\Core\Exception\InvalidPropertyValueException;
-    use EffectConnectSDK\Core\Helper\EffectConnectXMLElement;
-    use EffectConnectSDK\Core\Helper\Reflector;
-    use EffectConnectSDK\Core\Interfaces\OrderListFilterInterface;
+    use EffectConnect\PHPSdk\Core\Abstracts\ApiModel;
+    use EffectConnect\PHPSdk\Core\Exception\InvalidPropertyValueException;
+    use EffectConnect\PHPSdk\Core\Helper\EffectConnectXMLElement;
+    use EffectConnect\PHPSdk\Core\Helper\Reflector;
+    use EffectConnect\PHPSdk\Core\Interfaces\OrderListFilterInterface;
 
     /**
      * Class HasStatusFilter

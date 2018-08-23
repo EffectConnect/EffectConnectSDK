@@ -1,19 +1,19 @@
 <?php
-    namespace EffectConnectSDK\Core\Abstracts;
+    namespace EffectConnect\PHPSdk\Core\Abstracts;
 
-    use EffectConnectSDK\ApiCall;
-    use EffectConnectSDK\Core\Exception\IncorrectArgumentException;
-    use EffectConnectSDK\Core\Exception\InvalidCallActionException;
-    use EffectConnectSDK\Core\Exception\InvalidPayloadException;
-    use EffectConnectSDK\Core\Exception\InvalidPropertyException;
-    use EffectConnectSDK\Core\Exception\InvalidReflectionException;
-    use EffectConnectSDK\Core\Exception\InvalidResponseTypeException;
-    use EffectConnectSDK\Core\Exception\InvalidValidatorClassException;
-    use EffectConnectSDK\Core\Exception\MissingValidatorClassException;
-    use EffectConnectSDK\Core\Helper\Keychain;
-    use EffectConnectSDK\Core\Helper\Reflector;
-    use EffectConnectSDK\Core\Interfaces\CallTypeInterface;
-    use EffectConnectSDK\Core\Interfaces\CallValidatorInterface;
+    use EffectConnect\PHPSdk\ApiCall;
+    use EffectConnect\PHPSdk\Core\Exception\IncorrectArgumentException;
+    use EffectConnect\PHPSdk\Core\Exception\InvalidCallActionException;
+    use EffectConnect\PHPSdk\Core\Exception\InvalidPayloadException;
+    use EffectConnect\PHPSdk\Core\Exception\InvalidPropertyException;
+    use EffectConnect\PHPSdk\Core\Exception\InvalidReflectionException;
+    use EffectConnect\PHPSdk\Core\Exception\InvalidResponseTypeException;
+    use EffectConnect\PHPSdk\Core\Exception\InvalidValidatorClassException;
+    use EffectConnect\PHPSdk\Core\Exception\MissingValidatorClassException;
+    use EffectConnect\PHPSdk\Core\Helper\Keychain;
+    use EffectConnect\PHPSdk\Core\Helper\Reflector;
+    use EffectConnect\PHPSdk\Core\Interfaces\CallTypeInterface;
+    use EffectConnect\PHPSdk\Core\Interfaces\CallValidatorInterface;
 
     /**
      * Class AbstractCall

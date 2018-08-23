@@ -1,7 +1,7 @@
 <?php
-    namespace EffectConnectSDK\Core\Interfaces;
-    use EffectConnectSDK\Core\Exception\InvalidCallActionException;
-    use EffectConnectSDK\Core\Exception\InvalidPayloadException;
+    namespace EffectConnect\PHPSdk\Core\Interfaces;
+    use EffectConnect\PHPSdk\Core\Exception\InvalidCallActionException;
+    use EffectConnect\PHPSdk\Core\Exception\InvalidPayloadException;
 
     /**
      * Interface CallValidatorInterface

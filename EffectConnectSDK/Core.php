@@ -1,18 +1,18 @@
 <?php
-    namespace EffectConnectSDK;
+    namespace EffectConnect\PHPSdk;
 
-    use EffectConnectSDK\Core\CallType\OrderCall;
-    use EffectConnectSDK\Core\CallType\OrderListCall;
-    use EffectConnectSDK\Core\CallType\ProcessCall;
-    use EffectConnectSDK\Core\CallType\ProductsCall;
-    use EffectConnectSDK\Core\CallType\ReportCall;
-    use EffectConnectSDK\Core\Exception\InvalidApiCallException;
-    use EffectConnectSDK\Core\Exception\InvalidKeyException;
-    use EffectConnectSDK\Core\Exception\InvalidSignatureException;
-    use EffectConnectSDK\Core\Exception\MissingArgumentException;
-    use EffectConnectSDK\Core\Helper\Keychain;
-    use EffectConnectSDK\Core\Interfaces\CallTypeInterface;
-    use EffectConnectSDK\Core\Model\EffectConnectEvent;
+    use EffectConnect\PHPSdk\Core\CallType\OrderCall;
+    use EffectConnect\PHPSdk\Core\CallType\OrderListCall;
+    use EffectConnect\PHPSdk\Core\CallType\ProcessCall;
+    use EffectConnect\PHPSdk\Core\CallType\ProductsCall;
+    use EffectConnect\PHPSdk\Core\CallType\ReportCall;
+    use EffectConnect\PHPSdk\Core\Exception\InvalidApiCallException;
+    use EffectConnect\PHPSdk\Core\Exception\InvalidKeyException;
+    use EffectConnect\PHPSdk\Core\Exception\InvalidSignatureException;
+    use EffectConnect\PHPSdk\Core\Exception\MissingArgumentException;
+    use EffectConnect\PHPSdk\Core\Helper\Keychain;
+    use EffectConnect\PHPSdk\Core\Interfaces\CallTypeInterface;
+    use EffectConnect\PHPSdk\Core\Model\EffectConnectEvent;
 
     /**
      * Class Core

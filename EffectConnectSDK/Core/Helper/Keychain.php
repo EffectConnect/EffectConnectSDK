@@ -1,7 +1,7 @@
 <?php
-    namespace EffectConnectSDK\Core\Helper;
+    namespace EffectConnect\PHPSdk\Core\Helper;
 
-    use EffectConnectSDK\Core\Exception\InvalidKeyException;
+    use EffectConnect\PHPSdk\Core\Exception\InvalidKeyException;
 
     /**
      * Class Keychain

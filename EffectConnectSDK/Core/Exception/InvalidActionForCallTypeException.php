@@ -1,5 +1,5 @@
 <?php
-    namespace EffectConnectSDK\Core\Exception;
+    namespace EffectConnect\PHPSdk\Core\Exception;
 
     /**
      * Class InvalidActionForCallTypeException

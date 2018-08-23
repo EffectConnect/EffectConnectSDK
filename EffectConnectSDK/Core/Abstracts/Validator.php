@@ -1,9 +1,9 @@
 <?php
-    namespace EffectConnectSDK\Core\Abstracts;
+    namespace EffectConnect\PHPSdk\Core\Abstracts;
 
-    use EffectConnectSDK\Core\Exception\InvalidActionForCallTypeException;
-    use EffectConnectSDK\Core\Exception\InvalidCallActionException;
-    use EffectConnectSDK\Core\Interfaces\CallTypeInterface;
+    use EffectConnect\PHPSdk\Core\Exception\InvalidActionForCallTypeException;
+    use EffectConnect\PHPSdk\Core\Exception\InvalidCallActionException;
+    use EffectConnect\PHPSdk\Core\Interfaces\CallTypeInterface;
 
     /**
      * Class AbstractValidator

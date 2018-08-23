@@ -1,13 +1,13 @@
 <?php
-    namespace EffectConnectSDK\Core\Model;
+    namespace EffectConnect\PHPSdk\Core\Model;
 
-    use EffectConnectSDK\Core\Abstracts\ApiModel;
-    use EffectConnectSDK\Core\Exception\InvalidListTypeException;
-    use EffectConnectSDK\Core\Exception\InvalidListValuesException;
-    use EffectConnectSDK\Core\Exception\InvalidStatusException;
-    use EffectConnectSDK\Core\Helper\Reflector;
-    use EffectConnectSDK\Core\Interfaces\ApiModelInterface;
-    use EffectConnectSDK\Core\Interfaces\OrderListFilterInterface;
+    use EffectConnect\PHPSdk\Core\Abstracts\ApiModel;
+    use EffectConnect\PHPSdk\Core\Exception\InvalidListTypeException;
+    use EffectConnect\PHPSdk\Core\Exception\InvalidListValuesException;
+    use EffectConnect\PHPSdk\Core\Exception\InvalidStatusException;
+    use EffectConnect\PHPSdk\Core\Helper\Reflector;
+    use EffectConnect\PHPSdk\Core\Interfaces\ApiModelInterface;
+    use EffectConnect\PHPSdk\Core\Interfaces\OrderListFilterInterface;
 
     /**
      * Class OrderList

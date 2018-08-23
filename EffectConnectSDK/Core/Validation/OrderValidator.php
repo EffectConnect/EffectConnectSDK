@@ -1,13 +1,13 @@
 <?php
-    namespace EffectConnectSDK\Core\Validation;
+    namespace EffectConnect\PHPSdk\Core\Validation;
 
-    use EffectConnectSDK\Core\Abstracts\Validator;
-    use EffectConnectSDK\Core\Exception\InvalidPayloadException;
-    use EffectConnectSDK\Core\Interfaces\CallTypeInterface;
-    use EffectConnectSDK\Core\Interfaces\CallValidatorInterface;
-    use EffectConnectSDK\Core\Model\Order;
-    use EffectConnectSDK\Core\Model\OrderReadRequest;
-    use EffectConnectSDK\Core\Model\OrderUpdateRequest;
+    use EffectConnect\PHPSdk\Core\Abstracts\Validator;
+    use EffectConnect\PHPSdk\Core\Exception\InvalidPayloadException;
+    use EffectConnect\PHPSdk\Core\Interfaces\CallTypeInterface;
+    use EffectConnect\PHPSdk\Core\Interfaces\CallValidatorInterface;
+    use EffectConnect\PHPSdk\Core\Model\Order;
+    use EffectConnect\PHPSdk\Core\Model\OrderReadRequest;
+    use EffectConnect\PHPSdk\Core\Model\OrderUpdateRequest;
 
     /**
      * Class OrderValidator

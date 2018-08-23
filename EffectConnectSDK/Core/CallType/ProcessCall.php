@@ -1,13 +1,13 @@
 <?php
-    namespace EffectConnectSDK\Core\CallType;
+    namespace EffectConnect\PHPSdk\Core\CallType;
 
-    use EffectConnectSDK\Core\Abstracts\CallType;
-    use EffectConnectSDK\ApiCall;
-    use EffectConnectSDK\Core\Exception\InvalidActionForCallTypeException;
-    use EffectConnectSDK\Core\Interfaces\CallTypeInterface;
-    use EffectConnectSDK\Core\Model\ProcessReadRequest;
-    use EffectConnectSDK\Core\Validation\ProcessValidator;
-    use EffectConnectSDK\Core\Validation\ProductsValidator;
+    use EffectConnect\PHPSdk\Core\Abstracts\CallType;
+    use EffectConnect\PHPSdk\ApiCall;
+    use EffectConnect\PHPSdk\Core\Exception\InvalidActionForCallTypeException;
+    use EffectConnect\PHPSdk\Core\Interfaces\CallTypeInterface;
+    use EffectConnect\PHPSdk\Core\Model\ProcessReadRequest;
+    use EffectConnect\PHPSdk\Core\Validation\ProcessValidator;
+    use EffectConnect\PHPSdk\Core\Validation\ProductsValidator;
 
     /**
      * Class ProcessCall

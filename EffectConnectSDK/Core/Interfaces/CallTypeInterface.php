@@ -1,9 +1,9 @@
 <?php
-    namespace EffectConnectSDK\Core\Interfaces;
+    namespace EffectConnect\PHPSdk\Core\Interfaces;
 
-    use EffectConnectSDK\ApiCall;
-    use EffectConnectSDK\Core\Exception\InvalidCallTypeException;
-    use EffectConnectSDK\Core\Helper\Keychain;
+    use EffectConnect\PHPSdk\ApiCall;
+    use EffectConnect\PHPSdk\Core\Exception\InvalidCallTypeException;
+    use EffectConnect\PHPSdk\Core\Helper\Keychain;
 
     /**
      * Interface CallTypeInterface

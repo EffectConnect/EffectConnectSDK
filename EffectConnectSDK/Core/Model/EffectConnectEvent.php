@@ -1,6 +1,6 @@
 <?php
 
-    namespace EffectConnectSDK\Core\Model;
+    namespace EffectConnect\PHPSdk\Core\Model;
 
     /**
      * Class EffectConnectEvent

@@ -1,8 +1,8 @@
 <?php
-    namespace EffectConnectSDK\Core\Abstracts;
+    namespace EffectConnect\PHPSdk\Core\Abstracts;
 
-    use EffectConnectSDK\Core\Exception\InvalidPropertyException;
-    use EffectConnectSDK\Core\Helper\EffectConnectXMLElement;
+    use EffectConnect\PHPSdk\Core\Exception\InvalidPropertyException;
+    use EffectConnect\PHPSdk\Core\Helper\EffectConnectXMLElement;
 
     /**
      * Class ApiModel

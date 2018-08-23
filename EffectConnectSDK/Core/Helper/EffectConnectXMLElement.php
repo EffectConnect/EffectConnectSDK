@@ -1,5 +1,5 @@
 <?php
-    namespace EffectConnectSDK\Core\Helper;
+    namespace EffectConnect\PHPSdk\Core\Helper;
 
     use SimpleXMLElement;
 
