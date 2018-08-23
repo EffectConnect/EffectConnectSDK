@@ -99,7 +99,7 @@
         {
             try
             {
-                $reflection = new \ReflectionClass('EffectConnectSDK\Core\CallType\\'.$name);
+                $reflection = new \ReflectionClass('EffectConnect\PHPSdk\Core\CallType\\'.$name);
 
                 return $reflection->newInstanceArgs([$this->_keychain]);
             } catch (\Exception $exception)

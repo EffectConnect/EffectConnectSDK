@@ -3,7 +3,7 @@
     require_once(realpath(__DIR__.'/..').'/base.php');
 
     /**
-     * @var EffectConnectSDK\Core\CallType\OrderCall $orderCallType
+     * @var EffectConnect\PHPSdk\Core\CallType\OrderCall $orderCallType
      *
      * 2. Get the Order call type.
      */
@@ -11,7 +11,7 @@
     {
         $orderCallType = $effectConnectSDK->OrderCall();
         $orderCallType
-            ->setResponseType(EffectConnectSDK\Core\Interfaces\CallTypeInterface::RESPONSE_TYPE_XML)
+            ->setResponseType(EffectConnect\PHPSdk\Core\Interfaces\CallTypeInterface::RESPONSE_TYPE_XML)
             ->setResponseLanguage('en')
         ;
     } catch (Exception $exception)
@@ -20,33 +20,33 @@
         die();
     }
     /**
-     * 3. Create an EffectConnectSDK\Core\Model\Order object containing all orderlines you're trying to update.
+     * 3. Create an EffectConnect\PHPSdk\Core\Model\Order object containing all orderlines you're trying to update.
      */
 
     try
     {
-        $orderAddTag             = (new \EffectConnectSDK\Core\Model\OrderUpdate())
-            ->setOrderIdentifierType(\EffectConnectSDK\Core\Model\OrderUpdate::TYPE_CHANNEL_NUMBER)
+        $orderAddTag             = (new \EffectConnect\PHPSdk\Core\Model\OrderUpdate())
+            ->setOrderIdentifierType(\EffectConnect\PHPSdk\Core\Model\OrderUpdate::TYPE_CHANNEL_NUMBER)
             ->setOrderIdentifier('TEST-ORDER-1')
             ->addTag('CustomTag')
             ->addTag('Test')
             ->removeTag('RemovableTag')
         ;
-        $firstUpdatableOrderline = (new \EffectConnectSDK\Core\Model\OrderLineUpdate())
-            ->setOrderlineIdentifierType(\EffectConnectSDK\Core\Model\OrderLineUpdate::TYPE_CHANNEL_LINE_ID)
+        $firstUpdatableOrderline = (new \EffectConnect\PHPSdk\Core\Model\OrderLineUpdate())
+            ->setOrderlineIdentifierType(\EffectConnect\PHPSdk\Core\Model\OrderLineUpdate::TYPE_CHANNEL_LINE_ID)
             ->setOrderlineIdentifier('test_order3_1.2')
             ->setTrackingNumber('TEST-TRACK-1234')
             ->setTrackingUrl('https://test-update.test')
             ->setCarrier('NOT A CARRIER')
         ;
-        $secondUpdatableOrderline = (new \EffectConnectSDK\Core\Model\OrderLineUpdate())
-            ->setOrderlineIdentifierType(\EffectConnectSDK\Core\Model\OrderLineUpdate::TYPE_CHANNEL_LINE_ID)
+        $secondUpdatableOrderline = (new \EffectConnect\PHPSdk\Core\Model\OrderLineUpdate())
+            ->setOrderlineIdentifierType(\EffectConnect\PHPSdk\Core\Model\OrderLineUpdate::TYPE_CHANNEL_LINE_ID)
             ->setOrderlineIdentifier('test_order3_1.1')
             ->setTrackingNumber('TEST-TRACK-1234')
             ->setTrackingUrl('https://test-update.test')
             ->setCarrier('NOT A CARRIER')
         ;
-        $orderUpdate             = (new EffectConnectSDK\Core\Model\OrderUpdateRequest())
+        $orderUpdate             = (new EffectConnect\PHPSdk\Core\Model\OrderUpdateRequest())
             ->addLineUpdate($firstUpdatableOrderline)
             ->addLineUpdate($secondUpdatableOrderline)
             ->addOrderUpdate($orderAddTag)

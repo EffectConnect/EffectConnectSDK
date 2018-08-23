@@ -5,7 +5,7 @@
     $publicKey = 'PutYourSuppliedPublicKey';
     $secretKey = 'FillInYourOwnSecretKeyAsSupplied';
     // 3. Create a Keychain object.
-    $keychain  = new EffectConnectSDK\Core\Helper\Keychain();
+    $keychain  = new EffectConnect\PHPSdk\Core\Helper\Keychain();
     try
     {
         // 4. Add your keys to the keychain.
@@ -21,7 +21,7 @@
     // 5. Instantiate the SDK
     try
     {
-        $effectConnectSDK   = new EffectConnectSDK\Core($keychain);
+        $effectConnectSDK   = new EffectConnect\PHPSdk\Core($keychain);
     } catch (Exception $exception)
     {
         echo sprintf('Could not create SDK. `%s`', $exception->getMessage());

@@ -3,8 +3,8 @@
     require_once(realpath(__DIR__.'/..').'/base.php');
 
     /**
-     * @var \EffectConnectSDK\Core $effectConnectSDK
-     * @var \EffectConnectSDK\Core\CallType\ProductsCall $productCallType
+     * @var \EffectConnect\PHPSdk\Core $effectConnectSDK
+     * @var \EffectConnect\PHPSdk\Core\CallType\ProductsCall $productCallType
      *
      * 2. Get the Product call type.
      */
