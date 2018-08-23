@@ -1,11 +1,11 @@
 <?php
-    namespace EffectConnectSDK;
+    namespace EffectConnect\PHPSdk;
 
-    use EffectConnectSDK\Core\Exception\InvalidPropertyException;
-    use EffectConnectSDK\Core\Exception\MissingCertificateFileException;
-    use EffectConnectSDK\Core\Exception\MissingCertificateLocationException;
-    use EffectConnectSDK\Core\Interfaces\CallTypeInterface;
-    use EffectConnectSDK\Core\Abstracts\ApiModel;
+    use EffectConnect\PHPSdk\Core\Exception\InvalidPropertyException;
+    use EffectConnect\PHPSdk\Core\Exception\MissingCertificateFileException;
+    use EffectConnect\PHPSdk\Core\Exception\MissingCertificateLocationException;
+    use EffectConnect\PHPSdk\Core\Interfaces\CallTypeInterface;
+    use EffectConnect\PHPSdk\Core\Abstracts\ApiModel;
 
     /**
      * Class ApiCall

@@ -1,10 +1,10 @@
 <?php
-    namespace EffectConnectSDK\Core\Validation;
+    namespace EffectConnect\PHPSdk\Core\Validation;
 
-    use EffectConnectSDK\Core\Abstracts\Validator;
-    use EffectConnectSDK\Core\Exception\InvalidPayloadException;
-    use EffectConnectSDK\Core\Interfaces\CallTypeInterface;
-    use EffectConnectSDK\Core\Interfaces\CallValidatorInterface;
+    use EffectConnect\PHPSdk\Core\Abstracts\Validator;
+    use EffectConnect\PHPSdk\Core\Exception\InvalidPayloadException;
+    use EffectConnect\PHPSdk\Core\Interfaces\CallTypeInterface;
+    use EffectConnect\PHPSdk\Core\Interfaces\CallValidatorInterface;
 
     /**
      * Class ProductValidator

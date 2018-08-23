@@ -1,14 +1,14 @@
 <?php
-    namespace EffectConnectSDK\Core\CallType;
+    namespace EffectConnect\PHPSdk\Core\CallType;
 
-    use EffectConnectSDK\Core\Abstracts\CallType;
-    use EffectConnectSDK\ApiCall;
-    use EffectConnectSDK\Core\Exception\InvalidActionForCallTypeException;
-    use EffectConnectSDK\Core\Interfaces\CallTypeInterface;
-    use EffectConnectSDK\Core\Model\Order;
-    use EffectConnectSDK\Core\Model\OrderReadRequest;
-    use EffectConnectSDK\Core\Model\OrderUpdateRequest;
-    use EffectConnectSDK\Core\Validation\OrderValidator;
+    use EffectConnect\PHPSdk\Core\Abstracts\CallType;
+    use EffectConnect\PHPSdk\ApiCall;
+    use EffectConnect\PHPSdk\Core\Exception\InvalidActionForCallTypeException;
+    use EffectConnect\PHPSdk\Core\Interfaces\CallTypeInterface;
+    use EffectConnect\PHPSdk\Core\Model\Order;
+    use EffectConnect\PHPSdk\Core\Model\OrderReadRequest;
+    use EffectConnect\PHPSdk\Core\Model\OrderUpdateRequest;
+    use EffectConnect\PHPSdk\Core\Validation\OrderValidator;
 
     /**
      * Class OrderCall

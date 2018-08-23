@@ -1,6 +1,6 @@
 <?php
 
-    namespace EffectConnectSDK\Core\Interfaces;
+    namespace EffectConnect\PHPSdk\Core\Interfaces;
 
     /**
      * Interface ApiModelInterface

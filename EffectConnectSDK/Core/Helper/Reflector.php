@@ -1,6 +1,6 @@
 <?php
-    namespace EffectConnectSDK\Core\Helper;
-    use EffectConnectSDK\Core\Exception\InvalidReflectionException;
+    namespace EffectConnect\PHPSdk\Core\Helper;
+    use EffectConnect\PHPSdk\Core\Exception\InvalidReflectionException;
 
     /**
      * Class Reflector
