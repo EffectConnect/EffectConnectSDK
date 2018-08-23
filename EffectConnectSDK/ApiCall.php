@@ -149,7 +149,7 @@
         /**
          * @return array
          */
-        final public function getCurlErrors()
+        public function getCurlErrors()
         {
             if ($this->_curlErrNo > 0)
             {
@@ -184,7 +184,7 @@
         /**
          * @return bool
          */
-        final public function isSuccess()
+        public function isSuccess()
         {
             return (count($this->_curlErrors) === 0 && $this->_curlErrNo === 0 && $this->_curlResponse !== '');
         }
@@ -194,7 +194,7 @@
          *
          * @return ApiCall
          */
-        final public function setCallDate(\DateTime $callDate)
+        public function setCallDate(\DateTime $callDate)
         {
             $this->_callDate = $callDate;
 
@@ -206,7 +206,7 @@
          *
          * @return ApiCall
          */
-        final public function setCallVersion($callVersion)
+        public function setCallVersion($callVersion)
         {
             $this->_callVersion = $callVersion;
 
@@ -218,7 +218,7 @@
          *
          * @return ApiCall
          */
-        final public function setHeaders(array $headers)
+        public function setHeaders(array $headers)
         {
             $this->_headers = $headers;
 
@@ -230,7 +230,7 @@
          *
          * @return ApiCall
          */
-        final public function setMethod($method)
+        public function setMethod($method)
         {
             $this->_method = $method;
 
@@ -243,7 +243,7 @@
          * @return $this
          * @throws InvalidPropertyException
          */
-        final public function setPayload($payload=null)
+        public function setPayload($payload=null)
         {
             if ($payload instanceof ApiModel)
             {
@@ -261,7 +261,7 @@
          *
          * @return ApiCall
          */
-        final public function setPublicKey($publicKey)
+        public function setPublicKey($publicKey)
         {
             $this->_publicKey = $publicKey;
 
@@ -273,7 +273,7 @@
          *
          * @return ApiCall
          */
-        final public function setResponseLanguage($responseLanguage)
+        public function setResponseLanguage($responseLanguage)
         {
             $this->_responseLanguage = $responseLanguage;
 
@@ -285,7 +285,7 @@
          *
          * @return ApiCall
          */
-        final public function setResponseType($responseType)
+        public function setResponseType($responseType)
         {
             $this->_responseType = $responseType;
 
@@ -297,7 +297,7 @@
          *
          * @return ApiCall
          */
-        final public function setSecretKey($secretKey)
+        public function setSecretKey($secretKey)
         {
             $this->_secretKey = $secretKey;
 
@@ -309,7 +309,7 @@
          *
          * @return ApiCall
          */
-        final public function setUri($uri)
+        public function setUri($uri)
         {
             $this->_uri = $uri;
 
@@ -321,7 +321,7 @@
          *
          * @return ApiCall
          */
-        final public function setTimeout($timeout)
+        public function setTimeout($timeout)
         {
             $this->_timeout = $timeout;
 
@@ -331,7 +331,7 @@
         /**
          * @return array
          */
-        private function _getHeaders()
+        protected function _getHeaders()
         {
             $headers = [
                 'KEY: '.$this->_publicKey,
@@ -356,7 +356,7 @@
         /**
          * @return string
          */
-        private function _signApiCall()
+        protected function _signApiCall()
         {
             if ($this->_payload instanceof \CURLFile)
             {

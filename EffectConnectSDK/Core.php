@@ -36,19 +36,30 @@
         private $_keychain;
 
         /**
+         * @var ApiCall $_callClass
+         */
+        private $_callClass;
+
+        /**
          * Core constructor.
          *
          * @param Keychain $keychain
+         * @param ApiCall  $callClass
          *
          * @throws \Exception
          */
-        public function __construct($keychain)
+        public function __construct(Keychain $keychain, ApiCall $callClass=null)
         {
             if (!$keychain->_isValid())
             {
                 throw new \Exception('Invalid keychain.');
             }
-            $this->_keychain = $keychain;
+            if ($callClass === null)
+            {
+                $callClass = new ApiCall();
+            }
+            $this->_keychain  = $keychain;
+            $this->_callClass = $callClass;
         }
 
         /**
@@ -101,7 +112,7 @@
             {
                 $reflection = new \ReflectionClass('EffectConnect\PHPSdk\Core\CallType\\'.$name);
 
-                return $reflection->newInstanceArgs([$this->_keychain]);
+                return $reflection->newInstanceArgs([$this->_keychain, $this->_callClass]);
             } catch (\Exception $exception)
             {
                 throw new InvalidApiCallException($name);

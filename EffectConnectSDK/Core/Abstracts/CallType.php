@@ -32,6 +32,13 @@
         protected $action;
 
         /**
+         * @var ApiCall $callClass
+         *
+         * The CURL base class
+         */
+        protected $callClass;
+
+        /**
          * @var \DateTime $callDate
          *
          * Time the call is made.
@@ -83,14 +90,16 @@
          * AbstractCall constructor.
          *
          * @param Keychain $keychain
+         * @param ApiCall  $callClass
          *
          * @throws InvalidValidatorClassException
          * @throws MissingValidatorClassException
          */
-        public function __construct($keychain)
+        public function __construct(Keychain $keychain, ApiCall $callClass)
         {
-            $this->keychain = $keychain;
-            $this->callDate = new \DateTime('now', new \DateTimeZone('Europe/Amsterdam'));
+            $this->callClass = $callClass;
+            $this->keychain  = $keychain;
+            $this->callDate  = new \DateTime('now', new \DateTimeZone('Europe/Amsterdam'));
             if (!$this->validatorClass)
             {
                 throw new MissingValidatorClassException();
@@ -161,8 +170,7 @@
          */
         final public function prepareCall()
         {
-            $apiCall = new ApiCall();
-            $apiCall
+            $this->callClass
                 ->setResponseType($this->responseType)
                 ->setResponseLanguage($this->responseLanguage)
                 ->setCallDate($this->callDate)
@@ -172,7 +180,7 @@
                 ->setPayload($this->payload)
             ;
 
-            return $this->_prepareCall($apiCall);
+            return $this->_prepareCall($this->callClass);
         }
 
         /**

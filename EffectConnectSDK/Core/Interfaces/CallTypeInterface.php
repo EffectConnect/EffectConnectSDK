@@ -25,9 +25,12 @@
         const RESPONSE_TYPE_JSON    = 'json';
 
         /**
+         * CallTypeInterface constructor.
+         *
          * @param Keychain $keychain
+         * @param ApiCall  $callClass
          */
-        public function __construct($keychain);
+        public function __construct(Keychain $keychain, ApiCall $callClass);
 
         /**
          * @param string $responseType
