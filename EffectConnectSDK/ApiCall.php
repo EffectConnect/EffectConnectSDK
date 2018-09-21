@@ -138,7 +138,7 @@
                 CURLOPT_CAINFO          => self::CERTIFICATE_LOCATION
             ]);
             $this->_curlResponse = curl_exec($ch);
-            $this->_curlErrors   = curl_error($ch);
+            $this->_curlErrors[] = curl_error($ch);
             $this->_curlErrNo    = (int)curl_errno($ch);
             $this->_curlInfo     = curl_getinfo($ch);
             curl_close($ch);
