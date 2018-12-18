@@ -116,7 +116,6 @@
          *
          * @return ApiCall
          * @throws IncorrectArgumentException
-         * @throws InvalidCallActionException
          * @throws InvalidPayloadException
          * @throws InvalidPropertyException
          */
