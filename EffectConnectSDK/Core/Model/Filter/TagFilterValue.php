@@ -1,5 +1,4 @@
 <?php
-
     namespace EffectConnect\PHPSdk\Core\Model\Filter;
 
     use EffectConnect\PHPSdk\Core\Abstracts\ApiModel;
@@ -11,7 +10,7 @@
      * @author  Stefan Van den Heuvel
      * @company Koek & Peer
      * @product EffectConnect
-     * @package EC3
+     * @package EffectConnectSDK
      */
     final class TagFilterValue extends ApiModel implements ApiModelInterface
     {

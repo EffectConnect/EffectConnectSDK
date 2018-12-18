@@ -26,5 +26,7 @@
      */
     $apiCall = $productsCallType->create($curlFile);
     $apiCall->call();
-
-    echo $apiCall->getCurlResponse();
+    /**
+     * 5. Handle call result
+     */
+    require_once(realpath(__DIR__.'/..').'/result.php');

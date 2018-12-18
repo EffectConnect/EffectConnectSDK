@@ -1,5 +1,4 @@
 <?php
-
     namespace EffectConnect\PHPSdk\Core\Model\Filter;
 
     use EffectConnect\PHPSdk\Core\Abstracts\ApiModel;

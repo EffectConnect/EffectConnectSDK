@@ -4,8 +4,11 @@
     use EffectConnect\PHPSdk\Core\Abstracts\CallType;
     use EffectConnect\PHPSdk\ApiCall;
     use EffectConnect\PHPSdk\Core\Exception\InvalidActionForCallTypeException;
+    use EffectConnect\PHPSdk\Core\Helper\Payload;
     use EffectConnect\PHPSdk\Core\Interfaces\CallTypeInterface;
-    use EffectConnect\PHPSdk\Core\Model\ReportReadRequest;
+    use EffectConnect\PHPSdk\Core\Interfaces\ResponseContainerInterface;
+    use EffectConnect\PHPSdk\Core\Model\Request\ReportReadRequest;
+    use EffectConnect\PHPSdk\Core\Model\Response\ReportReadResponseContainer;
     use EffectConnect\PHPSdk\Core\Validation\ReportValidator;
 
     /**
@@ -46,5 +49,16 @@
             ;
 
             return $apiCall;
+        }
+
+        /**
+         * @param $method
+         * @param $responsePayload
+         *
+         * @return ResponseContainerInterface
+         */
+        public static function processResponse($method, $responsePayload)
+        {
+            return new ReportReadResponseContainer(Payload::extract($responsePayload, 'ReportReadResponseContainer'));
         }
     }

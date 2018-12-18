@@ -4,8 +4,11 @@
     use EffectConnect\PHPSdk\Core\Abstracts\CallType;
     use EffectConnect\PHPSdk\ApiCall;
     use EffectConnect\PHPSdk\Core\Exception\InvalidActionForCallTypeException;
+    use EffectConnect\PHPSdk\Core\Helper\Payload;
     use EffectConnect\PHPSdk\Core\Interfaces\CallTypeInterface;
-    use EffectConnect\PHPSdk\Core\Model\OrderList;
+    use EffectConnect\PHPSdk\Core\Interfaces\ResponseContainerInterface;
+    use EffectConnect\PHPSdk\Core\Model\Request\OrderList;
+    use EffectConnect\PHPSdk\Core\Model\Response\OrderListReadResponseContainer;
     use EffectConnect\PHPSdk\Core\Validation\OrderListValidator;
 
     /**
@@ -47,5 +50,16 @@
             ;
 
             return $apiCall;
+        }
+
+        /**
+         * @param $method
+         * @param $responsePayload
+         *
+         * @return ResponseContainerInterface
+         */
+        public static function processResponse($method, $responsePayload)
+        {
+            return new OrderListReadResponseContainer(Payload::extract($responsePayload, 'OrderListReadResponseContainer'));
         }
     }

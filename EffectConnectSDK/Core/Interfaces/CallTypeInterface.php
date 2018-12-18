@@ -2,7 +2,6 @@
     namespace EffectConnect\PHPSdk\Core\Interfaces;
 
     use EffectConnect\PHPSdk\ApiCall;
-    use EffectConnect\PHPSdk\Core\Exception\InvalidCallTypeException;
     use EffectConnect\PHPSdk\Core\Helper\Keychain;
 
     /**
@@ -45,4 +44,12 @@
          * @return CallTypeInterface
          */
         public function setResponseLanguage($responseLanguage);
+
+        /**
+         * @param $method
+         * @param $responsePayload
+         *
+         * @return ResponseContainerInterface
+         */
+        public static function processResponse($method, $responsePayload);
     }

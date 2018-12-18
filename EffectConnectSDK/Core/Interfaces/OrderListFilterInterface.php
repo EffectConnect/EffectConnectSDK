@@ -1,6 +1,7 @@
 <?php
-
     namespace EffectConnect\PHPSdk\Core\Interfaces;
+
+    use EffectConnect\PHPSdk\Core\Exception\InvalidPropertyValueException;
 
     /**
      * Interface OrderListFilterInterface
@@ -14,5 +15,11 @@
     {
         public function getFilterValue();
 
+        /**
+         * @param $filterValue
+         *
+         * @return mixed
+         * @throws InvalidPropertyValueException
+         */
         public function setFilterValue($filterValue);
     }

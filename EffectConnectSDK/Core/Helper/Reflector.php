@@ -1,5 +1,6 @@
 <?php
     namespace EffectConnect\PHPSdk\Core\Helper;
+
     use EffectConnect\PHPSdk\Core\Exception\InvalidReflectionException;
 
     /**
@@ -64,7 +65,8 @@
          *
          * @return bool
          *
-         * @throws \Exception
+         * @throws InvalidReflectionException
+         * @throws \ReflectionException
          */
         final public static function isValid($class, $variable, $predefined=null)
         {

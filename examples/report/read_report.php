@@ -16,13 +16,13 @@
         die();
     }
     /**
-     * 3. Create an EffectConnect\PHPSdk\Core\Model\ReportReadRequest object and populate it with the process ID you want to retrieve
+     * 3. Create an EffectConnect\PHPSdk\Core\Model\Request\ReportReadRequest object and populate it with the process ID you want to retrieve
      */
 
     try
     {
-        $reportReadRequest = (new \EffectConnect\PHPSdk\Core\Model\ReportReadRequest())
-            ->setID('Vqs2PqP985p4r1rG')
+        $reportReadRequest = (new \EffectConnect\PHPSdk\Core\Model\Request\ReportReadRequest())
+            ->setID('abcdefghijklmnop')
         ;
     } catch (Exception $exception)
     {
@@ -34,4 +34,5 @@
      */
     $apiCall = $reportCallType->read($reportReadRequest);
     $apiCall->call();
-    echo $apiCall->getCurlResponse();
+
+    require_once(realpath(__DIR__.'/..').'/result.php');

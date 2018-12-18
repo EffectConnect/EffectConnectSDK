@@ -1,17 +1,17 @@
 <?xml version="1.0"?>
 <products>
     <product>
-        <id>1</id>
+        <identifier>1</identifier>
         <options>
             <option>
-                <id>1</id>
+                <identifier>1</identifier>
                 <cost>5.50</cost>
                 <price>13.50</price>
                 <priceOriginal>17.00</priceOriginal>
                 <stock>12</stock>
             </option>
             <option>
-                <id>2</id>
+                <identifier>2</identifier>
                 <cost>5.50</cost>
                 <price>13.50</price>
                 <priceOriginal>17.00</priceOriginal>
@@ -20,17 +20,17 @@
         </options>
     </product>
     <product>
-        <id>2</id>
+        <identifier>2</identifier>
         <options>
             <option>
-                <id>6</id>
+                <identifier>6</identifier>
                 <cost>5.50</cost>
                 <price>13.50</price>
                 <priceOriginal>17.00</priceOriginal>
                 <stock>15</stock>
             </option>
             <option>
-                <id>7</id>
+                <identifier>7</identifier>
                 <cost>5.50</cost>
                 <price>13.50</price>
                 <priceOriginal>17.00</priceOriginal>

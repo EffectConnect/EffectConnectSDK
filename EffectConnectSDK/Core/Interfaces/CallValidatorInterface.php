@@ -1,5 +1,6 @@
 <?php
     namespace EffectConnect\PHPSdk\Core\Interfaces;
+
     use EffectConnect\PHPSdk\Core\Exception\InvalidCallActionException;
     use EffectConnect\PHPSdk\Core\Exception\InvalidPayloadException;
 

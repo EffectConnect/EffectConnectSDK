@@ -1,5 +1,4 @@
 <?php
-
     namespace EffectConnect\PHPSdk\Core\Model\Filter;
 
     use EffectConnect\PHPSdk\Core\Abstracts\ApiModel;
@@ -31,6 +30,11 @@
             return $this->_filterValue;
         }
 
+        /**
+         * @param $filterValue
+         *
+         * @throws InvalidPropertyValueException
+         */
         public function setFilterValue($filterValue)
         {
             if (!is_array($filterValue))

@@ -16,13 +16,13 @@
         die();
     }
     /**
-     * 3. Create an EffectConnect\PHPSdk\Core\Model\ProcessReadRequest object and populate it with the process ID you want to retrieve
+     * 3. Create an EffectConnect\PHPSdk\Core\Model\Request\ProcessReadRequest object and populate it with the process ID you want to retrieve
      */
 
     try
     {
-        $processReadRequest = (new \EffectConnect\PHPSdk\Core\Model\ProcessReadRequest())
-            ->setID('Vqs2PqP985p4r1rG')
+        $processReadRequest = (new \EffectConnect\PHPSdk\Core\Model\Request\ProcessReadRequest())
+            ->setID('abcdefghijklmnop')
         ;
     } catch (Exception $exception)
     {
@@ -34,4 +34,7 @@
      */
     $apiCall = $processCallType->read($processReadRequest);
     $apiCall->call();
-    echo $apiCall->getCurlResponse();
+    /**
+     * 5. Handle call result
+     */
+    require_once(realpath(__DIR__.'/..').'/result.php');
