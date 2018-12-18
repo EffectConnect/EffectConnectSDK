@@ -20,11 +20,17 @@
          */
         protected $_filterValue;
 
+        /**
+         * @return string
+         */
         public function getName()
         {
             return 'toDateFilter';
         }
 
+        /**
+         * @return string
+         */
         public function getFilterValue()
         {
             return $this->_filterValue->format('Y-m-d\TH:i:sP');

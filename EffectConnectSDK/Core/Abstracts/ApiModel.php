@@ -115,19 +115,16 @@
             return $xmlPayload->asXML();
         }
 
-        public function __get($name)
-        {
-            if(property_exists($this, $name))
-            {
-                return $this->{'_'.$name};
-            }
-            return null;
-        }
-
+        /**
+         * @return bool
+         */
         protected function isIterator()
         {
             return false;
         }
 
+        /**
+         * @return string
+         */
         public abstract function getName();
     }

@@ -23,16 +23,25 @@
          */
         protected $_orders      = [];
 
+        /**
+         * @return string
+         */
         public function getName()
         {
             return 'update';
         }
 
+        /**
+         * @return OrderUpdate[]
+         */
         public function getOrders()
         {
             return $this->_orders;
         }
 
+        /**
+         * @return OrderLineUpdate[]
+         */
         public function getOrderlines()
         {
             return $this->_orderlines;

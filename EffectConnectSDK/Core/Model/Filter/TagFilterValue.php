@@ -23,6 +23,9 @@
          */
         protected $_exclude = false;
 
+        /**
+         * @return string
+         */
         public function getName()
         {
             return 'filterValue';

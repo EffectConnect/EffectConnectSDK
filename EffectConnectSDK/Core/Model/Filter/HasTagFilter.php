@@ -20,11 +20,17 @@
          */
         protected $_filterValue = [];
 
+        /**
+         * @return string
+         */
         public function getName()
         {
             return 'hasTagFilter';
         }
 
+        /**
+         * @return array
+         */
         public function getFilterValue()
         {
             return $this->_filterValue;
@@ -51,6 +57,9 @@
             }
         }
 
+        /**
+         * @return bool
+         */
         protected function isIterator()
         {
             return true;

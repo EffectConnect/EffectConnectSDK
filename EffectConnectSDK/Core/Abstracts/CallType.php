@@ -3,7 +3,6 @@
 
     use EffectConnect\PHPSdk\ApiCall;
     use EffectConnect\PHPSdk\Core\Exception\IncorrectArgumentException;
-    use EffectConnect\PHPSdk\Core\Exception\InvalidCallActionException;
     use EffectConnect\PHPSdk\Core\Exception\InvalidPayloadException;
     use EffectConnect\PHPSdk\Core\Exception\InvalidPropertyException;
     use EffectConnect\PHPSdk\Core\Exception\InvalidReflectionException;

@@ -1,7 +1,6 @@
 <?php
     namespace EffectConnect\PHPSdk\Core\Interfaces;
 
-    use EffectConnect\PHPSdk\Core\Exception\InvalidCallActionException;
     use EffectConnect\PHPSdk\Core\Exception\InvalidPayloadException;
 
     /**
@@ -17,8 +16,6 @@
     {
         /**
          * @param string $callAction
-         *
-         * @throws InvalidCallActionException
          */
         public function setup($callAction);
 

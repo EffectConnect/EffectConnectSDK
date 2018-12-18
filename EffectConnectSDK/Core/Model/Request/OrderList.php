@@ -52,8 +52,7 @@
         {
             try
             {
-                $filterValue = $filter->getFilterValue();
-                if ($filterValue)
+                if ($filterValue = $filter->getFilterValue())
                 {
                     $this->_filters[] = $filter;
                 } else

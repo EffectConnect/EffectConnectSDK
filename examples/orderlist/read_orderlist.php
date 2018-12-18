@@ -7,7 +7,8 @@
      *
      * 2. Get the OrderList call type.
      */
-    try {
+    try
+    {
         $orderListCallType = $effectConnectSDK->OrderListCall();
     } catch (Exception $exception) {
         echo sprintf('Could not create call type. `%s`', $exception->getMessage());
@@ -70,7 +71,8 @@
         echo $invalidPropertyValueException->getMessage();
         die();
     }
-    try {
+    try
+    {
         $orderList = (new \EffectConnect\PHPSdk\Core\Model\Request\OrderList())
             ->addFilter($fromDateExampleFilter)
             ->addFilter($toDateExampleFilter)

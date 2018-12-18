@@ -14,18 +14,18 @@
         /**
          * @param      $payload
          * @param      $field
-         * @param bool $recursive
+         * @param bool $iteration
          *
          * @return mixed|null|\SimpleXMLElement|string
          */
-        final public static function extract($payload, $field, $recursive=false)
+        final public static function extract($payload, $field, $iteration=false)
         {
             if (is_array($payload))
             {
-                return self::_extractFromJson($payload, $field, $recursive);
+                return self::_extractFromJson($payload, $field);
             } elseif ($payload instanceof \SimpleXMLElement)
             {
-                return self::_extractFromXml($payload, $field, $recursive);
+                return self::_extractFromXml($payload, $field, $iteration);
             }
 
             return null;
@@ -53,17 +53,17 @@
         /**
          * @param array $payload
          * @param       $field
-         * @param bool  $recursive
+         * @param bool  $iteration
          *
          * @return mixed|null
          */
-        private static function _extractFromJson(array $payload, $field, $recursive=false)
+        private static function _extractFromJson(array $payload, $field, $iteration=false)
         {
             if (array_key_exists($field, $payload))
             {
                 return $payload[$field];
             }
-            if ($recursive)
+            if ($iteration)
             {
                 return reset($payload);
             }
@@ -74,11 +74,11 @@
         /**
          * @param \SimpleXMLElement $payload
          * @param                   $field
-         * @param bool              $recursive
+         * @param bool              $iteration
          *
          * @return array|null|\SimpleXMLElement|string
          */
-        private static function _extractFromXml(\SimpleXMLElement $payload, $field, $recursive=false)
+        private static function _extractFromXml(\SimpleXMLElement $payload, $field, $iteration=false)
         {
             if (isset($payload->{$field}))
             {
@@ -89,7 +89,7 @@
                 } else
                 {
                     $newValue = $value;
-                    if ($recursive)
+                    if ($iteration)
                     {
                         $newValue = [];
                         foreach ($value->children() as $child)
@@ -99,7 +99,7 @@
                     }
                     return $newValue;
                 }
-            } elseif ($recursive)
+            } elseif ($iteration)
             {
                 return $payload;
             }

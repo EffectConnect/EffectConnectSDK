@@ -29,16 +29,25 @@
          */
         protected $_filterValue = [];
 
+        /**
+         * @return string
+         */
         public function getName()
         {
             return 'hasStatusFilter';
         }
 
+        /**
+         * @return bool
+         */
         public function isIterator()
         {
             return true;
         }
 
+        /**
+         * @return array
+         */
         public function getFilterValue()
         {
             return $this->_filterValue;
@@ -47,7 +56,7 @@
         /**
          * @param $filterValue
          *
-         * @return $this
+         * @return HasStatusFilter
          * @throws InvalidPropertyValueException
          */
         public function setFilterValue($filterValue)
