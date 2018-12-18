@@ -21,11 +21,17 @@
          */
         protected $_filterValue;
 
+        /**
+         * @return string
+         */
         public function getName()
         {
             return 'fromDateFilter';
         }
 
+        /**
+         * @return string
+         */
         public function getFilterValue()
         {
             return $this->_filterValue->format('Y-m-d\TH:i:sP');

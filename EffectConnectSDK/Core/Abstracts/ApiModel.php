@@ -16,31 +16,6 @@
     abstract class ApiModel
     {
         /**
-         * @param array|null $productData
-         */
-        public function __construct($productData=null)
-        {
-            if ($productData)
-            {
-                $this->_hydrate($productData);
-            }
-        }
-
-        /**
-         * @param array $productData
-         */
-        private function _hydrate($productData)
-        {
-            foreach ($productData as $property => $value)
-            {
-                if (property_exists($this, '_'.$property))
-                {
-                    call_user_func([$this, 'set'.ucfirst($property)], $value);
-                }
-            }
-        }
-
-        /**
          * @return string
          *
          * @throws InvalidPropertyException
@@ -140,19 +115,16 @@
             return $xmlPayload->asXML();
         }
 
-        public function __get($name)
-        {
-            if(property_exists($this, $name))
-            {
-                return $this->{'_'.$name};
-            }
-            return null;
-        }
-
+        /**
+         * @return bool
+         */
         protected function isIterator()
         {
             return false;
         }
 
+        /**
+         * @return string
+         */
         public abstract function getName();
     }

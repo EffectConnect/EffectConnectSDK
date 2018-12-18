@@ -3,7 +3,6 @@
 
     use EffectConnect\PHPSdk\ApiCall;
     use EffectConnect\PHPSdk\Core\Exception\IncorrectArgumentException;
-    use EffectConnect\PHPSdk\Core\Exception\InvalidCallActionException;
     use EffectConnect\PHPSdk\Core\Exception\InvalidPayloadException;
     use EffectConnect\PHPSdk\Core\Exception\InvalidPropertyException;
     use EffectConnect\PHPSdk\Core\Exception\InvalidReflectionException;
@@ -116,7 +115,10 @@
          * @param $arguments
          *
          * @return ApiCall
-         * @throws \Exception
+         * @throws IncorrectArgumentException
+         * @throws InvalidCallActionException
+         * @throws InvalidPayloadException
+         * @throws InvalidPropertyException
          */
         public function __call($name, $arguments)
         {
@@ -148,15 +150,23 @@
          * @param $responseType
          *
          * @return $this
+         *
          * @throws InvalidResponseTypeException
-         * @throws InvalidReflectionException
          */
         final public function setResponseType($responseType = CallTypeInterface::RESPONSE_TYPE_XML)
         {
-            if (Reflector::isValid(CallTypeInterface::class, $responseType, 'RESPONSE_TYPE_%') === true)
+            try {
+                if (Reflector::isValid(CallTypeInterface::class, $responseType, 'RESPONSE_TYPE_%') === true)
+                {
+                    $this->responseType = $responseType;
+                } else
+                {
+                    throw new InvalidResponseTypeException();
+                }
+            } catch (InvalidReflectionException $e)
             {
-                $this->responseType = $responseType;
-            } else
+                throw new InvalidResponseTypeException();
+            } catch (\ReflectionException $e)
             {
                 throw new InvalidResponseTypeException();
             }
@@ -178,6 +188,7 @@
                 ->setPublicKey($this->keychain->getPublicKey())
                 ->setSecretKey($this->keychain->getSecretKey())
                 ->setPayload($this->payload)
+                ->setParseCallback(get_class($this).'::processResponse')
             ;
 
             return $this->_prepareCall($this->callClass);

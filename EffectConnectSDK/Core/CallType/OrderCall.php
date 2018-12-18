@@ -4,16 +4,19 @@
     use EffectConnect\PHPSdk\Core\Abstracts\CallType;
     use EffectConnect\PHPSdk\ApiCall;
     use EffectConnect\PHPSdk\Core\Exception\InvalidActionForCallTypeException;
+    use EffectConnect\PHPSdk\Core\Helper\Payload;
     use EffectConnect\PHPSdk\Core\Interfaces\CallTypeInterface;
-    use EffectConnect\PHPSdk\Core\Model\Order;
-    use EffectConnect\PHPSdk\Core\Model\OrderReadRequest;
-    use EffectConnect\PHPSdk\Core\Model\OrderUpdateRequest;
+    use EffectConnect\PHPSdk\Core\Interfaces\ResponseContainerInterface;
+    use EffectConnect\PHPSdk\Core\Model\Request\Order;
+    use EffectConnect\PHPSdk\Core\Model\Request\OrderReadRequest;
+    use EffectConnect\PHPSdk\Core\Model\Request\OrderUpdateRequest;
+    use EffectConnect\PHPSdk\Core\Model\Response\OrderCreateResponseContainer;
+    use EffectConnect\PHPSdk\Core\Model\Response\OrderReadResponseContainer;
+    use EffectConnect\PHPSdk\Core\Model\Response\OrderUpdateResponseContainer;
     use EffectConnect\PHPSdk\Core\Validation\OrderValidator;
 
     /**
      * Class OrderCall
-     *
-     * CallType class for creating single order calls to the EffectConnect API
      *
      * @author  Stefan Van den Heuvel
      * @company Koek & Peer
@@ -57,5 +60,29 @@
             ;
 
             return $apiCall;
+        }
+
+        /**
+         * @param $method
+         * @param $responsePayload
+         *
+         * @return ResponseContainerInterface
+         */
+        public static function processResponse($method, $responsePayload)
+        {
+            switch ($method)
+            {
+                case 'GET':
+                    return new OrderReadResponseContainer(Payload::extract($responsePayload, 'OrderReadResponseContainer'));
+                    break;
+                case 'POST':
+                    return new OrderCreateResponseContainer(Payload::extract($responsePayload, 'OrderCreateResponseContainer'));
+                    break;
+                case 'PUT':
+                    return new OrderUpdateResponseContainer(Payload::extract($responsePayload, 'OrderUpdateResponseContainer'));
+                    break;
+            }
+
+            return null;
         }
     }

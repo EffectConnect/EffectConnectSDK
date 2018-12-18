@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <products>
     <product>
-        <id>1</id>
+        <identifier>1</identifier>
         <brand>Brand-1</brand>
         <categories>
             <category>
@@ -48,8 +48,7 @@
         </categories>
         <options>
             <option>
-                <id>1</id>
-                <visible>false</visible>
+                <identifier>1</identifier>
                 <cost>6.50</cost>
                 <price>12.50</price>
                 <priceOriginal>15.00</priceOriginal>
@@ -97,14 +96,14 @@
                 </images>
                 <attributes>
                     <attribute>
-                        <id>1</id>
+                        <code>color</code>
                         <names>
                             <name language="nl">Kleur</name>
                             <name language="en">Color</name>
                         </names>
                         <values>
                             <value>
-                                <id>1</id>
+                                <code>red</code>
                                 <names>
                                     <name language="nl">Rood</name>
                                     <name language="en">Red</name>
@@ -113,14 +112,14 @@
                         </values>
                     </attribute>
                     <attribute>
-                        <id>2</id>
+                        <code>size</code>
                         <names>
                             <name language="nl">Maat</name>
                             <name language="en">Size</name>
                         </names>
                         <values>
                             <value>
-                                <id>12</id>
+                                <code>l</code>
                                 <names>
                                     <name language="nl">L</name>
                                     <name language="en">L</name>
@@ -129,18 +128,17 @@
                         </values>
                     </attribute>
                     <attribute>
-                        <id>3</id>
+                        <code>length</code>
                         <names>
                             <name language="nl">Lengte</name>
                             <name language="en">Length</name>
                         </names>
-                        <unit>cm</unit>
                         <values>
                             <value>
-                                <id>44</id>
+                                <code>120cm</code>
                                 <names>
-                                    <name language="nl">120</name>
-                                    <name language="en">120</name>
+                                    <name language="nl">120cm</name>
+                                    <name language="en">120cm</name>
                                 </names>
                             </value>
                         </values>
@@ -148,8 +146,7 @@
                 </attributes>
             </option>
             <option>
-                <id>2</id>
-                <visible>true</visible>
+                <identifier>2</identifier>
                 <cost>6.50</cost>
                 <price>12.50</price>
                 <priceOriginal>15.00</priceOriginal>
@@ -197,14 +194,14 @@
                 </images>
                 <attributes>
                     <attribute>
-                        <id>1</id>
+                        <code>color</code>
                         <names>
                             <name language="nl">Kleur</name>
                             <name language="en">Color</name>
                         </names>
                         <values>
                             <value>
-                                <id>1</id>
+                                <code>blue</code>
                                 <names>
                                     <name language="nl">Blauw</name>
                                     <name language="en">Blue</name>
@@ -213,14 +210,14 @@
                         </values>
                     </attribute>
                     <attribute>
-                        <id>2</id>
+                        <code>size</code>
                         <names>
                             <name language="nl">Maat</name>
                             <name language="en">Size</name>
                         </names>
                         <values>
                             <value>
-                                <id>12</id>
+                                <code>l</code>
                                 <names>
                                     <name language="nl">L</name>
                                     <name language="en">L</name>
@@ -229,18 +226,17 @@
                         </values>
                     </attribute>
                     <attribute>
-                        <id>3</id>
+                        <code>length</code>
                         <names>
                             <name language="nl">Lengte</name>
                             <name language="en">Length</name>
                         </names>
-                        <unit>cm</unit>
                         <values>
                             <value>
-                                <id>44</id>
+                                <code>120cm</code>
                                 <names>
-                                    <name language="nl">120</name>
-                                    <name language="en">120</name>
+                                    <name language="nl">120cm</name>
+                                    <name language="en">120cm</name>
                                 </names>
                             </value>
                         </values>
@@ -250,7 +246,7 @@
         </options>
     </product>
     <product>
-        <id>2</id>
+        <identifier>2</identifier>
         <brand>Brand-1</brand>
         <categories>
             <category>
@@ -297,15 +293,14 @@
         </categories>
         <options>
             <option>
-                <id>6</id>
-                <visible>true</visible>
+                <identifier>6</identifier>
                 <cost>6.50</cost>
                 <price>12.50</price>
                 <priceOriginal>15.00</priceOriginal>
                 <stock>7</stock>
                 <titles>
-                    <title language="nl">Optie 1</title>
-                    <title language="en">Option 1</title>
+                    <title language="nl">Optie 3</title>
+                    <title language="en">Option 3</title>
                 </titles>
                 <urls>
                     <url language="nl">https://go.effectconnect.com/nl/test-1</url>
@@ -315,8 +310,8 @@
                     <description language="nl"><![CDATA[Product beschrijving.]]></description>
                     <description language="en"><![CDATA[Product description.]]></description>
                 </descriptions>
-                <ean>1234567890123</ean>
-                <sku>OPTION-1</sku>
+                <ean>1234567890125</ean>
+                <sku>OPTION-3</sku>
                 <deliveryTime>Voor 16:00 besteld, morgen in huis</deliveryTime>
                 <images>
                     <image>
@@ -346,14 +341,14 @@
                 </images>
                 <attributes>
                     <attribute>
-                        <id>1</id>
+                        <code>color</code>
                         <names>
                             <name language="nl">Kleur</name>
                             <name language="en">Color</name>
                         </names>
                         <values>
                             <value>
-                                <id>1</id>
+                                <code>red</code>
                                 <names>
                                     <name language="nl">Rood</name>
                                     <name language="en">Red</name>
@@ -362,14 +357,14 @@
                         </values>
                     </attribute>
                     <attribute>
-                        <id>2</id>
+                        <code>size</code>
                         <names>
                             <name language="nl">Maat</name>
                             <name language="en">Size</name>
                         </names>
                         <values>
                             <value>
-                                <id>12</id>
+                                <code>l</code>
                                 <names>
                                     <name language="nl">L</name>
                                     <name language="en">L</name>
@@ -378,18 +373,17 @@
                         </values>
                     </attribute>
                     <attribute>
-                        <id>3</id>
+                        <code>length</code>
                         <names>
                             <name language="nl">Lengte</name>
                             <name language="en">Length</name>
                         </names>
-                        <unit>cm</unit>
                         <values>
                             <value>
-                                <id>44</id>
+                                <code>120cm</code>
                                 <names>
-                                    <name language="nl">120</name>
-                                    <name language="en">120</name>
+                                    <name language="nl">120cm</name>
+                                    <name language="en">120cm</name>
                                 </names>
                             </value>
                         </values>
@@ -397,15 +391,14 @@
                 </attributes>
             </option>
             <option>
-                <id>7</id>
-                <visible>true</visible>
+                <identifier>7</identifier>
                 <cost>6.50</cost>
                 <price>12.50</price>
                 <priceOriginal>15.00</priceOriginal>
                 <stock>7</stock>
                 <titles>
-                    <title language="nl">Optie 2</title>
-                    <title language="en">Option 2</title>
+                    <title language="nl">Optie 4</title>
+                    <title language="en">Option 4</title>
                 </titles>
                 <urls>
                     <url language="nl">https://go.effectconnect.com/nl/test-2</url>
@@ -415,8 +408,8 @@
                     <description language="nl"><![CDATA[Product 2 beschrijving.]]></description>
                     <description language="en"><![CDATA[Product 2 description.]]></description>
                 </descriptions>
-                <ean>1234567890124</ean>
-                <sku>OPTION-2</sku>
+                <ean>1234567890126</ean>
+                <sku>OPTION-4</sku>
                 <deliveryTime>Voor 16:00 besteld, morgen in huis</deliveryTime>
                 <images>
                     <image>
@@ -446,14 +439,14 @@
                 </images>
                 <attributes>
                     <attribute>
-                        <id>1</id>
+                        <code>color</code>
                         <names>
                             <name language="nl">Kleur</name>
                             <name language="en">Color</name>
                         </names>
                         <values>
                             <value>
-                                <id>1</id>
+                                <code>blue</code>
                                 <names>
                                     <name language="nl">Blauw</name>
                                     <name language="en">Blue</name>
@@ -462,14 +455,14 @@
                         </values>
                     </attribute>
                     <attribute>
-                        <id>2</id>
+                        <code>size</code>
                         <names>
                             <name language="nl">Maat</name>
                             <name language="en">Size</name>
                         </names>
                         <values>
                             <value>
-                                <id>12</id>
+                                <code>l</code>
                                 <names>
                                     <name language="nl">L</name>
                                     <name language="en">L</name>
@@ -478,18 +471,17 @@
                         </values>
                     </attribute>
                     <attribute>
-                        <id>3</id>
+                        <code>length</code>
                         <names>
                             <name language="nl">Lengte</name>
                             <name language="en">Length</name>
                         </names>
-                        <unit>cm</unit>
                         <values>
                             <value>
-                                <id>44</id>
+                                <code>120cm</code>
                                 <names>
-                                    <name language="nl">120</name>
-                                    <name language="en">120</name>
+                                    <name language="nl">120cm</name>
+                                    <name language="en">120cm</name>
                                 </names>
                             </value>
                         </values>

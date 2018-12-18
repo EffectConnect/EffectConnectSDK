@@ -17,16 +17,29 @@
         die();
     }
     /**
-     * 3. Create an EffectConnect\PHPSdk\Core\Model\Order object and populate it with the order number
+     * 3. Create an EffectConnect\PHPSdk\Core\Model\Request\Order object and populate it with the order number
      */
-    $order       = (new \EffectConnect\PHPSdk\Core\Model\OrderReadRequest())
-        ->setIdentifierType(\EffectConnect\PHPSdk\Core\Model\OrderReadRequest::TYPE_EFFECTCONNECT_NUMBER)
-        ->setIdentifier('TEST_ORDER_1')
-    ;
+    try
+    {
+        $order = (new \EffectConnect\PHPSdk\Core\Model\Request\OrderReadRequest())
+            ->setIdentifierType(\EffectConnect\PHPSdk\Core\Model\Request\OrderReadRequest::TYPE_EFFECTCONNECT_NUMBER)
+            ->setIdentifier('YOUR-IDENTIFIER')
+        ;
+    } catch (\EffectConnect\PHPSdk\Core\Exception\InvalidPropertyValueException $invalidPropertyValueException)
+    {
+        echo $invalidPropertyValueException->getMessage();
+        die();
+    } catch (Exception $exception)
+    {
+        echo sprintf('Could not read Order object. `%s`', $exception->getMessage());
+        die();
+    }
     /**
      * 4. Make the call
      */
-    $apiCall     = $orderCallType->read($order);
+    $apiCall = $orderCallType->read($order);
     $apiCall->call();
-
-    echo $apiCall->getCurlResponse();
+    /**
+     * 5. Handle call result
+     */
+    require_once(realpath(__DIR__.'/..').'/result.php');

@@ -2,7 +2,6 @@
     namespace EffectConnect\PHPSdk\Core\Abstracts;
 
     use EffectConnect\PHPSdk\Core\Exception\InvalidActionForCallTypeException;
-    use EffectConnect\PHPSdk\Core\Exception\InvalidCallActionException;
     use EffectConnect\PHPSdk\Core\Interfaces\CallTypeInterface;
 
     /**
@@ -31,7 +30,6 @@
         /**
          * @param $callAction
          *
-         * @throws InvalidCallActionException
          * @throws InvalidActionForCallTypeException
          */
         final public function setup($callAction)
@@ -40,17 +38,6 @@
             if (!in_array($callAction, $this->validActions))
             {
                 throw new InvalidActionForCallTypeException();
-            }
-            switch ($callAction)
-            {
-                case CallTypeInterface::ACTION_CREATE:
-                case CallTypeInterface::ACTION_READ:
-                case CallTypeInterface::ACTION_UPDATE:
-                case CallTypeInterface::ACTION_DELETE:
-                    break;
-                default:
-                    throw new InvalidCallActionException();
-                    break;
             }
         }
     }

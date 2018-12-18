@@ -2,10 +2,14 @@
     namespace EffectConnect\PHPSdk;
 
     use EffectConnect\PHPSdk\Core\Exception\InvalidPropertyException;
-    use EffectConnect\PHPSdk\Core\Exception\MissingCertificateFileException;
-    use EffectConnect\PHPSdk\Core\Exception\MissingCertificateLocationException;
+    use EffectConnect\PHPSdk\Core\Helper\Payload;
+    use EffectConnect\PHPSdk\Core\Interfaces\ApiModelInterface;
     use EffectConnect\PHPSdk\Core\Interfaces\CallTypeInterface;
-    use EffectConnect\PHPSdk\Core\Abstracts\ApiModel;
+    use EffectConnect\PHPSdk\Core\Interfaces\ResponseContainerInterface;
+    use EffectConnect\PHPSdk\Core\Model\Response\ApiResponseContainer;
+    use EffectConnect\PHPSdk\Core\Model\Response\ErrorContainer;
+    use EffectConnect\PHPSdk\Core\Model\Response\Request;
+    use EffectConnect\PHPSdk\Core\Model\Response\Response;
 
     /**
      * Class ApiCall
@@ -16,11 +20,9 @@
      * @package EffectConnectSDK
      *
      */
-    class ApiCall
+    final class ApiCall
     {
-        const API_ENDPOINT          = 'https://submit.effectconnect.com/v1';
-        const CERTIFICATE_LOCATION  = '';
-
+        const API_ENDPOINT = 'https://submit.effectconnect.com/v1';
         /**
          * @var \DateTime $_callDate
          */
@@ -32,16 +34,6 @@
         protected $_callVersion = '1.0';
 
         /**
-         * @var int $_curlErrNo
-         */
-        protected $_curlErrNo;
-
-        /**
-         * @var array $_curlErrors
-         */
-        protected $_curlErrors = [];
-
-        /**
          * @var array $_curlInfo
          */
         protected $_curlInfo = [];
@@ -50,6 +42,11 @@
          * @var string $_curlResponse
          */
         protected $_curlResponse;
+
+        /**
+         * @var array $_errors
+         */
+        protected $_errors = [];
 
         /**
          * @var array $_headers
@@ -79,18 +76,24 @@
 
         /**
          * @var string $_responseType
-         *
          */
         protected $_responseType = CallTypeInterface::RESPONSE_TYPE_XML;
+
+        /**
+         * @var string $_parseCallback
+         */
+        protected $_parseCallback;
 
         /**
          * @var string $_secretKey
          */
         protected $_secretKey;
+
         /**
          * @var int $_timeout
          */
         protected $_timeout = 3;
+
         /**
          * @var string $_uri
          *
@@ -100,9 +103,6 @@
 
         /**
          * @return ApiCall
-         *
-         * @throws MissingCertificateFileException
-         * @throws MissingCertificateLocationException
          */
         public function call()
         {
@@ -118,14 +118,6 @@
                  */
                 $postFields     = [$this->_payload];
             }
-            if (!self::CERTIFICATE_LOCATION)
-            {
-                throw new MissingCertificateLocationException();
-            }
-            if (!file_exists(self::CERTIFICATE_LOCATION))
-            {
-                throw new MissingCertificateFileException(self::CERTIFICATE_LOCATION);
-            }
             $ch = curl_init();
             curl_setopt_array($ch, [
                 CURLOPT_HTTPHEADER      => $this->_getHeaders(),
@@ -133,52 +125,84 @@
                 CURLOPT_CUSTOMREQUEST   => $this->_method,
                 CURLOPT_TIMEOUT         => $this->_timeout,
                 CURLOPT_POSTFIELDS      => $postFields,
-                CURLOPT_RETURNTRANSFER  => true,
-                CURLOPT_SSL_VERIFYHOST  => 2,
-                CURLOPT_CAINFO          => self::CERTIFICATE_LOCATION
+                CURLOPT_RETURNTRANSFER  => true
             ]);
-            $this->_curlResponse = curl_exec($ch);
-            $this->_curlErrors[] = curl_error($ch);
-            $this->_curlErrNo    = (int)curl_errno($ch);
-            $this->_curlInfo     = curl_getinfo($ch);
+            if (($curlError = curl_error($ch)) !== '')
+            {
+                $this->_errors[] = curl_error($ch);
+            }
+            if (($errNo = (int)curl_errno($ch)) > 0)
+            {
+                $this->_errors[] = sprintf('Curl error %d', $errNo);
+            }
+            if (($this->_curlResponse = curl_exec($ch)) === '')
+            {
+                $this->_errors[] = sprintf('No response received: `%s`',
+                    ($errNo === CURLE_OPERATION_TIMEDOUT?'Operation timed out. Extend your timeout (ApiCall::setTimeout()).':'Unknown reason')
+                );
+            }
+            $this->_curlInfo = curl_getinfo($ch);
             curl_close($ch);
+            if ((int)$this->_curlInfo['http_code'] !== 200)
+            {
+                $this->_errors[] = sprintf('Invalid http code: `%d`', (int)$this->_curlInfo['http_code']);
+            }
 
             return $this;
         }
 
         /**
+         * @param string $parseCallback
+         *
+         * @return ApiCall
+         */
+        public function setParseCallback($parseCallback)
+        {
+            $this->_parseCallback = $parseCallback;
+
+            return $this;
+        }
+
+
+        /**
          * @return array
          */
-        public function getCurlErrors()
+        public function getErrors()
         {
-            if ($this->_curlErrNo > 0)
-            {
-                $this->_curlErrors[] = sprintf('Curl error %d', $this->_curlErrNo);
-            }
-            return $this->_curlErrors;
+            return $this->_errors;
         }
 
         /**
          * @return string
          */
-        public function getCurlResponse()
+        public function getRawResponse()
         {
-            switch ($this->_responseType)
+            return $this->_curlResponse;
+        }
+
+        /**
+         * @return ApiResponseContainer
+         */
+        public function getResponseContainer()
+        {
+            $payload = json_decode($this->_curlResponse, true);
+            if (json_last_error() !== JSON_ERROR_NONE)
             {
-                case CallTypeInterface::RESPONSE_TYPE_XML:
-                    $dom = new \DOMDocument();
-                    $dom->loadXML($this->_curlResponse);
-                    $dom->formatOutput       = true;
-                    $dom->preserveWhiteSpace = false;
-                    return $dom->saveXML();
-                    break;
-                case CallTypeInterface::RESPONSE_TYPE_JSON:
-                    return '<pre>'.print_r($this->_curlResponse, true).'</pre>';
-                    break;
-                default:
-                    return $this->_curlResponse;
-                    break;
+                $payload = simplexml_load_string($this->_curlResponse);
             }
+            $responsePayload   = Payload::extract($payload, 'Response');
+            $response          = (new Response())->setResult(Payload::extract($responsePayload, 'Result'));
+            $container         = (new ApiResponseContainer())->setRequest(new Request(Payload::extract($payload, 'Request')));
+            if (($responseContainer = call_user_func_array($this->_parseCallback, [$this->_method, $responsePayload])) instanceof ResponseContainerInterface)
+            {
+                $response->setResponseContainer($responseContainer);
+            }
+            $container
+                ->setResponse($response)
+                ->setErrorContainer(new ErrorContainer(Payload::extract($payload, 'ErrorContainer', true)))
+            ;
+
+            return $container;
         }
 
         /**
@@ -186,7 +210,7 @@
          */
         public function isSuccess()
         {
-            return (count($this->_curlErrors) === 0 && $this->_curlErrNo === 0 && $this->_curlResponse !== '');
+            return (count($this->_errors) === 0);
         }
 
         /**
@@ -238,14 +262,14 @@
         }
 
         /**
-         * @param \EffectConnect\PHPSdk\Core\Abstracts\ApiModel $payload
+         * @param ApiModelInterface|\CURLFile|null $payload
          *
-         * @return $this
+         * @return ApiCall
          * @throws InvalidPropertyException
          */
         public function setPayload($payload=null)
         {
-            if ($payload instanceof ApiModel)
+            if ($payload instanceof ApiModelInterface)
             {
                 $this->_payload = $payload->getXml();
             } elseif ($payload instanceof \CURLFile)

@@ -1,6 +1,7 @@
 <?php
-
     namespace EffectConnect\PHPSdk\Core\Interfaces;
+
+    use EffectConnect\PHPSdk\Core\Exception\InvalidPropertyException;
 
     /**
      * Interface ApiModelInterface
@@ -22,6 +23,8 @@
 
         /**
          * @return string
+         *
+         * @throws InvalidPropertyException
          */
         public function getXml();
     }

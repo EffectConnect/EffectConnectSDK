@@ -5,9 +5,9 @@
     use EffectConnect\PHPSdk\Core\Exception\InvalidPayloadException;
     use EffectConnect\PHPSdk\Core\Interfaces\CallTypeInterface;
     use EffectConnect\PHPSdk\Core\Interfaces\CallValidatorInterface;
-    use EffectConnect\PHPSdk\Core\Model\Order;
-    use EffectConnect\PHPSdk\Core\Model\OrderReadRequest;
-    use EffectConnect\PHPSdk\Core\Model\OrderUpdateRequest;
+    use EffectConnect\PHPSdk\Core\Model\Request\Order;
+    use EffectConnect\PHPSdk\Core\Model\Request\OrderReadRequest;
+    use EffectConnect\PHPSdk\Core\Model\Request\OrderUpdateRequest;
 
     /**
      * Class OrderValidator

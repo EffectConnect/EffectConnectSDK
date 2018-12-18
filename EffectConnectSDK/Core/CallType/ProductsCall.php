@@ -4,7 +4,11 @@
     use EffectConnect\PHPSdk\Core\Abstracts\CallType;
     use EffectConnect\PHPSdk\ApiCall;
     use EffectConnect\PHPSdk\Core\Exception\InvalidActionForCallTypeException;
+    use EffectConnect\PHPSdk\Core\Helper\Payload;
     use EffectConnect\PHPSdk\Core\Interfaces\CallTypeInterface;
+    use EffectConnect\PHPSdk\Core\Interfaces\ResponseContainerInterface;
+    use EffectConnect\PHPSdk\Core\Model\Response\ProductsCreateResponseContainer;
+    use EffectConnect\PHPSdk\Core\Model\Response\ProductsUpdateResponseContainer;
     use EffectConnect\PHPSdk\Core\Validation\ProductsValidator;
 
     /**
@@ -18,11 +22,11 @@
      * @package EffectConnectSDK
      *
      * @method ApiCall create(\CURLFile $productFile)
-     * @method ApiCall read($id)
      * @method ApiCall update(\CURLFile $productFile)
      */
     final class ProductsCall extends CallType implements CallTypeInterface
     {
+        protected $callVersion    = '2.0';
         protected $validatorClass = ProductsValidator::class;
 
         /**
@@ -35,9 +39,6 @@
         {
             switch ($this->action)
             {
-                case CallTypeInterface::ACTION_READ:
-                    $method = 'GET';
-                    break;
                 case CallTypeInterface::ACTION_CREATE:
                     $method = 'POST';
                     break;
@@ -53,5 +54,26 @@
             ;
 
             return $apiCall;
+        }
+
+        /**
+         * @param $method
+         * @param $responsePayload
+         *
+         * @return ResponseContainerInterface
+         */
+        public static function processResponse($method, $responsePayload)
+        {
+            switch ($method)
+            {
+                case 'POST':
+                    return new ProductsCreateResponseContainer(Payload::extract($responsePayload, 'ProductsCreateResponseContainer'));
+                    break;
+                case 'PUT':
+                    return new ProductsUpdateResponseContainer(Payload::extract($responsePayload, 'ProductsUpdateResponseContainer'));
+                    break;
+            }
+
+            return null;
         }
     }

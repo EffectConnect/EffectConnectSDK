@@ -1,12 +1,11 @@
 <?php
-
     namespace EffectConnect\PHPSdk\Core\Validation;
 
     use EffectConnect\PHPSdk\Core\Abstracts\Validator;
     use EffectConnect\PHPSdk\Core\Exception\InvalidPayloadException;
     use EffectConnect\PHPSdk\Core\Interfaces\CallTypeInterface;
     use EffectConnect\PHPSdk\Core\Interfaces\CallValidatorInterface;
-    use EffectConnect\PHPSdk\Core\Model\OrderList;
+    use EffectConnect\PHPSdk\Core\Model\Request\OrderList;
 
     /**
      * Class OrderListValidator
@@ -37,11 +36,5 @@
             }
 
             return true;
-        }
-
-        protected function _setupRead()
-        {
-            $this->identifierRequired = false;
-            $this->payloadRequired    = true;
         }
     }
