@@ -83,7 +83,7 @@
             if (isset($payload->{$field}))
             {
                 $value = $payload->{$field};
-                if (count($value->children()) === 0)
+                if (!$iteration && count($value->children()) === 0)
                 {
                     return (string)$value;
                 } else
