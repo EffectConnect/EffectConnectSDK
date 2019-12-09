@@ -41,6 +41,10 @@
                         EffectConnectXMLElement::insert($xmlPayload, $modelValue);
                     } elseif (is_array($value))
                     {
+                        if (count($value) === 0)
+                        {
+                            continue;
+                        }
                         if ($this->isIterator())
                         {
                             foreach ($value as $parent => $list) {
