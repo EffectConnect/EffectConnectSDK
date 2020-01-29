@@ -1,6 +1,7 @@
 <?php
     namespace EffectConnect\PHPSdk;
 
+    use EffectConnect\PHPSdk\Core\CallType\ChannelListCall;
     use EffectConnect\PHPSdk\Core\CallType\OrderCall;
     use EffectConnect\PHPSdk\Core\CallType\OrderListCall;
     use EffectConnect\PHPSdk\Core\CallType\ProcessCall;
@@ -20,6 +21,7 @@
      *
      * @method OrderCall     OrderCall()
      * @method OrderListCall OrderListCall()
+     * @method ChannelListCall ChannelListCall()
      * @method ProductsCall  ProductsCall()
      * @method ProcessCall   ProcessCall()
      * @method ReportCall    ReportCall()
