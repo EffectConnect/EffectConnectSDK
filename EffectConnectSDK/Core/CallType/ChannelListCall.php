@@ -7,11 +7,9 @@
     use EffectConnect\PHPSdk\Core\Helper\Payload;
     use EffectConnect\PHPSdk\Core\Interfaces\CallTypeInterface;
     use EffectConnect\PHPSdk\Core\Interfaces\ResponseContainerInterface;
-    use EffectConnect\PHPSdk\Core\Model\Request\OrderList;
+    use EffectConnect\PHPSdk\Core\Model\Request\ChannelListRequest;
     use EffectConnect\PHPSdk\Core\Model\Response\ChannelListReadResponseContainer;
-    use EffectConnect\PHPSdk\Core\Model\Response\OrderListReadResponseContainer;
     use EffectConnect\PHPSdk\Core\Validation\ChannelListValidator;
-    use EffectConnect\PHPSdk\Core\Validation\OrderListValidator;
 
     /**
      * Class ChannelListCall
@@ -29,6 +27,11 @@
     {
         protected $callVersion    = '2.0';
         protected $validatorClass = ChannelListValidator::class;
+
+        public function __call($name, $arguments)
+        {
+            return parent::__call($name, [new ChannelListRequest()]);
+        }
 
         /**
          * @param ApiCall $apiCall
