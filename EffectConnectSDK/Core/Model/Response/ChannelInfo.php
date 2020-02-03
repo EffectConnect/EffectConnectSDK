@@ -13,6 +13,11 @@
      */
     final class ChannelInfo
     {
+
+        /**
+         * @var int $_id
+         */
+        private $_id;
         /**
          * @var string $_type
          */
@@ -37,9 +42,18 @@
             {
                 return;
             }
+            $this->_id      = Payload::extract($payload, 'id');
             $this->_type    = Payload::extract($payload, 'type');
             $this->_subtype = Payload::extract($payload, 'subtype');
             $this->_title   = Payload::extract($payload, 'title');
+        }
+
+        /**
+         * @return int
+         */
+        public function getId()
+        {
+            return $this->_id;
         }
 
         /**
