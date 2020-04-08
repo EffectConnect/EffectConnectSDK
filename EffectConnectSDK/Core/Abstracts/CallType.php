@@ -121,10 +121,6 @@
          */
         public function __call($name, $arguments)
         {
-            if (count($arguments) !== 1)
-            {
-                throw new IncorrectArgumentException();
-            }
             $this->payload = array_shift($arguments);
             $this->action  = $name;
             $this->validator->setup($this->action);
