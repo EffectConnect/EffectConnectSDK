@@ -74,13 +74,10 @@
             {
                 case 'GET':
                     return new OrderReadResponseContainer(Payload::extract($responsePayload, 'OrderReadResponseContainer'));
-                    break;
                 case 'POST':
                     return new OrderCreateResponseContainer(Payload::extract($responsePayload, 'OrderCreateResponseContainer'));
-                    break;
                 case 'PUT':
                     return new OrderUpdateResponseContainer(Payload::extract($responsePayload, 'OrderUpdateResponseContainer'));
-                    break;
             }
 
             return null;

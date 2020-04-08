@@ -127,6 +127,7 @@
                 CURLOPT_POSTFIELDS      => $postFields,
                 CURLOPT_RETURNTRANSFER  => true
             ]);
+            $this->_curlResponse = curl_exec($ch);
             if (($curlError = curl_error($ch)) !== '')
             {
                 $this->_errors[] = curl_error($ch);
@@ -135,14 +136,14 @@
             {
                 $this->_errors[] = sprintf('Curl error %d', $errNo);
             }
-            if (($this->_curlResponse = curl_exec($ch)) === '')
-            {
-                $this->_errors[] = sprintf('No response received: `%s`',
-                    ($errNo === CURLE_OPERATION_TIMEDOUT?'Operation timed out. Extend your timeout (ApiCall::setTimeout()).':'Unknown reason')
-                );
-            }
             $this->_curlInfo = curl_getinfo($ch);
             curl_close($ch);
+            if ($this->_curlResponse === '')
+            {
+                $this->_errors[] = sprintf('No response received: `%s`',
+                    ((int)$curlError === CURLE_OPERATION_TIMEDOUT?'Operation timed out. Extend your timeout (ApiCall::setTimeout()).':'Unknown reason')
+                );
+            }
             if ((int)$this->_curlInfo['http_code'] !== 200)
             {
                 $this->_errors[] = sprintf('Invalid http code: `%d`', (int)$this->_curlInfo['http_code']);
