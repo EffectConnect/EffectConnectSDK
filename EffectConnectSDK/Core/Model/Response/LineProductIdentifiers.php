@@ -25,6 +25,10 @@
          * @var string $_sku
          */
         private $_sku;
+        /**
+         * @var string $_identifier
+         */
+        private $_identifier;
 
         /**
          * LineProductIdentifiers constructor.
@@ -40,6 +44,7 @@
             $this->_id  = Payload::extract($payload, 'ID');
             $this->_ean = Payload::extract($payload, 'EAN');
             $this->_sku = Payload::extract($payload, 'SKU');
+            $this->_identifier = Payload::extract($payload, 'identifier');
         }
 
         /**
@@ -64,5 +69,13 @@
         public function getSku()
         {
             return $this->_sku;
+        }
+
+        /**
+         * @return string
+         */
+        public function getIdentifier()
+        {
+            return $this->_identifier;
         }
     }
