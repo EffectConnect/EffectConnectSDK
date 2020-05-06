@@ -34,10 +34,12 @@
             {
                 return;
             }
-            $this->_count = (int)Payload::extract($payload, 'Count');
-            foreach (Payload::extract($payload, 'Orders', true) as $order)
+            if (($this->_count = (int)Payload::extract($payload, 'Count')) > 0)
             {
-                $this->_orders[] = new Order($order);
+                foreach (Payload::extract($payload, 'Orders', true) as $order)
+                {
+                    $this->_orders[] = new Order($order);
+                }
             }
         }
 

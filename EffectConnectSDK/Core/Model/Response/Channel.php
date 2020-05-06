@@ -4,35 +4,43 @@
     use EffectConnect\PHPSdk\Core\Helper\Payload;
 
     /**
-     * Class ChannelInfo
+     * Class Channel
      *
      * @author  Stefan Van den Heuvel
      * @company Koek & Peer
      * @product EffectConnect
      * @package EffectConnectSDK
      */
-    final class ChannelInfo
+    final class Channel
     {
 
         /**
          * @var int $_id
          */
         private $_id;
+
         /**
          * @var string $_type
          */
         private $_type;
+
         /**
          * @var string $_subtype
          */
         private $_subtype;
+
+        /**
+         * @var string $_language
+         */
+        private $_language;
+
         /**
          * @var string $_title
          */
         private $_title;
 
         /**
-         * ChannelInfo constructor.
+         * Channel constructor.
          *
          * @param $payload
          */
@@ -42,10 +50,11 @@
             {
                 return;
             }
-            $this->_id      = Payload::extract($payload, 'id');
-            $this->_type    = Payload::extract($payload, 'type');
+            $this->_id = Payload::extract($payload, 'id');
+            $this->_type = Payload::extract($payload, 'type');
             $this->_subtype = Payload::extract($payload, 'subtype');
-            $this->_title   = Payload::extract($payload, 'title');
+            $this->_language = Payload::extract($payload, 'language');
+            $this->_title = Payload::extract($payload, 'title');
         }
 
         /**
@@ -75,8 +84,17 @@
         /**
          * @return string
          */
+        public function getLanguage()
+        {
+            return $this->_language;
+        }
+
+        /**
+         * @return string
+         */
         public function getTitle()
         {
             return $this->_title;
         }
+
     }

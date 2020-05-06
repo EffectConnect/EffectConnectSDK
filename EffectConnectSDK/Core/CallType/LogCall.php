@@ -7,27 +7,28 @@
     use EffectConnect\PHPSdk\Core\Helper\Payload;
     use EffectConnect\PHPSdk\Core\Interfaces\CallTypeInterface;
     use EffectConnect\PHPSdk\Core\Interfaces\ResponseContainerInterface;
-    use EffectConnect\PHPSdk\Core\Model\Response\ProductsCreateResponseContainer;
-    use EffectConnect\PHPSdk\Core\Model\Response\ProductsUpdateResponseContainer;
-    use EffectConnect\PHPSdk\Core\Validation\ProductsValidator;
+    use EffectConnect\PHPSdk\Core\Model\Response\LogCreateResponseContainer;
+    use EffectConnect\PHPSdk\Core\Model\Response\LogReadResponseContainer;
+    use EffectConnect\PHPSdk\Core\Validation\LogValidator;
 
     /**
-     * Class ProductsCall
+     * Class LogCall
      *
-     * CallType class for creating batch product calls to the EffectConnect API
+     * CallType class for retrieving the process status report
      *
      * @author  Stefan Van den Heuvel
      * @company Koek & Peer
      * @product EffectConnect
      * @package EffectConnectSDK
      *
-     * @method ApiCall create(\CURLFile $productFile)
-     * @method ApiCall update(\CURLFile $productFile)
+     * @method ApiCall read()
+     * @method ApiCall create(\CURLFile $logFile)
      */
-    final class ProductsCall extends CallType implements CallTypeInterface
+    final class LogCall extends CallType implements CallTypeInterface
     {
-        protected $callVersion    = '2.0';
-        protected $validatorClass = ProductsValidator::class;
+        protected $validatorClass = LogValidator::class;
+
+        protected $callVersion = '2.0';
 
         /**
          * @param ApiCall $apiCall
@@ -39,17 +40,17 @@
         {
             switch ($this->action)
             {
+                case CallTypeInterface::ACTION_READ:
+                    $method = 'GET';
+                    break;
                 case CallTypeInterface::ACTION_CREATE:
                     $method = 'POST';
-                    break;
-                case CallTypeInterface::ACTION_UPDATE:
-                    $method = 'PUT';
                     break;
                 default:
                     throw new InvalidActionForCallTypeException();
             }
             $apiCall
-                ->setUri('/products')
+                ->setUri('/log')
                 ->setMethod($method)
             ;
 
@@ -67,11 +68,10 @@
             switch ($method)
             {
                 case 'POST':
-                    return new ProductsCreateResponseContainer(Payload::extract($responsePayload, 'ProductsCreateResponseContainer'));
-                case 'PUT':
-                    return new ProductsUpdateResponseContainer(Payload::extract($responsePayload, 'ProductsUpdateResponseContainer'));
+                    return new LogCreateResponseContainer(Payload::extract($responsePayload, 'LogCreateResponseContainer'));
+                case 'GET':
+                    return new LogReadResponseContainer(Payload::extract($responsePayload, 'LogReadResponseContainer'));
             }
-
             return null;
         }
     }

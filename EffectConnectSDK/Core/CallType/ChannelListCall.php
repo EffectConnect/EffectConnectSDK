@@ -7,27 +7,31 @@
     use EffectConnect\PHPSdk\Core\Helper\Payload;
     use EffectConnect\PHPSdk\Core\Interfaces\CallTypeInterface;
     use EffectConnect\PHPSdk\Core\Interfaces\ResponseContainerInterface;
-    use EffectConnect\PHPSdk\Core\Model\Response\ProductsCreateResponseContainer;
-    use EffectConnect\PHPSdk\Core\Model\Response\ProductsUpdateResponseContainer;
-    use EffectConnect\PHPSdk\Core\Validation\ProductsValidator;
+    use EffectConnect\PHPSdk\Core\Model\Request\ChannelListRequest;
+    use EffectConnect\PHPSdk\Core\Model\Response\ChannelListReadResponseContainer;
+    use EffectConnect\PHPSdk\Core\Validation\ChannelListValidator;
 
     /**
-     * Class ProductsCall
+     * Class ChannelListCall
      *
-     * CallType class for creating batch product calls to the EffectConnect API
+     * CallType class receiving orders from the EffectConnect Api.
      *
-     * @author  Stefan Van den Heuvel
+     * @author  Mark Thiesen
      * @company Koek & Peer
      * @product EffectConnect
      * @package EffectConnectSDK
      *
-     * @method ApiCall create(\CURLFile $productFile)
-     * @method ApiCall update(\CURLFile $productFile)
+     * @method ApiCall read()
      */
-    final class ProductsCall extends CallType implements CallTypeInterface
+    final class ChannelListCall extends CallType implements CallTypeInterface
     {
         protected $callVersion    = '2.0';
-        protected $validatorClass = ProductsValidator::class;
+        protected $validatorClass = ChannelListValidator::class;
+
+        public function __call($name, $arguments)
+        {
+            return parent::__call($name, [new ChannelListRequest()]);
+        }
 
         /**
          * @param ApiCall $apiCall
@@ -39,17 +43,14 @@
         {
             switch ($this->action)
             {
-                case CallTypeInterface::ACTION_CREATE:
-                    $method = 'POST';
-                    break;
-                case CallTypeInterface::ACTION_UPDATE:
-                    $method = 'PUT';
+                case CallTypeInterface::ACTION_READ:
+                    $method = 'GET';
                     break;
                 default:
                     throw new InvalidActionForCallTypeException();
             }
             $apiCall
-                ->setUri('/products')
+                ->setUri('/channellist')
                 ->setMethod($method)
             ;
 
@@ -64,14 +65,6 @@
          */
         public static function processResponse($method, $responsePayload)
         {
-            switch ($method)
-            {
-                case 'POST':
-                    return new ProductsCreateResponseContainer(Payload::extract($responsePayload, 'ProductsCreateResponseContainer'));
-                case 'PUT':
-                    return new ProductsUpdateResponseContainer(Payload::extract($responsePayload, 'ProductsUpdateResponseContainer'));
-            }
-
-            return null;
+            return new ChannelListReadResponseContainer(Payload::extract($responsePayload, 'ChannelListReadResponseContainer'));
         }
     }
