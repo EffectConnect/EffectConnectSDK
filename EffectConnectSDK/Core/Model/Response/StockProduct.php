@@ -41,6 +41,11 @@
          */
         private $_latestUpdate;
 
+        /**
+         * @var string $_sku
+         */
+        private $_sku;
+
         public function __construct($payload)
         {
             if ($payload === null)
@@ -53,6 +58,7 @@
             $this->_unsaleableStock  = Payload::extract($payload, 'unsaleableStock');
             $this->_fulfilmentStatus = Payload::extract($payload, 'fulfilmentStatus');
             $this->_latestUpdate     = \DateTime::createFromFormat('Y-m-d\TH:i:sP', Payload::extract($payload, 'latestUpdate'));
+            $this->_sku              = Payload::extract($payload, 'sku');
         }
 
         /**
@@ -93,5 +99,13 @@
         public function getLatestUpdate()
         {
             return $this->_latestUpdate;
+        }
+
+        /**
+         * @return string|null
+         */
+        public function getSku()
+        {
+            return $this->_sku;
         }
     }
