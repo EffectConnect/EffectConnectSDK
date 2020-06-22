@@ -2,6 +2,7 @@
     namespace EffectConnect\PHPSdk;
 
     use EffectConnect\PHPSdk\Core\CallType\ChannelListCall;
+    use EffectConnect\PHPSdk\Core\CallType\ExternalStockListCall;
     use EffectConnect\PHPSdk\Core\CallType\LogCall;
     use EffectConnect\PHPSdk\Core\CallType\OrderCall;
     use EffectConnect\PHPSdk\Core\CallType\OrderListCall;
@@ -22,6 +23,7 @@
      *
      * @method OrderCall        OrderCall()
      * @method OrderListCall    OrderListCall()
+     * @method ExternalStockListCall ExternalStockListCall()
      * @method ChannelListCall  ChannelListCall()
      * @method LogCall          LogCall()
      * @method ProductsCall     ProductsCall()
