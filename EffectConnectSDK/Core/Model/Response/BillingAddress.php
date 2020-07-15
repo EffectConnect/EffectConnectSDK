@@ -66,6 +66,10 @@
          */
         private $_phone;
         /**
+         * @var string $_taxNumber
+         */
+        private $_taxNumber;
+        /**
          * @var string $_email
          */
         private $_email;
@@ -94,6 +98,7 @@
             $this->_state                = Payload::extract($payload, 'state');
             $this->_country              = Payload::extract($payload, 'country');
             $this->_phone                = Payload::extract($payload, 'phone');
+            $this->_taxNumber            = Payload::extract($payload, 'taxNumber');
             $this->_email                = Payload::extract($payload, 'email');
         }
 
@@ -199,6 +204,14 @@
         public function getPhone()
         {
             return $this->_phone;
+        }
+
+        /**
+         * @return string
+         */
+        public function getTaxNumber()
+        {
+            return $this->_taxNumber;
         }
 
         /**

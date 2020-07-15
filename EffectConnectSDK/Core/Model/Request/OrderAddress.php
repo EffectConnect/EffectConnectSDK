@@ -135,6 +135,14 @@
         protected $_phone;
 
         /**
+         * OPTIONAL
+         * @var string $_taxNumber
+         *
+         * Tax number
+         */
+        protected $_taxNumber;
+
+        /**
          * REQUIRED
          * @var string $_email
          *
@@ -421,6 +429,26 @@
         public function setPhone($phone)
         {
             $this->_phone = $phone;
+
+            return $this;
+        }
+
+        /**
+         * @return string
+         */
+        public function getTaxNumber()
+        {
+            return $this->_taxNumber;
+        }
+
+        /**
+         * @param string $taxNumber
+         *
+         * @return OrderAddress
+         */
+        public function setTaxNumber($taxNumber)
+        {
+            $this->_taxNumber = $taxNumber;
 
             return $this;
         }
