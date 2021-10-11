@@ -109,10 +109,11 @@
             $postFields = $this->_payload;
             if ($this->_payload instanceof \CURLFile)
             {
-                /**
-                 * Allowing a longer timeout to upload the file to EffectConnect.
-                 */
-                $this->_timeout = 30;
+                if ($this->_timeout < 30) {
+                    /* Allowing a longer timeout to upload the file to EffectConnect */
+                    $this->_timeout = 30;
+                }
+
                 /**
                  * Sending the CURLFile as an array.
                  */
