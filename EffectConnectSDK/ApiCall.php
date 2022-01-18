@@ -92,7 +92,7 @@
         /**
          * @var int $_timeout
          */
-        protected $_timeout = 3;
+        protected $_timeout = 60;
 
         /**
          * @var string $_uri
