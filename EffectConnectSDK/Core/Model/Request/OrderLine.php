@@ -18,7 +18,7 @@
         /**
          * REQUIRED
          * @var string $_id
-         * 
+         *
          * The order line identifier
          */
         protected $_id;
@@ -26,7 +26,7 @@
         /**
          * REQUIRED
          * @var OrderLineProductIdentifier[] $_productIdentifiers
-         * 
+         *
          * At least one identifier is required to match the product.
          */
         protected $_productIdentifiers = [];
@@ -40,7 +40,7 @@
         /**
          * REQUIRED
          * @var int $_quantity
-         * 
+         *
          * Defaults to 1
          */
         protected $_quantity = 1;
@@ -48,7 +48,7 @@
         /**
          * REQUIRED
          * @var float $_individualProductPrice
-         * 
+         *
          * The price of a single product in this line
          */
         protected $_individualProductPrice;
@@ -58,6 +58,12 @@
          * @var OrderFee[] $_fees
          */
         protected $_fees = [];
+
+        /**
+         * OPTIONAL
+         * @var OrderLineAttribute[] $_attributes
+         */
+        protected $_attributes = [];
 
         /**
          * @return string
@@ -183,6 +189,25 @@
         public function addFee(OrderFee $fee)
         {
             $this->_fees[] = $fee;
+
+            return $this;
+        }
+
+        /**
+         * @return OrderLineAttribute[]
+         */
+        public function getAttributes()
+        {
+            return $this->_attributes;
+        }
+
+        /**
+         * @param OrderLineAttribute $attribute
+         * @return $this
+         */
+        public function addAttribute(OrderLineAttribute $attribute)
+        {
+            $this->_attributes[] = $attribute;
 
             return $this;
         }

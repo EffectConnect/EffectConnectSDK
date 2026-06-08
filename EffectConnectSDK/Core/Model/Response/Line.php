@@ -42,6 +42,10 @@
          */
         private $_fees          = [];
         /**
+         * @var LineAttribute[] $_attributes
+         */
+        private $_attributes    = [];
+        /**
          * @var LineProductIdentifiers $_product
          */
         private $_product;
@@ -71,6 +75,13 @@
                 foreach (Payload::extract($payload, 'fees', true) as $fee)
                 {
                     $this->_fees[] = new LineFee($fee);
+                }
+            }
+            if (Payload::contains($payload, 'attributes'))
+            {
+                foreach (Payload::extract($payload, 'attributes', true) as $attribute)
+                {
+                    $this->_attributes[] = new LineAttribute($attribute);
                 }
             }
         }
@@ -129,6 +140,14 @@
         public function getFees()
         {
             return $this->_fees;
+        }
+
+        /**
+         * @return LineAttribute[]
+         */
+        public function getAttributes(): array
+        {
+            return $this->_attributes;
         }
 
         /**

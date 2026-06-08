@@ -86,6 +86,12 @@
                 ->setType(\EffectConnect\PHPSdk\Core\Model\Request\OrderFee::FEE_TYPE_COMMISSION)
                 ->setAmount(1.25)
             )
+            ->addAttribute((new \EffectConnect\PHPSdk\Core\Model\Request\OrderLineAttribute())
+                ->setCode("test-attribute")
+                ->setValues((new \EffectConnect\PHPSdk\Core\Model\Request\OrderLineAttributeValues())
+                    ->setValue(["test-value"])
+                )
+            )
         ;
         $secondOrderLine = (new \EffectConnect\PHPSdk\Core\Model\Request\OrderLine())
             ->setId('test_order_2')
