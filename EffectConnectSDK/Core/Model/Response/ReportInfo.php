@@ -38,7 +38,7 @@
                 return;
             }
             $this->_processId   = Payload::extract($payload, 'processId');
-            $this->_createdAt   = \DateTime::createFromFormat('Y-m-d\TH:i:sP', Payload::extract($payload, 'createdAt'));
+            $this->_createdAt   = \DateTime::createFromFormat('Y-m-d\TH:i:sP', (string)Payload::extract($payload, 'createdAt'));
             $this->_processType = Payload::extract($payload, 'processType');
         }
 

@@ -138,7 +138,10 @@
                 $this->_errors[] = sprintf('Curl error %d', $errNo);
             }
             $this->_curlInfo = curl_getinfo($ch);
-            curl_close($ch);
+            if (PHP_VERSION_ID < 80000)
+            {
+                curl_close($ch);
+            }
             if ($this->_curlResponse === '')
             {
                 $this->_errors[] = sprintf('No response received: `%s`',

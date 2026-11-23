@@ -49,7 +49,7 @@
             $this->_requestAction     = Payload::extract($payload, 'RequestAction');
             $this->_requestVersion    = Payload::extract($payload, 'RequestVersion');
             $this->_requestIdentifier = Payload::extract($payload, 'RequestIdentifier');
-            $this->_processedAt       = \DateTime::createFromFormat('Y-m-d\TH:i:sP', Payload::extract($payload, 'ProcessedAt'));
+            $this->_processedAt       = \DateTime::createFromFormat('Y-m-d\TH:i:sP', (string)Payload::extract($payload, 'ProcessedAt'));
         }
 
         /**

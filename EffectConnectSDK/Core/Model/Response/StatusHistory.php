@@ -54,7 +54,7 @@
             $this->_processed = (int)Payload::extract($payload, 'processed');
             $this->_succeeded = (int)Payload::extract($payload, 'succeeded');
             $this->_errors    = (int)Payload::extract($payload, 'errors');
-            $this->_date      = \DateTime::createFromFormat('Y-m-d\TH:i:sP', Payload::extract($payload, 'date'));
+            $this->_date      = \DateTime::createFromFormat('Y-m-d\TH:i:sP', (string)Payload::extract($payload, 'date'));
         }
 
         /**
