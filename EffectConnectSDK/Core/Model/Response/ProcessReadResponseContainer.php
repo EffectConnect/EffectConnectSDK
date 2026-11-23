@@ -54,11 +54,11 @@
             {
                 return;
             }
-            $this->_createdAt       = \DateTime::createFromFormat('Y-m-d\TH:i:sP', Payload::extract($payload, 'createdAt'));
+            $this->_createdAt       = \DateTime::createFromFormat('Y-m-d\TH:i:sP', (string)Payload::extract($payload, 'createdAt'));
             $this->_process         = Payload::extract($payload, 'process');
             $this->_hasReport       = (int)Payload::extract($payload, 'hasReport')===1;
             $this->_currentStatus   = Payload::extract($payload, 'currentStatus');
-            $this->_startedAt       = \DateTime::createFromFormat('Y-m-d\TH:i:sP', Payload::extract($payload, 'startedAt'));
+            $this->_startedAt       = \DateTime::createFromFormat('Y-m-d\TH:i:sP', (string)Payload::extract($payload, 'startedAt'));
             $this->_type            = Payload::extract($payload, 'type');
             foreach (Payload::extract($payload, 'statusHistory', true) as $status)
             {

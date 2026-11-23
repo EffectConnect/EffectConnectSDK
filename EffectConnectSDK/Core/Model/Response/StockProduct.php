@@ -57,7 +57,7 @@
             $this->_stock            = Payload::extract($payload, 'stock');
             $this->_unsaleableStock  = Payload::extract($payload, 'unsaleableStock');
             $this->_fulfilmentStatus = Payload::extract($payload, 'fulfilmentStatus');
-            $this->_latestUpdate     = \DateTime::createFromFormat('Y-m-d\TH:i:sP', Payload::extract($payload, 'latestUpdate'));
+            $this->_latestUpdate     = \DateTime::createFromFormat('Y-m-d\TH:i:sP', (string)Payload::extract($payload, 'latestUpdate'));
             $this->_sku              = Payload::extract($payload, 'sku');
         }
 

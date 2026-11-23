@@ -39,7 +39,7 @@
             }
             $this->_type         = Payload::extract($payload, 'type');
             $this->_notification = Payload::extract($payload, 'notification');
-            $this->_createdAt    = \DateTime::createFromFormat('Y-m-d\TH:i:sP', Payload::extract($payload, 'createdAt'));
+            $this->_createdAt    = \DateTime::createFromFormat('Y-m-d\TH:i:sP', (string)Payload::extract($payload, 'createdAt'));
         }
 
         /**

@@ -45,7 +45,7 @@
             {
                 return;
             }
-            $this->_date         = \DateTime::createFromFormat('Y-m-d\TH:i:sP', Payload::extract($payload, 'date'));
+            $this->_date         = \DateTime::createFromFormat('Y-m-d\TH:i:sP', (string)Payload::extract($payload, 'date'));
             $this->_status       = Payload::extract($payload, 'status');
             $this->_trackingCode = Payload::extract($payload, 'trackingCode');
             $this->_trackingUrl  = Payload::extract($payload, 'trackingUrl');

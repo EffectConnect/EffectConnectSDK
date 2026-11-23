@@ -46,12 +46,16 @@
          * Core constructor.
          *
          * @param Keychain $keychain
-         * @param ApiCall  $callClass
+         * @param ApiCall|null $callClass
          *
          * @throws \Exception
          */
-        public function __construct(Keychain $keychain, ApiCall $callClass=null)
+        public function __construct(Keychain $keychain, $callClass=null)
         {
+            if ($callClass !== null)
+            {
+                $callClass = self::_validateCallClass($callClass);
+            }
             if (!$keychain->_isValid())
             {
                 throw new \Exception('Invalid keychain.');
@@ -62,6 +66,12 @@
             }
             $this->_keychain  = $keychain;
             $this->_callClass = $callClass;
+        }
+
+        // Keep PHP 5.5's type check without an implicitly nullable parameter.
+        private static function _validateCallClass(ApiCall $callClass)
+        {
+            return $callClass;
         }
 
         /**

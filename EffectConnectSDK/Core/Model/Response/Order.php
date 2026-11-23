@@ -77,7 +77,7 @@
             $this->_channelInfo     = new ChannelInfo(Payload::extract($payload, 'channelInfo'));
             $this->_currency        = Payload::extract($payload, 'currency');
             $this->_isTaxShifted    = Payload::extract($payload, 'isTaxShifted');
-            $this->_date            = \DateTime::createFromFormat('Y-m-d\TH:i:sP', Payload::extract($payload, 'date'));
+            $this->_date            = \DateTime::createFromFormat('Y-m-d\TH:i:sP', (string)Payload::extract($payload, 'date'));
             $this->_status          = Payload::extract($payload, 'status');
             $this->_billingAddress  = new BillingAddress(Payload::extract($payload, 'billingAddress'));
             $this->_shippingAddress = (new ShippingAddress(Payload::extract($payload, 'shippingAddress')));
